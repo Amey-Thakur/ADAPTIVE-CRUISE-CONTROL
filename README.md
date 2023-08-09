@@ -1,5 +1,11 @@
 # ADAPTIVE-CRUISE-CONTROL
 
+### [Matlab code](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/blob/main/Adaptive%20Cruise%20Control.m)
+
+![ACC Circuit View](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/66e33659-2604-45a3-b138-b829941594d5)
+
+---
+
 ## Flowchart
 
 ![image](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/3d4f8413-2923-4855-b758-851bf653572f)
@@ -56,6 +62,36 @@
 
     11.	End of the infinite loop.
 
----
+## Working Model
 
-### [Matlab code](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/blob/main/Adaptive%20Cruise%20Control.m)
+A. Circuit Connections
+
+![Circuit Connections](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/622277b5-b2b8-461e-8d48-7099bd46342d)
+
+B. Welcome Message
+
+ ![Welcome message](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/9d45eef8-df90-4f74-9881-49fd9664f90a)
+
+C.	Group Number & Names
+
+ ![Group Number   Names](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/0c4f6580-c18c-4445-a4a6-35247d9c3dbc)
+
+D.	Circuit at initial (zero speed)
+
+ ![Circuit at initial (zero speed)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/03f5102e-808f-47ec-9a63-78bd2adf1edf)
+
+E.	Circuit in Cruise Mode (non-zero speed)
+
+ ![Circuit in Cruise Mode (non-zero speed)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/44df42e4-3892-41ba-9ed0-9689ece2e6ea)
+
+F.	Circuit in Cruise Mode (zero speed)
+
+ ![Circuit in Cruise Mode (zero speed)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/d6665663-4968-4c11-bf7a-9d7aabfae584)
+
+G.	Circuit in Adaptive Cruise Control Mode (no object in front of the ultrasonic sensor)
+
+ ![Circuit in Adaptive Cruise Control Mode (no object in front of ultrasonic sensor)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/9a0aa4e9-0bb7-4b6f-ae79-059dd163e5f0)
+
+H.	Circuit in Adaptive Cruise Control Mode (an object in front of the ultrasonic sensor)
+
+![Circuit in Adaptive Cruise Control Mode (an object in front of ultrasonic sensor)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/f583253e-b616-4e5d-bf90-248a140ba1b1)
