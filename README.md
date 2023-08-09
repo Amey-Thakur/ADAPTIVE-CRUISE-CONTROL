@@ -4,7 +4,6 @@
 
 ![image](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/3d4f8413-2923-4855-b758-851bf653572f)
 
-
 ## Algorithm: ACC
 
     1.	Initialize the Arduino board and Ultrasonic Sensor.
@@ -57,6 +56,6 @@
 
     11.	End of the infinite loop.
 
+---
 
-## Matlab code
-
+### [Matlab code](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/blob/main/Adaptive%20Cruise%20Control.m)
