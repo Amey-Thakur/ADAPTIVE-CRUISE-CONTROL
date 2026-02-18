@@ -1,0 +1,39 @@
+# ADAPTIVE-CRUISE-CONTROL - Academic Repository
+# Specialized .gitignore for MATLAB development and scholarly archiving
+
+# OS-generated files
+[Tt]humbs.db
+[Dd]esktop.ini
+.DS_Store
+
+# Editor and IDE configuration
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# MATLAB-specific patterns
+*.asv
+*.mat
+*.mex*
+*.p
+*.slxc
+*.slxp
+slprj/
+cat_slprj/
+_autosave*
+MSL_temp*
+
+# Temporary and Output files
+*.tmp
+*.log
+*.bak
+*.sav
+*.old
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
