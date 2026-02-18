@@ -1,0 +1,51 @@
+ALGORITHM: ADAPTIVE CRUISE CONTROL (ACC)
+
+1.  Initialize the Arduino board and Ultrasonic Sensor.
+2.  Initialize the LCD display and clear its content.
+3.  Print project name and group number on the first two lines of the LCD display.
+4.  Pause execution for 5 seconds to display the information.
+5.  Clear the LCD display.
+6.  Print team members' names on the LCD display.
+7.  Pause execution for 5 seconds to display the information.
+8.  Declare and initialize variables for various inputs and modes:
+    - speed: current vehicle speed
+    - increase_speed: input from the increase speed button
+    - decrease_speed: input from the decrease speed button
+    - cancel: input from the cancel button
+    - set_speed: input from the set speed button
+    - adaptive_cruise_speed: input from the adaptive cruise control button
+    - distance: distance measured by the ultrasonic sensor
+    - mode: variable to indicate the current mode of operation (0 = Normal Mode, 1 = Cruise Control Mode, 2 = Adaptive Cruise Control Mode)
+9.  Enter an infinite loop to continuously monitor and update the vehicle speed.
+    - Read inputs from the analog pins on the Arduino board for the various buttons and the ultrasonic sensor.
+    - Determine the mode of operation based on button inputs:
+    - If the cancel button is pressed (voltage value >= 4), set mode to 0 (Normal Mode).
+    - If the set speed button is pressed (voltage value >= 4), set mode to 1 (Cruise Control Mode).
+    - If the adaptive cruise control button is pressed (voltage value >= 4), set mode to 2 (Adaptive Cruise Control Mode) and store the current speed in 'constant'.
+
+10. Implement different behaviors based on the current mode:
+    - Normal Mode:
+        - Increase speed if the increase speed button is pressed.
+        - Decrease speed if the decrease speed button is pressed.
+        - Gradually decrease speed if no button is pressed.
+        - Ensure speed doesn't go below 0.
+        - Display the current speed on the LCD display with the label "Vehicle Speed: ".
+
+    - Cruise Control Mode:
+        - Increase speed if the increase speed button is pressed.
+        - Decrease speed if the decrease speed button is pressed.
+        - Ensure speed doesn't go below 0.
+        - Display the current speed on the LCD display with the label "Cruise mode: ".
+
+    - Adaptive Cruise Control Mode:
+        - Clear the LCD display and display a blinking effect.
+        - Reinitialize the LCD display.
+        - Activate the vehicle's motor (D13) and deactivate the brake (D12).
+        - Adjust speed based on the distance measured by the ultrasonic sensor:
+        - If the distance is less than 0.3 units, decrease the speed.
+        - If the distance is greater than or equal to 0.3 units, increase the speed.
+        - Ensure the speed doesn't exceed the constant value (stored previously).
+        - Ensure speed doesn't go below 0.
+        - Display the current speed on the LCD display with the label "Adap_Cruise_mode".
+
+11. End of the infinite loop.
