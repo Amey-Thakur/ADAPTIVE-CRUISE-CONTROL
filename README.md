@@ -6,7 +6,7 @@
 
 ---
 
->**[Matlab code](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/blob/main/Adaptive%20Cruise%20Control.m)**
+>**[MATLAB code](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/blob/main/Adaptive%20Cruise%20Control.m)**
 
 ![ACC Circuit View](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/66e33659-2604-45a3-b138-b829941594d5)
 
@@ -14,7 +14,7 @@
 
 ### Flowchart
 
-![image](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/3d4f8413-2923-4855-b758-851bf653572f)
+![Flowchart](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/3d4f8413-2923-4855-b758-851bf653572f)
 
 ---
 
@@ -108,9 +108,9 @@ H.	Circuit in Adaptive Cruise Control Mode (an object in front of the ultrasonic
 
 ---
 
-<p align="center"> <b> 👉🏻 Presented as a part of the 2nd Semester Project @ University of Windsor 👈🏻 <b> </p>
+<p align="center"> <b> 👉🏻 Presented as a part of the 2nd Semester Project @ University of Windsor 👈🏻 </b> </p>
 
-<p align="center"> <b> 👷 Project Authors: Amey Thakur, Nandeshwar Royal and Brano Barshmen (Batch of 2024) <b> </p>
+<p align="center"> <b> 👷 Project Authors: Amey Thakur, Nandeshwar Royal Uppalapati and Brano Bruno Barshmen (Batch of 2024) </b> </p>
  
-<p align="center"><a href='https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING', style='color: greenyellow;'> ✌🏻 Back To Engineering ✌🏻</p>
+<p align="center"><a href="https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING" style="color: greenyellow;"> ✌🏻 Back To Engineering ✌🏻 </a></p>
  
