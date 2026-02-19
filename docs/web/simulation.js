@@ -20,6 +20,7 @@ const S = {
     D13: false,        // Green LED
     D12: false,        // Red LED
     running: false,
+    lastLog: '',       // Suppression of duplicate logs
     pins: { A0: 0, A1: 0, A2: 0, A3: 0, A4: 0 },
 };
 
@@ -77,14 +78,43 @@ function updateThemeIcon() {
 
 // ─── SERIAL LOGGER ───────────────────────────────────────────────────────────
 function log(msg, cls = 'info') {
+    // Suppress duplicate rapid-fire logs from the engine loop
+    if (msg === S.lastLog) return;
+    S.lastLog = msg;
+
     const t = new Date();
     const ts = t.toLocaleTimeString('en-US', { hour12: false });
     const ms = String(t.getMilliseconds()).padStart(3, '0');
     const el = document.createElement('div');
     el.innerHTML = `<span class="ts">[${ts}.${ms}]</span> <span class="${cls}">${msg}</span>`;
     D.serial.appendChild(el);
-    while (D.serial.children.length > 80) D.serial.removeChild(D.serial.firstChild);
+    while (D.serial.children.length > 100) D.serial.removeChild(D.serial.firstChild);
     D.serial.scrollTop = D.serial.scrollHeight;
+}
+
+
+// ─── HORN SOUND (Web Audio API) ─────────────────────────────────────────────
+function playHorn() {
+    try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const playTone = (freq, start, dur) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.frequency.setValueAtTime(freq, start);
+            gain.gain.setValueAtTime(0.1, start);
+            gain.gain.exponentialRampToValueAtTime(0.01, start + dur);
+            osc.start(start);
+            osc.stop(start + dur);
+        };
+        const now = ctx.currentTime;
+        playTone(440, now, 0.15); // Beep
+        playTone(440, now + 0.2, 0.15); // Beep
+        log('Vehicle Horn: Beep Beep! 🔊', 'sys');
+    } catch (e) {
+        console.warn('Audio blocked or not supported');
+    }
 }
 
 
@@ -518,5 +548,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     refreshSensor();
     refreshRoad();
+
+    // Horn interaction
+    D.egoCar.addEventListener('click', playHorn);
+    D.leadCar.addEventListener('click', playHorn);
+
     boot();
 });
