@@ -10,7 +10,7 @@
 
   An Adaptive Cruise Control (ACC) system developed as a **2nd-Semester Project** for the **MEng Computer Engineering** program. This implementation utilizes MATLAB and Arduino to demonstrate real-time sensory feedback, automated speed regulation, and proximity-aware safety logic.
 
-  **[Source Code](Source%20Code/)** &nbsp;·&nbsp; **[Technical Specification](docs/SPECIFICATION.md)** &nbsp;·&nbsp; **[ACC Algorithm](Source%20Code/Adaptive%20Cruise%20Control%20Algorithm.txt)**
+  **[Source Code](Source%20Code/)** &nbsp;·&nbsp; **[Technical Specification](docs/SPECIFICATION.md)** &nbsp;·&nbsp; **[ACC Algorithm](Source%20Code/Adaptive%20Cruise%20Control%20Algorithm.txt)** &nbsp;·&nbsp; **[Final Report](Matlab%20Project/Final%20Report/Adaptive%20Cruise%20Control%20Final%20Report.pdf)**
 
   <img src="Source Code/figures/Adaptive Cruise Control Overview.jpg" width="80%" alt="ACC Overview">
 
@@ -56,14 +56,15 @@ The **Adaptive Cruise Control (ACC)** system is a sophisticated embedded control
 
 | # | Resource | Description |
 |---|---|---|
-| 1 | [Technical Specification](docs/SPECIFICATION.md) | Technical architecture and control logic specification |
-| 2 | [ACC Algorithm](Source%20Code/Adaptive%20Cruise%20Control%20Algorithm.txt) | Step-by-step logic for speed and proximity regulation |
-| 3 | [Source Code](Source%20Code/Adaptive%20Cruise%20Control.m) | Primary MATLAB implementation script |
-| 4 | [Arduino Working Model](Source%20Code/figures/Arduino%20Working%20Model/) | Physical hardware implementation and operational states |
-| 5 | [Hardware Components](Source%20Code/figures/Hardware%20Components/) | Visual documentation of standalone project components |
-| 6 | [Tinkercad Simulation](Source%20Code/figures/Tinkercad%20Simulation/) | Virtual prototyping results and circuit logic views |
-| 7 | [MATLAB Repository](https://github.com/Amey-Thakur/COMPUTATIONAL-METHODS-AND-MODELING-FOR-ENGINEERING-APPLICATIONS) | Academic repository for Computational Methods and Modeling |
-| 8 | [Engineering Repository](https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING) | Master repository for MEng Computer Engineering |
+| 1 | [Final Project Report](Matlab%20Project/Final%20Report/Adaptive%20Cruise%20Control%20Final%20Report.pdf) | Comprehensive academic report on system design and results |
+| 2 | [Technical Specification](docs/SPECIFICATION.md) | Technical architecture and control logic specification |
+| 3 | [ACC Algorithm](Source%20Code/Adaptive%20Cruise%20Control%20Algorithm.txt) | Step-by-step logic for speed and proximity regulation |
+| 4 | [Source Code](Source%20Code/Adaptive%20Cruise%20Control.m) | Primary MATLAB implementation script |
+| 5 | [Arduino Working Model](Source%20Code/figures/Arduino%20Working%20Model/) | Physical hardware implementation and operational states |
+| 6 | [Hardware Components](Source%20Code/figures/Hardware%20Components/) | Visual documentation of standalone project components |
+| 7 | [Tinkercad Simulation](Source%20Code/figures/Tinkercad%20Simulation/) | Virtual prototyping results and circuit logic views |
+| 8 | [MATLAB Repository](https://github.com/Amey-Thakur/COMPUTATIONAL-METHODS-AND-MODELING-FOR-ENGINEERING-APPLICATIONS) | Academic repository for Computational Methods and Modeling |
+| 9 | [Engineering Repository](https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING) | Master repository for MEng Computer Engineering |
 
 ---
 
