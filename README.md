@@ -1,6 +1,6 @@
 <div align="center">
 
-  # Adaptive Cruise Control (ACC)
+  # Adaptive Cruise Control
 
   [![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
   ![Status](https://img.shields.io/badge/Status-Completed-success)
@@ -10,7 +10,7 @@
 
   An Adaptive Cruise Control (ACC) system developed as a **2nd-Semester Project** for the **MEng Computer Engineering** program. This implementation utilizes MATLAB and Arduino to demonstrate real-time sensory feedback, automated speed regulation, and proximity-aware safety logic.
 
-  **[Source Code](Source%20Code/)** &nbsp;·&nbsp; **[Technical Specification](docs/SPECIFICATION.md)** &nbsp;·&nbsp; **[Adaptive Cruise Control Algorithm](Source%20Code/Adaptive%20Cruise%20Control%20Algorithm.txt)**
+  **[Source Code](Source%20Code/)** &nbsp;·&nbsp; **[Technical Specification](docs/SPECIFICATION.md)** &nbsp;·&nbsp; **[ACC Algorithm](Source%20Code/Adaptive%20Cruise%20Control%20Algorithm.txt)**
 
   <img src="Source Code/figures/Adaptive Cruise Control Overview.jpg" width="80%" alt="ACC Overview">
 
@@ -257,13 +257,13 @@ Special thanks to the engineering project partners and peers for their continuou
 <!-- FOOTER SECTION -->
 <div align="center">
 
-  [↑ Back to Top](#adaptive-cruise-control-acc)
+  [↑ Back to Top](#adaptive-cruise-control)
 
   [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
 
   <br>
 
-  🏎️ **[MEng Repository](https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING)** &nbsp;·&nbsp; 💻 **[ACC Project](#adaptive-cruise-control-acc)**
+  🏎️ **[MEng Repository](https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING)** &nbsp;·&nbsp; 💻 **[ACC Project](#adaptive-cruise-control)**
 
   ---
 
