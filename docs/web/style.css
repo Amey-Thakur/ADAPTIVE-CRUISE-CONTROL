@@ -1817,19 +1817,8 @@ input[type="range"]::-moz-range-thumb {
   }
 
   .car-body {
-    width: 60px;
-    height: 24px;
-  }
-
-  .car-top {
-    height: 12px;
-    bottom: 12px;
-  }
-
-  .car-window,
-  .car-body::after {
-    height: 8px;
-    bottom: 14px;
+    transform: scale(0.55);
+    transform-origin: center bottom;
   }
 
   #serial-col {
