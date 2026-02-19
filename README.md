@@ -99,11 +99,25 @@ The **Adaptive Cruise Control (ACC)** system is a sophisticated embedded control
 ADAPTIVE-CRUISE-CONTROL/
 │
 ├── docs/                                    # Formal Documentation
+│   ├── Matlab Logo.png                      # MATLAB Branding Asset
 │   └── SPECIFICATION.md                     # Technical Architecture & Specification
 │
 ├── Matlab Project/                          # Academic Deliverables
 │   ├── Final Report/                        # Final Project Report & MATLAB Source
-│   └── Preliminary Report/                  # Initial System Architecture Report
+│   │   ├── Adaptive Cruise Control Final Report.pdf
+│   │   ├── Final Report Cover Page.pdf
+│   │   ├── Group32_Amey_Brano_Nandu.m       # Team MATLAB Source Code
+│   │   └── Summer_2023_Final_Project_Report_&_Presentation_Instructions.pdf
+│   │
+│   ├── Preliminary Report/                  # Initial System Architecture Report
+│   │   ├── Adaptive Cruise Control Preliminary Report.pdf
+│   │   ├── Cover Page.pdf
+│   │   ├── Group 32 - Adaptive Cruise Control Preliminary Report.pdf
+│   │   └── Summer 2023 - Primary Report Project Instructions.pdf
+│   │
+│   ├── Adaptive Cruise Control.pdf          # Project Overview Document
+│   ├── Project Groups.pdf                   # Group Allocation Record
+│   └── Smart Parking Management System.pdf  # Supplementary Reference
 │
 ├── Source Code/                             # Core Implementation
 │   ├── figures/                             # Visual Documentation Assets
@@ -134,7 +148,7 @@ ADAPTIVE-CRUISE-CONTROL/
 ## Quick Start
 
 ### 1. Prerequisites
-- **MATLAB R2020a+**: Required for running the ACC control script. [Download MATLAB](https://www.mathworks.com/products/matlab.html)
+- **MATLAB R2023a+**: Required for running the ACC control script. [Download MATLAB](https://www.mathworks.com/products/matlab.html)
 - **MATLAB Support Package for Arduino Hardware**: For Arduino-MATLAB interfacing. [Install Package](https://www.mathworks.com/matlabcentral/fileexchange/47522-matlab-support-package-for-arduino-hardware)
 - **Arduino Uno R3**: Physical microcontroller for hardware deployment.
 - **Git**: For version control and cloning. [Download Git](https://git-scm.com/downloads)
