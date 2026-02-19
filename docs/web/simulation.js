@@ -46,6 +46,7 @@ const D = {
     btnM0: $('btn-m0'), btnM1: $('btn-m1'), btnM2: $('btn-m2'),
     themeToggle: $('theme-toggle'),
     iconSun: $('icon-sun'), iconMoon: $('icon-moon'),
+    laneStrip: $('lane-strip'),
 };
 
 // Pin bar refs
@@ -207,15 +208,15 @@ function refreshRoad() {
     const pos = 42 + (S.distance * 38);
     D.leadCar.style.left = pos + '%';
 
-    const dashes = document.querySelectorAll('.dash');
-    dashes.forEach(d => {
-        if (S.speed > 0) {
-            d.style.animationDuration = Math.max(0.2, 2.5 - (S.speed / 35)) + 's';
-            d.style.animationPlayState = 'running';
-        } else {
-            d.style.animationPlayState = 'paused';
-        }
-    });
+    if (S.speed > 0) {
+        // GPU-accelerated speed mapping: duration = distance / speed
+        // This curve is optimized for a butter-smooth high-fidelity feel
+        const dur = Math.max(0.1, 2.0 - (S.speed / 45));
+        D.laneStrip.style.setProperty('--road-speed', dur + 's');
+        D.laneStrip.style.animationPlayState = 'running';
+    } else {
+        D.laneStrip.style.animationPlayState = 'paused';
+    }
 }
 
 
