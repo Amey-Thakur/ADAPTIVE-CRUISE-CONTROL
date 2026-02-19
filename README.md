@@ -145,17 +145,32 @@ ADAPTIVE-CRUISE-CONTROL/
 
   ### Core Components
   
-  | LCD Display | Arduino Uno | Ultrasonic Sensor |
-  | :---: | :---: | :---: |
-  | <img src="Source Code/figures/Hardware Components/01 - LCD Display.png" width="200"> | <img src="Source Code/figures/Hardware Components/02 - Arduino Uno.png" width="200"> | <img src="Source Code/figures/Hardware Components/05 - Ultrasonic Sensor.png" width="200"> |
-  
-  | Push Button | Digital Input | Resistor |
-  | :---: | :---: | :---: |
-  | <img src="Source Code/figures/Hardware Components/03 - Push Button.jpg" width="200"> | <img src="Source Code/figures/Hardware Components/04 - Digital Input.jpg" width="200"> | <img src="Source Code/figures/Hardware Components/06 - Resistor.png" width="200"> |
-  
-  | Jumper Wires | Breadboard | Potentiometer |
-  | :---: | :---: | :---: |
-  | <img src="Source Code/figures/Hardware Components/07 - Jumper Wires.jpg" width="200"> | <img src="Source Code/figures/Hardware Components/08 - Breadboard.png" width="200"> | <img src="Source Code/figures/Hardware Components/09 - Potentiometer.png" width="200"> |
+  **LCD Display**  
+  <img src="Source Code/figures/Hardware Components/01 - LCD Display.png" width="400" alt="LCD Display">
+
+  **Arduino Uno**  
+  <img src="Source Code/figures/Hardware Components/02 - Arduino Uno.png" width="400" alt="Arduino Uno">
+
+  **Ultrasonic Sensor**  
+  <img src="Source Code/figures/Hardware Components/05 - Ultrasonic Sensor.png" width="400" alt="Ultrasonic Sensor">
+
+  **Push Button**  
+  <img src="Source Code/figures/Hardware Components/03 - Push Button.jpg" width="400" alt="Push Button">
+
+  **Digital Input**  
+  <img src="Source Code/figures/Hardware Components/04 - Digital Input.jpg" width="400" alt="Digital Input">
+
+  **Resistor**  
+  <img src="Source Code/figures/Hardware Components/06 - Resistor.png" width="600" alt="Resistor">
+
+  **Jumper Wires**  
+  <img src="Source Code/figures/Hardware Components/07 - Jumper Wires.jpg" width="400" alt="Jumper Wires">
+
+  **Breadboard**  
+  <img src="Source Code/figures/Hardware Components/08 - Breadboard.png" width="600" alt="Breadboard">
+
+  **Potentiometer**  
+  <img src="Source Code/figures/Hardware Components/09 - Potentiometer.png" width="400" alt="Potentiometer">
 
 </div>
 
