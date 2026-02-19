@@ -1163,7 +1163,7 @@ body.cinematic-active #main {
 
 .btn {
   flex: 1;
-  padding: .9rem .8rem;
+  padding: .55rem .8rem;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--btn-bg);
