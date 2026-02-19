@@ -10,9 +10,8 @@
   <meta name="description"
     content="Interactive browser-based simulation of an Arduino Uno Adaptive Cruise Control (ACC) system. Explore Normal, Cruise, and Adaptive modes with real-time sensor feedback.">
   <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Play:wght@400;700&display=swap"
     rel="stylesheet">
 </head>
 
@@ -108,29 +107,31 @@
         <div class="road-edge bottom"></div>
 
         <!-- Lead Vehicle -->
-        <div id="lead-car" class="car"
-          title="Lead vehicle. Distance is measured from ACC vehicle to this car using HC-SR04 ultrasonic sensor.">
+        <div id="lead-car" class="car" title="Lead vehicle. Click to horn! 🔊">
           <div class="car-body lead">
-            <div class="car-top"></div>
-            <div class="car-window"></div>
+            <svg class="car-svg" viewBox="0 0 100 40">
+              <path class="body-main" d="M10,35 L90,35 L95,25 L85,10 L30,10 L15,25 Z" fill="var(--car-lead)" />
+              <path class="glass" d="M32,12 L83,12 L88,25 L32,25 Z" fill="rgba(255,255,255,0.2)" />
+              <circle class="wheel" cx="25" cy="35" r="5" fill="#222" />
+              <circle class="wheel" cx="75" cy="35" r="5" fill="#222" />
+            </svg>
             <div class="tail-light l"></div>
             <div class="tail-light r"></div>
-            <div class="car-wheel front"></div>
-            <div class="car-wheel rear"></div>
           </div>
           <span class="car-tag">Lead Vehicle</span>
         </div>
 
         <!-- ACC Vehicle -->
-        <div id="ego-car" class="car"
-          title="Your ACC-equipped vehicle. Uses closed-loop feedback control with ultrasonic sensing for adaptive speed regulation.">
+        <div id="ego-car" class="car" title="Your ACC vehicle. Click to horn! 🔊">
           <div class="car-body ego">
-            <div class="car-top"></div>
-            <div class="car-window"></div>
+            <svg class="car-svg" viewBox="0 0 100 40">
+              <path class="body-main" d="M10,35 L90,35 L95,25 L85,10 L30,10 L15,25 Z" fill="var(--car-ego)" />
+              <path class="glass" d="M32,12 L83,12 L88,25 L32,25 Z" fill="rgba(255,255,255,0.2)" />
+              <circle class="wheel" cx="25" cy="35" r="5" fill="#222" />
+              <circle class="wheel" cx="75" cy="35" r="5" fill="#222" />
+            </svg>
             <div class="headlight l"></div>
             <div class="headlight r"></div>
-            <div class="car-wheel front"></div>
-            <div class="car-wheel rear"></div>
             <div class="sensor-cone" id="sensor-cone"></div>
           </div>
           <span class="car-tag">ACC Vehicle</span>
@@ -174,8 +175,8 @@
                   stroke-linecap="round" />
                 <path d="M 10 70 A 50 50 0 0 1 110 70" fill="none" stroke="var(--gauge-fill)" stroke-width="8"
                   stroke-linecap="round" id="gauge-arc" stroke-dasharray="157" stroke-dashoffset="157" />
-                <text x="60" y="56" text-anchor="middle" class="gauge-num" id="gauge-num">0</text>
-                <text x="60" y="70" text-anchor="middle" class="gauge-unit">km/h</text>
+                <text x="60" y="56" text-anchor="middle" class="gauge-num" id="gauge-num" font-family="Play">0</text>
+                <text x="60" y="72" text-anchor="middle" class="gauge-unit" font-family="Play">km/h</text>
               </svg>
             </div>
           </div>
