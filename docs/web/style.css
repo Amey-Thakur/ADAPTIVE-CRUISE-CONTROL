@@ -683,7 +683,7 @@ body {
 
 #info-panel,
 #hw-panel {
-  height: 130px;
+  height: 140px;
   /* Increased size for Telemetry & Arduino */
 }
 
