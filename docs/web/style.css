@@ -1,16 +1,16 @@
 /* =========================================================================================
-   ADAPTIVE CRUISE CONTROL — SIMULATION STYLES
-   Compact single-viewport dashboard · Dark/Light mode
+   ADAPTIVE CRUISE CONTROL — SIMULATION STYLES v2.1
+   Full-viewport, polished dashboard · Dark/Light · Better car visuals
    ========================================================================================= */
 
 /* ── DARK THEME (Default) ── */
 [data-theme="dark"] {
-  --bg: #0b1120;
-  --bg2: #131b2e;
-  --bg3: #1a2540;
-  --surface: #1e293b;
-  --border: rgba(255, 255, 255, 0.07);
-  --border-h: rgba(255, 255, 255, 0.14);
+  --bg: #080d1a;
+  --bg2: #0f1628;
+  --bg3: #151d32;
+  --surface: #1a2340;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-h: rgba(255, 255, 255, 0.12);
   --text: #f1f5f9;
   --text2: #94a3b8;
   --text3: #64748b;
@@ -23,34 +23,42 @@
   --amber: #f59e0b;
   --purple: #a855f7;
 
-  --lcd-bg: #0d2a0d;
+  --lcd-bg: #0a2a0a;
   --lcd-text: #39ff14;
   --lcd-glow: rgba(57, 255, 20, 0.2);
 
   --gauge-track: #1e293b;
   --gauge-fill: #3b82f6;
 
-  --road-bg: linear-gradient(180deg, #16192a 0%, #0d1020 100%);
-  --road-edge: #f59e0b;
-  --road-dash: rgba(255, 255, 255, 0.35);
+  --road-bg: linear-gradient(180deg, #0e1525 0%, #080d18 100%);
+  --road-surface: #141c2e;
+  --road-edge: #d97706;
+  --road-dash: rgba(255, 255, 255, 0.4);
 
-  --serial-bg: #070d19;
+  --serial-bg: #060a14;
 
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --btn-bg: #1e293b;
-  --btn-hover: #263450;
+  --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --btn-bg: #151d32;
+  --btn-hover: #1e2845;
   --kbd-bg: rgba(255, 255, 255, 0.06);
   --kbd-text: #64748b;
+
+  --car-ego: #3b82f6;
+  --car-ego-dark: #1d4ed8;
+  --car-ego-glow: rgba(59, 130, 246, 0.25);
+  --car-lead: #6b7280;
+  --car-lead-dark: #4b5563;
 }
 
 /* ── LIGHT THEME ── */
 [data-theme="light"] {
-  --bg: #f0f4f8;
+  --bg: #eef2f7;
   --bg2: #ffffff;
-  --bg3: #f8fafc;
+  --bg3: #f1f5f9;
   --surface: #ffffff;
-  --border: rgba(0, 0, 0, 0.08);
-  --border-h: rgba(0, 0, 0, 0.15);
+  --border: rgba(0, 0, 0, 0.07);
+  --border-h: rgba(0, 0, 0, 0.13);
   --text: #0f172a;
   --text2: #475569;
   --text3: #94a3b8;
@@ -63,25 +71,34 @@
   --amber: #d97706;
   --purple: #7c3aed;
 
-  --lcd-bg: #143a14;
+  --lcd-bg: #0f3a0f;
   --lcd-text: #39ff14;
   --lcd-glow: rgba(57, 255, 20, 0.25);
 
   --gauge-track: #e2e8f0;
   --gauge-fill: #2563eb;
 
-  --road-bg: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+  --road-bg: linear-gradient(180deg, #374151 0%, #1f2937 100%);
+  --road-surface: #2d3748;
   --road-edge: #f59e0b;
-  --road-dash: rgba(255, 255, 255, 0.5);
+  --road-dash: rgba(255, 255, 255, 0.55);
 
   --serial-bg: #0f172a;
 
-  --shadow: 0 1px 4px rgba(0, 0, 0, 0.08), 0 2px 12px rgba(0, 0, 0, 0.04);
-  --btn-bg: #f1f5f9;
+  --shadow: 0 1px 4px rgba(0, 0, 0, 0.06), 0 2px 12px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --btn-bg: #f8fafc;
   --btn-hover: #e2e8f0;
-  --kbd-bg: rgba(0, 0, 0, 0.06);
+  --kbd-bg: rgba(0, 0, 0, 0.05);
   --kbd-text: #94a3b8;
+
+  --car-ego: #3b82f6;
+  --car-ego-dark: #2563eb;
+  --car-ego-glow: rgba(59, 130, 246, 0.3);
+  --car-lead: #9ca3af;
+  --car-lead-dark: #6b7280;
 }
+
 
 /* ── RESET ── */
 *,
@@ -95,6 +112,7 @@
 html {
   font-size: 15px;
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
@@ -123,13 +141,13 @@ body {
 
 
 /* =========================================================================================
-   HEADER — Compact sticky bar
+   HEADER
    ========================================================================================= */
 #header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1.25rem;
+  padding: 0.45rem 1.5rem;
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
   position: sticky;
@@ -146,18 +164,18 @@ body {
 }
 
 .h-icon {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .h-left h1 {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
 .h-sub {
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   color: var(--text3);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -166,13 +184,13 @@ body {
 .h-right {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .mode-badge {
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   font-weight: 700;
-  padding: 0.2rem 0.6rem;
+  padding: 0.15rem 0.55rem;
   border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -195,26 +213,25 @@ body {
 }
 
 .theme-btn {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 6px;
   background: var(--btn-bg);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 0.85rem;
   transition: all 0.2s;
 }
 
 .theme-btn:hover {
   background: var(--btn-hover);
-  border-color: var(--border-h);
 }
 
 .gh-link {
-  color: var(--text2);
+  color: var(--text3);
   display: flex;
   align-items: center;
   transition: color 0.2s;
@@ -226,23 +243,24 @@ body {
 
 
 /* =========================================================================================
-   STATUS BAR — Educational context
+   STATUS BAR
    ========================================================================================= */
 #status-bar {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.35rem 1.25rem;
+  padding: 0.3rem 1.5rem;
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   color: var(--text2);
+  min-height: 26px;
   transition: background 0.3s, border-color 0.3s;
 }
 
 .status-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--green);
   flex-shrink: 0;
@@ -274,27 +292,24 @@ body {
 
 
 /* =========================================================================================
-   MAIN LAYOUT
+   MAIN — Full viewport fill
    ========================================================================================= */
 #main {
   flex: 1;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0.75rem 1rem;
+  padding: 0.6rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 
 /* =========================================================================================
-   ROAD
+   ROAD — Wider, taller, premium asphalt look
    ========================================================================================= */
 #road-section {
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: background 0.3s, border-color 0.3s;
@@ -303,25 +318,43 @@ body {
 #road {
   position: relative;
   width: 100%;
-  height: 140px;
+  height: 155px;
   background: var(--road-bg);
   overflow: hidden;
+}
+
+/* Asphalt texture overlay */
+#road::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.008) 2px,
+      rgba(255, 255, 255, 0.008) 4px);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .road-edge {
   position: absolute;
   left: 0;
   right: 0;
-  height: 3px;
-  background: var(--road-edge);
+  height: 2px;
+  z-index: 2;
 }
 
 .road-edge.top {
-  top: 12px;
+  top: 10px;
+  background: var(--road-edge);
+  box-shadow: 0 0 8px rgba(217, 119, 6, 0.3);
 }
 
 .road-edge.bottom {
-  bottom: 12px;
+  bottom: 10px;
+  background: var(--road-edge);
+  box-shadow: 0 0 8px rgba(217, 119, 6, 0.3);
 }
 
 .lane-markers {
@@ -332,7 +365,7 @@ body {
   transform: translateY(-50%);
   height: 3px;
   display: flex;
-  gap: 30px;
+  gap: 28px;
   padding-left: 10px;
 }
 
@@ -340,7 +373,7 @@ body {
   width: 40px;
   height: 3px;
   background: var(--road-dash);
-  border-radius: 2px;
+  border-radius: 1px;
   flex-shrink: 0;
   animation: scrollDash 1.5s linear infinite;
   animation-play-state: paused;
@@ -352,11 +385,12 @@ body {
   }
 
   100% {
-    transform: translateX(-70px);
+    transform: translateX(-68px);
   }
 }
 
-/* Cars */
+
+/* ── CARS — Realistic silhouettes ── */
 .car {
   position: absolute;
   top: 50%;
@@ -375,120 +409,179 @@ body {
 }
 
 .car-body {
-  width: 90px;
-  height: 38px;
-  border-radius: 6px;
   position: relative;
-  transition: box-shadow 0.3s;
+  width: 105px;
+  height: 42px;
 }
 
-.car-body.lead {
-  background: linear-gradient(180deg, #6b7280, #4b5563);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Sedan body shape */
+.car-body::before {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  height: 22px;
+  border-radius: 4px 4px 3px 3px;
+  z-index: 1;
 }
 
-.car-body.ego {
-  background: linear-gradient(180deg, #60a5fa, #2563eb);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 16px rgba(59, 130, 246, 0.25);
+.car-body.lead::before {
+  background: linear-gradient(180deg, var(--car-lead), var(--car-lead-dark));
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+.car-body.ego::before {
+  background: linear-gradient(180deg, var(--car-ego), var(--car-ego-dark));
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 14px var(--car-ego-glow);
+}
+
+/* Roof / cabin */
 .car-top {
   position: absolute;
-  top: -8px;
+  bottom: 22px;
   left: 22%;
   width: 56%;
-  height: 14px;
-  border-radius: 5px 5px 0 0;
+  height: 19px;
+  border-radius: 10px 10px 0 0;
+  z-index: 2;
 }
 
 .lead .car-top {
-  background: linear-gradient(180deg, #6b7280, #555f6d);
+  background: linear-gradient(180deg, #7d8694, var(--car-lead));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: none;
 }
 
 .ego .car-top {
-  background: linear-gradient(180deg, #93c5fd, #3b82f6);
+  background: linear-gradient(180deg, #93c5fd, var(--car-ego));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: none;
 }
 
+/* Windows */
 .car-window {
   position: absolute;
-  top: -4px;
-  left: 27%;
-  width: 46%;
-  height: 9px;
-  background: rgba(147, 197, 253, 0.25);
-  border-radius: 3px 3px 0 0;
+  bottom: 24px;
+  left: 26%;
+  width: 22%;
+  height: 13px;
+  background: rgba(148, 200, 255, 0.2);
+  border-radius: 5px 3px 0 0;
+  z-index: 3;
+  border: 1px solid rgba(148, 200, 255, 0.1);
+  border-bottom: none;
 }
 
+/* Rear window */
+.car-body::after {
+  content: '';
+  position: absolute;
+  bottom: 24px;
+  left: 52%;
+  width: 20%;
+  height: 13px;
+  background: rgba(148, 200, 255, 0.15);
+  border-radius: 3px 5px 0 0;
+  z-index: 3;
+  border: 1px solid rgba(148, 200, 255, 0.08);
+  border-bottom: none;
+}
+
+/* Wheels */
 .car-wheel {
   position: absolute;
-  bottom: -5px;
-  width: 14px;
-  height: 10px;
-  background: #1e1e2e;
-  border-radius: 2px 2px 4px 4px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #3a3a4a, #111);
+  border: 2px solid #2a2a3a;
+  z-index: 4;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.car-wheel::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #555;
 }
 
 .car-wheel.front {
-  right: 8px;
+  right: 10px;
 }
 
 .car-wheel.rear {
-  left: 8px;
+  left: 10px;
 }
 
+/* Tail lights (lead car) */
 .tail-light {
   position: absolute;
-  bottom: 8px;
+  bottom: 12px;
   width: 6px;
-  height: 6px;
-  border-radius: 50%;
+  height: 10px;
+  border-radius: 2px;
   background: #4a2020;
+  z-index: 4;
   transition: all 0.2s;
 }
 
 .tail-light.l {
-  left: 4px;
+  left: 5px;
 }
 
 .tail-light.r {
-  right: 4px;
+  right: 5px;
 }
 
 .tail-light.on {
   background: var(--red);
-  box-shadow: 0 0 10px var(--red), 0 0 20px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 0 8px var(--red), 0 0 18px rgba(239, 68, 68, 0.35);
 }
 
+/* Headlights (ego car) */
 .headlight {
   position: absolute;
-  top: 10px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255, 253, 220, 0.2);
+  width: 5px;
+  height: 8px;
+  border-radius: 2px;
+  background: rgba(255, 253, 220, 0.15);
+  z-index: 4;
   transition: all 0.2s;
 }
 
 .headlight.l {
-  right: -1px;
+  right: 4px;
+  bottom: 16px;
 }
 
 .headlight.r {
-  right: -1px;
-  top: 22px;
+  right: 4px;
+  bottom: 8px;
 }
 
 .headlight.on {
   background: #fffde0;
-  box-shadow: 0 0 8px #fffde0;
+  box-shadow: 0 0 6px #fffde0, 0 0 14px rgba(255, 253, 224, 0.3);
+}
+
+/* Sedan body reflection strip */
+.car-body.ego::after {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .car-tag {
   display: block;
-  margin-top: 4px;
-  font-size: 0.5rem;
+  margin-top: 2px;
+  font-size: 0.48rem;
   color: var(--road-dash);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -498,15 +591,16 @@ body {
 /* Sensor Cone */
 .sensor-cone {
   position: absolute;
-  right: -4px;
+  right: -5px;
   top: 50%;
   transform: translateY(-50%);
   width: 0;
   height: 0;
-  border-top: 12px solid transparent;
-  border-bottom: 12px solid transparent;
-  border-left: 60px solid rgba(6, 182, 212, 0.08);
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  border-left: 80px solid rgba(6, 182, 212, 0.06);
   opacity: 0;
+  z-index: 0;
   transition: opacity 0.3s;
 }
 
@@ -519,30 +613,30 @@ body {
 
   0%,
   100% {
-    opacity: 0.6
+    opacity: 0.7
   }
 
   50% {
-    opacity: 0.2
+    opacity: 0.15
   }
 }
 
 .sensor-cone.danger {
-  border-left-color: rgba(239, 68, 68, 0.12);
+  border-left-color: rgba(239, 68, 68, 0.1);
 }
 
 /* Distance Label */
 #dist-label {
   position: absolute;
-  top: 18px;
-  left: 29%;
+  top: 14px;
+  left: 28%;
   right: 28%;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity 0.3s;
-  z-index: 6;
+  z-index: 8;
 }
 
 #dist-label.show {
@@ -557,37 +651,40 @@ body {
   right: 0;
   height: 1px;
   background: repeating-linear-gradient(90deg, var(--cyan), var(--cyan) 4px, transparent 4px, transparent 8px);
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 #dist-label-val {
   position: relative;
-  background: rgba(6, 182, 212, 0.15);
+  background: rgba(6, 182, 212, 0.12);
   color: var(--cyan);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   font-weight: 600;
   padding: 1px 7px;
-  border-radius: 4px;
-  border: 1px solid rgba(6, 182, 212, 0.25);
+  border-radius: 3px;
+  border: 1px solid rgba(6, 182, 212, 0.2);
 }
 
 
 /* =========================================================================================
-   INSTRUMENTS ROW (4 panels)
+   INSTRUMENTS — 4 panels in a row, equal height
    ========================================================================================= */
 #instruments {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 0.6rem;
+  grid-template-columns: 1.1fr 0.9fr 1fr 1fr;
+  gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .panel {
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 0.6rem;
+  border-radius: 8px;
+  padding: 0.5rem 0.6rem;
   box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
   transition: background 0.3s, border-color 0.3s;
 }
 
@@ -595,11 +692,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
+  flex-shrink: 0;
 }
 
 .panel-title {
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -608,7 +706,7 @@ body {
 
 .panel-pin {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   color: var(--text4);
 }
 
@@ -620,39 +718,44 @@ body {
 /* LCD */
 #lcd {
   background: var(--lcd-bg);
-  border-radius: 5px;
-  padding: 8px 10px;
-  box-shadow: inset 0 0 20px rgba(57, 255, 20, 0.06);
+  border-radius: 4px;
+  padding: 7px 10px;
+  box-shadow: inset 0 0 20px rgba(57, 255, 20, 0.05);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .lcd-line {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--lcd-text);
   text-shadow: 0 0 6px var(--lcd-glow), 0 0 14px var(--lcd-glow);
   letter-spacing: 0.12em;
   white-space: nowrap;
   overflow: hidden;
-  min-height: 1.3em;
-  line-height: 1.3;
+  min-height: 1.25em;
+  line-height: 1.25;
 }
 
 /* Gauge */
 #gauge {
   display: flex;
   justify-content: center;
-  padding: 0.2rem 0 0;
+  flex: 1;
+  align-items: center;
 }
 
 #gauge-svg {
   width: 100%;
-  max-width: 130px;
+  max-width: 120px;
 }
 
 .gauge-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
   fill: var(--text);
   transition: fill 0.3s;
@@ -669,29 +772,33 @@ body {
 #info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.35rem;
+  gap: 0.3rem;
+  flex: 1;
 }
 
 .info-cell {
   background: var(--bg3);
-  border-radius: 6px;
-  padding: 0.35rem 0.5rem;
+  border-radius: 5px;
+  padding: 0.3rem 0.4rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .info-label {
   display: block;
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   color: var(--text4);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 600;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .info-val {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--text);
 }
@@ -703,9 +810,9 @@ body {
 /* HW Panel */
 #hw-grid {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.35rem;
   justify-content: center;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
   flex-wrap: wrap;
 }
 
@@ -714,21 +821,21 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  min-width: 40px;
+  min-width: 36px;
 }
 
 .led-pair span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.42rem;
+  font-size: 0.38rem;
   color: var(--text4);
   text-transform: uppercase;
 }
 
 .hw-led {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: var(--surface);
+  background: var(--bg3);
   border: 1px solid var(--border);
   transition: all 0.2s;
 }
@@ -736,25 +843,25 @@ body {
 .hw-led.green.on {
   background: var(--green);
   border-color: var(--green);
-  box-shadow: 0 0 8px var(--green), 0 0 16px rgba(34, 197, 94, 0.2);
+  box-shadow: 0 0 6px var(--green), 0 0 14px rgba(34, 197, 94, 0.2);
 }
 
 .hw-led.red.on {
   background: var(--red);
   border-color: var(--red);
-  box-shadow: 0 0 8px var(--red), 0 0 16px rgba(239, 68, 68, 0.2);
+  box-shadow: 0 0 6px var(--red), 0 0 14px rgba(239, 68, 68, 0.2);
 }
 
 .hw-led.cyan.on {
   background: var(--cyan);
   border-color: var(--cyan);
-  box-shadow: 0 0 8px var(--cyan), 0 0 16px rgba(6, 182, 212, 0.2);
+  box-shadow: 0 0 6px var(--cyan), 0 0 14px rgba(6, 182, 212, 0.2);
 }
 
 /* Pin Bars */
 #pin-bars {
   display: flex;
-  gap: 4px;
+  gap: 3px;
 }
 
 .pbar {
@@ -767,14 +874,14 @@ body {
 
 .pbar span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.42rem;
+  font-size: 0.38rem;
   color: var(--text4);
   font-weight: 600;
 }
 
 .pbar-fill {
   width: 100%;
-  height: 4px;
+  height: 3px;
   background: var(--bg3);
   border-radius: 2px;
   position: relative;
@@ -800,23 +907,24 @@ body {
 
 
 /* =========================================================================================
-   CONTROLS ROW
+   CONTROLS — Tight inline row
    ========================================================================================= */
 #controls {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
   align-items: stretch;
+  flex-shrink: 0;
 }
 
 #ctrl-left {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.35rem;
   flex-shrink: 0;
 }
 
 #ctrl-modes {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.35rem;
   flex-shrink: 0;
 }
 
@@ -824,20 +932,20 @@ body {
   flex: 1;
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  padding: 0.4rem 0.65rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 4px;
+  gap: 3px;
   transition: background 0.3s, border-color 0.3s;
 }
 
 .slider-head {
   display: flex;
   justify-content: space-between;
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   color: var(--text2);
   font-weight: 500;
 }
@@ -852,7 +960,7 @@ input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 6px;
+  height: 5px;
   background: linear-gradient(90deg,
       var(--red) 0%, var(--red) 30%,
       var(--amber) 30%, var(--amber) 35%,
@@ -864,8 +972,8 @@ input[type="range"] {
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: white;
   border: 2px solid var(--cyan);
@@ -874,8 +982,8 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="range"]::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: white;
   border: 2px solid var(--cyan);
@@ -886,7 +994,7 @@ input[type="range"]::-moz-range-thumb {
   display: flex;
   justify-content: space-between;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.45rem;
+  font-size: 0.4rem;
   color: var(--text4);
 }
 
@@ -904,18 +1012,18 @@ input[type="range"]::-moz-range-thumb {
 
 /* Buttons */
 .btn {
-  padding: 0.5rem 0.75rem;
+  padding: 0.4rem 0.65rem;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 7px;
   background: var(--btn-bg);
   color: var(--text);
   font-family: 'Inter', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.25rem;
   user-select: none;
   white-space: nowrap;
   transition: all 0.12s;
@@ -933,16 +1041,16 @@ input[type="range"]::-moz-range-thumb {
 
 .btn kbd {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.5rem;
-  padding: 1px 4px;
-  border-radius: 3px;
+  font-size: 0.42rem;
+  padding: 1px 3px;
+  border-radius: 2px;
   background: var(--kbd-bg);
   color: var(--kbd-text);
   font-weight: 400;
 }
 
 .btn-arrow {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .btn-accel .btn-arrow {
@@ -956,42 +1064,37 @@ input[type="range"]::-moz-range-thumb {
 .btn-accel:hover,
 .btn-accel.pressed {
   border-color: var(--green);
-  box-shadow: 0 0 12px rgba(34, 197, 94, 0.12);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.1);
 }
 
 .btn-brake:hover,
 .btn-brake.pressed {
   border-color: var(--red);
-  box-shadow: 0 0 12px rgba(239, 68, 68, 0.12);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);
 }
 
 .mode-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   font-weight: 700;
-  width: 16px;
-  height: 16px;
-  border-radius: 4px;
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: var(--kbd-bg);
   color: var(--text3);
+  transition: all 0.2s;
 }
 
 .btn-mode.active {
-  border-color: var(--accent);
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.1);
-}
-
-.btn-mode.active .mode-num {
-  background: var(--accent);
-  color: white;
+  border-width: 1.5px;
 }
 
 .btn-mode.m0-active {
   border-color: var(--green);
-  box-shadow: 0 0 10px rgba(34, 197, 94, 0.1);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.08);
 }
 
 .btn-mode.m0-active .mode-num {
@@ -1001,7 +1104,7 @@ input[type="range"]::-moz-range-thumb {
 
 .btn-mode.m1-active {
   border-color: var(--accent);
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.08);
 }
 
 .btn-mode.m1-active .mode-num {
@@ -1011,7 +1114,7 @@ input[type="range"]::-moz-range-thumb {
 
 .btn-mode.m2-active {
   border-color: var(--purple);
-  box-shadow: 0 0 10px rgba(168, 85, 247, 0.1);
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.08);
 }
 
 .btn-mode.m2-active .mode-num {
@@ -1021,28 +1124,33 @@ input[type="range"]::-moz-range-thumb {
 
 
 /* =========================================================================================
-   SERIAL MONITOR
+   SERIAL MONITOR — Fills remaining space
    ========================================================================================= */
 #serial-section {
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: var(--shadow);
+  flex: 1;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
   transition: background 0.3s, border-color 0.3s;
 }
 
 .serial-head {
   display: flex;
   justify-content: space-between;
-  padding: 0.35rem 0.7rem;
+  padding: 0.3rem 0.6rem;
   background: var(--bg3);
   border-bottom: 1px solid var(--border);
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   font-weight: 600;
   color: var(--text3);
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  flex-shrink: 0;
 }
 
 .serial-baud {
@@ -1052,11 +1160,11 @@ input[type="range"]::-moz-range-thumb {
 
 #serial {
   background: var(--serial-bg);
-  padding: 0.4rem 0.7rem;
-  height: 95px;
+  padding: 0.35rem 0.6rem;
+  flex: 1;
   overflow-y: auto;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
+  font-size: 0.55rem;
   line-height: 1.5;
   color: #94a3b8;
 }
@@ -1090,17 +1198,18 @@ input[type="range"]::-moz-range-thumb {
    FOOTER
    ========================================================================================= */
 #footer {
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   text-align: center;
   border-top: 1px solid var(--border);
   background: var(--bg2);
+  flex-shrink: 0;
   transition: background 0.3s, border-color 0.3s;
 }
 
 #footer p {
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   color: var(--text3);
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.1rem;
 }
 
 #footer a {
@@ -1116,7 +1225,7 @@ input[type="range"]::-moz-range-thumb {
 /* =========================================================================================
    RESPONSIVE
    ========================================================================================= */
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   #instruments {
     grid-template-columns: 1fr 1fr;
   }
@@ -1133,15 +1242,19 @@ input[type="range"]::-moz-range-thumb {
 
 @media (max-width: 640px) {
   #header {
-    padding: 0.4rem 0.75rem;
+    padding: 0.35rem 0.75rem;
+  }
+
+  #status-bar {
+    padding: 0.25rem 0.75rem;
+  }
+
+  #main {
+    padding: 0.4rem 0.5rem;
   }
 
   .h-left h1 {
     font-size: 0.85rem;
-  }
-
-  #main {
-    padding: 0.5rem;
   }
 
   #instruments {
@@ -1164,11 +1277,11 @@ input[type="range"]::-moz-range-thumb {
   }
 
   #road {
-    height: 110px;
+    height: 115px;
   }
 
   .car-body {
-    width: 65px;
-    height: 28px;
+    width: 75px;
+    height: 32px;
   }
 }
