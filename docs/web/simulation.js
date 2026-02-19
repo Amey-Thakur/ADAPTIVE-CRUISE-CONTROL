@@ -575,7 +575,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "color: #3b82f6; font-size: 20px; font-weight: bold; font-family: 'Inter', sans-serif;"
     );
     console.log(
-        "%cDesigned & Developed by Amey Thakur & Mega Satish\n%c\"Precision is the soul of engineering.\"",
+        "%cDesigned & Developed by Amey Thakur\n%c\"Precision is the soul of engineering.\"",
         "color: #94a3b8; font-size: 14px; font-style: italic;",
         "color: #22c55e; font-size: 12px; font-weight: bold;"
     );
