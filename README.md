@@ -20,7 +20,7 @@
 
 <div align="center">
 
-  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [Hardware Components](#hardware-components) &nbsp;·&nbsp; [Tinkercad Simulation](#tinkercad-simulation) &nbsp;·&nbsp; [Working Model](#arduino-working-model) &nbsp;·&nbsp; [Development Roadmap](#development-roadmap) &nbsp;·&nbsp; [Usage Guidelines](#usage-guidelines) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
+  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [Quick Start](#quick-start) &nbsp;·&nbsp; [Hardware Components](#hardware-components) &nbsp;·&nbsp; [Tinkercad Simulation](#tinkercad-simulation) &nbsp;·&nbsp; [Working Model](#arduino-working-model) &nbsp;·&nbsp; [Development Roadmap](#development-roadmap) &nbsp;·&nbsp; [Usage Guidelines](#usage-guidelines) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
 
 </div>
 
@@ -101,6 +101,10 @@ ADAPTIVE-CRUISE-CONTROL/
 ├── docs/                                    # Formal Documentation
 │   └── SPECIFICATION.md                     # Technical Architecture & Specification
 │
+├── Matlab Project/                          # Academic Deliverables
+│   ├── Final Report/                        # Final Project Report & MATLAB Source
+│   └── Preliminary Report/                  # Initial System Architecture Report
+│
 ├── Source Code/                             # Core Implementation
 │   ├── figures/                             # Visual Documentation Assets
 │   │   ├── Arduino Working Model/           # Real-world Hardware Implementation
@@ -122,6 +126,54 @@ ADAPTIVE-CRUISE-CONTROL/
 ├── README.md                                # Main Documentation
 └── SECURITY.md                              # Security Policy & Posture
 ```
+
+---
+
+<!-- QUICK START -->
+<a name="quick-start"></a>
+## Quick Start
+
+### 1. Prerequisites
+- **MATLAB R2020a+**: Required for running the ACC control script. [Download MATLAB](https://www.mathworks.com/products/matlab.html)
+- **MATLAB Support Package for Arduino Hardware**: For Arduino-MATLAB interfacing. [Install Package](https://www.mathworks.com/matlabcentral/fileexchange/47522-matlab-support-package-for-arduino-hardware)
+- **Arduino Uno R3**: Physical microcontroller for hardware deployment.
+- **Git**: For version control and cloning. [Download Git](https://git-scm.com/downloads)
+
+> [!WARNING]
+> **Hardware Configuration**
+>
+> Ensure the Arduino Uno is properly connected via USB and recognized by MATLAB before executing the control script. The HC-SR04 ultrasonic sensor and LCD display must be wired according to the [Technical Specification](docs/SPECIFICATION.md).
+
+### 2. Installation & Setup
+
+#### Step 1: Clone the Repository
+Open your terminal and clone the repository:
+```bash
+git clone https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL.git
+cd ADAPTIVE-CRUISE-CONTROL
+```
+
+#### Step 2: Install Arduino Support Package
+In the MATLAB Command Window, install the required hardware support:
+```matlab
+matlabAddonInstaller
+```
+Search for and install **"MATLAB Support Package for Arduino Hardware"**.
+
+### 3. Execution
+
+#### Run the ACC System
+Launch the primary control script in MATLAB:
+```matlab
+run("Source Code/Adaptive Cruise Control.m")
+```
+
+> [!TIP]
+> **Simulation First**
+>
+> Before deploying on physical hardware, prototype and validate circuit logic using the Tinkercad simulation:
+>
+> 👉🏻 **[View Tinkercad Simulation](#tinkercad-simulation)**
 
 ---
 
@@ -308,7 +360,7 @@ Special thanks to the **mentors** and **peers** whose encouragement, discussions
 
   [↑ Back to Top](#adaptive-cruise-control)
 
-  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [Hardware Components](#hardware-components) &nbsp;·&nbsp; [Tinkercad Simulation](#tinkercad-simulation) &nbsp;·&nbsp; [Working Model](#arduino-working-model) &nbsp;·&nbsp; [Roadmap](#development-roadmap) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
+  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [Quick Start](#quick-start) &nbsp;·&nbsp; [Hardware Components](#hardware-components) &nbsp;·&nbsp; [Tinkercad Simulation](#tinkercad-simulation) &nbsp;·&nbsp; [Working Model](#arduino-working-model) &nbsp;·&nbsp; [Roadmap](#development-roadmap) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
 
   <br>
 
