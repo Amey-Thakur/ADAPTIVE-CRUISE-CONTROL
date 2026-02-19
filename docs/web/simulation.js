@@ -168,9 +168,10 @@ function playHorn() {
 }
 
 // ─── CINEMATIC SEQUENCE ─────────────────────────────────────────────────────
-// Hidden Easter egg sequence activated by typing 'amey'. Plays a power-up
-// sound effect, overlays a holographic blueprint view of the ACC algorithm,
-// and streams the algorithm pseudocode into the serial monitor.
+// Interactive Easter egg sequence activated by typing 'amey' or clicking the 
+// header title. Plays a power-up sound effect, overlays a holographic 
+// blueprint view of the ACC algorithm, and streams the algorithm 
+// pseudocode into the serial monitor.
 function playPowerUpSound() {
     try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -812,7 +813,13 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshSensor();
     refreshRoad();
 
-    // Cinematic Easter egg: typing 'amey' triggers the holographic sequence
+    // Cinematic trigger: typing 'amey' or clicking the header title
+    const title = document.querySelector('#header h1');
+    if (title) {
+        title.style.cursor = 'pointer';
+        title.addEventListener('click', startCinematic);
+    }
+
     let eggBuffer = '';
     let eggTimer = null;
     document.addEventListener('keydown', (e) => {
