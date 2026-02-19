@@ -364,7 +364,7 @@ Special thanks to the **mentors** and **peers** whose encouragement, discussions
 
   <br>
 
-  � **[MATLAB Repository](https://github.com/Amey-Thakur/COMPUTATIONAL-METHODS-AND-MODELING-FOR-ENGINEERING-APPLICATIONS)** &nbsp;·&nbsp; 🚘 **[Adaptive Cruise Control](#adaptive-cruise-control)**
+  <a href="https://github.com/Amey-Thakur/COMPUTATIONAL-METHODS-AND-MODELING-FOR-ENGINEERING-APPLICATIONS"><img src="docs/Matlab Logo.png" width="18" height="18" valign="middle"></a> **[MATLAB Repository](https://github.com/Amey-Thakur/COMPUTATIONAL-METHODS-AND-MODELING-FOR-ENGINEERING-APPLICATIONS)** &nbsp;·&nbsp; 🚘 **[Adaptive Cruise Control](#adaptive-cruise-control)**
 
   ---
 
@@ -372,10 +372,10 @@ Special thanks to the **mentors** and **peers** whose encouragement, discussions
 
   ---
 
-  ### 🎓 [Computer Engineering Repository](https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING)
+  ### 🎓 [MEng Computer Engineering Repository](https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING)
 
-  **Master of Engineering (M.Eng.) - University of Windsor**
+  **Computer Engineering (M.Eng) - University of Windsor**
 
-  *Coursework, simulations, engineering projects, and academic research.*
+  *An archival record of **graduate-level research** and **advanced engineering coursework**.*
 
 </div>
