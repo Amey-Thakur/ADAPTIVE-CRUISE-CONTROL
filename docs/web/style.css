@@ -644,14 +644,16 @@ body {
   padding: .5rem 1rem;
   min-height: 0;
   overflow: hidden;
+  align-items: stretch;
 }
 
 #left-col {
   display: flex;
   flex-direction: column;
-  gap: .4rem;
+  gap: .5rem;
   min-height: 0;
-  overflow: visible;
+  height: 100%;
+  overflow: hidden;
 }
 
 #instruments-top {
@@ -1210,6 +1212,7 @@ input[type="range"]::-moz-range-thumb {
   height: 100%;
   min-height: 0;
   transition: background .3s, border-color .3s;
+  align-self: stretch;
 }
 
 .serial-head {
