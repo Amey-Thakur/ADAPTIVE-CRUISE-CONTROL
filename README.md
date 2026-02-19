@@ -20,7 +20,7 @@
 
 <div align="center">
 
-  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [Hardware Gallery](#hardware-gallery) &nbsp;·&nbsp; [Simulation Results](#simulation-results) &nbsp;·&nbsp; [Working Model](#working-model-gallery) &nbsp;·&nbsp; [Usage Guidelines](#usage-guidelines) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
+  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [Hardware Components](#hardware-components) &nbsp;·&nbsp; [Tinkercad Simulation](#tinkercad-simulation) &nbsp;·&nbsp; [Working Model](#arduino-working-model) &nbsp;·&nbsp; [Usage Guidelines](#usage-guidelines) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
 
 </div>
 
@@ -102,7 +102,7 @@ ADAPTIVE-CRUISE-CONTROL/
 │
 ├── Source Code/                             # Core Implementation
 │   ├── figures/                             # Visual Documentation Assets
-│   │   ├── Arduino Working Model/           # Real-world Hardware Gallery
+│   │   ├── Arduino Working Model/           # Real-world Hardware Implementation
 │   │   ├── Hardware Components/             # Standalone Component Visuals
 │   │   ├── Tinkercad Simulation/            # Virtual Prototyping Results
 │   │   ├── Adaptive Cruise Control Flowchart.png
@@ -125,7 +125,7 @@ ADAPTIVE-CRUISE-CONTROL/
 ---
 
 <!-- HARDWARE GALLERY -->
-## Hardware Gallery
+## Hardware Components
 
 <div align="center">
 
@@ -134,7 +134,7 @@ ADAPTIVE-CRUISE-CONTROL/
   | Name | Quantity | Component |
   | :--- | :---: | :--- |
   | **U2** | 1 | Arduino Uno R3 |
-  | **S1 – S5** | 5 | Pushbutton |
+  | **S1, S2, S3, S4, S5** | 5 | Pushbutton |
   | **R1, R2** | 2 | 10 mΩ Resistor |
   | **R3, R4, R5** | 3 | 50 mΩ Resistor |
   | **U3** | 1 | LCD 16 x 2 |
@@ -162,7 +162,7 @@ ADAPTIVE-CRUISE-CONTROL/
 ---
 
 <!-- SIMULATION RESULTS -->
-## Simulation Results
+## Tinkercad Simulation
 
 <div align="center">
 
@@ -187,7 +187,7 @@ ADAPTIVE-CRUISE-CONTROL/
 ---
 
 <!-- WORKING MODEL -->
-## Working Model Gallery
+## Arduino Working Model
 
 <div align="center">
 
@@ -281,7 +281,7 @@ Special thanks to the engineering project partners and peers for their continuou
 
   [↑ Back to Top](#adaptive-cruise-control)
 
-  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
+  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [Hardware Components](#hardware-components) &nbsp;·&nbsp; [Tinkercad Simulation](#tinkercad-simulation) &nbsp;·&nbsp; [Working Model](#arduino-working-model) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
 
   <br>
 
