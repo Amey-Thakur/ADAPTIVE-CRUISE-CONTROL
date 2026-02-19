@@ -98,21 +98,29 @@ function log(msg, cls = 'info') {
 function playHorn() {
     try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const playTone = (freq, start, dur) => {
+        if (ctx.state === 'suspended') ctx.resume();
+
+        const playTone = (freq, type, start, dur, vol) => {
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, start);
+
+            gain.gain.setValueAtTime(0, start);
+            gain.gain.linearRampToValueAtTime(vol, start + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.01, start + dur);
+
             osc.connect(gain);
             gain.connect(ctx.destination);
-            osc.frequency.setValueAtTime(freq, start);
-            gain.gain.setValueAtTime(0.1, start);
-            gain.gain.exponentialRampToValueAtTime(0.01, start + dur);
             osc.start(start);
             osc.stop(start + dur);
         };
+
         const now = ctx.currentTime;
-        playTone(440, now, 0.15); // Beep
-        playTone(440, now + 0.2, 0.15); // Beep
-        log('ACC Vehicle Horn: Beep Beep! 🔊', 'sys');
+        // Dual-tone car horn (Standard F & A notes)
+        playTone(340, 'triangle', now, 0.4, 0.15);
+        playTone(420, 'triangle', now, 0.4, 0.15);
+        log('ACC Vehicle Horn: HOOOOONK! 🔊', 'sys');
     } catch (e) {
         console.warn('Audio blocked or not supported');
     }
