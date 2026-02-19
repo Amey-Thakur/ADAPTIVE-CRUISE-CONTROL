@@ -2,11 +2,14 @@
     "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
     "@type": "SoftwareSourceCode",
     "name": "Adaptive Cruise Control (ACC)",
-    "description": "A high-fidelity Adaptive Cruise Control (ACC) system implemented using MATLAB and Arduino. The system utilizes real-time sensor feedback for automated speed regulation and proximity awareness.",
+    "description": "An Adaptive Cruise Control (ACC) system developed as a 2nd-Semester Project for the MEng Computer Engineering program. This implementation utilizes MATLAB and Arduino to demonstrate real-time sensory feedback, automated speed regulation, and proximity-aware safety logic.",
     "identifier": "ADAPTIVE-CRUISE-CONTROL",
     "license": "https://spdx.org/licenses/MIT.html",
     "programmingLanguage": [
-        "MATLAB"
+        "MATLAB",
+        "JavaScript",
+        "CSS",
+        "HTML"
     ],
     "author": [
         {
@@ -25,7 +28,8 @@
     "developmentStatus": "complete",
     "runtimePlatform": [
         "MATLAB R2023a",
-        "Arduino Uno"
+        "Arduino Uno",
+        "Web Browser (PWA)"
     ],
     "applicationCategory": "Embedded Control System",
     "keywords": [
@@ -35,6 +39,9 @@
         "Arduino",
         "Ultrasonic Sensor",
         "Control Systems",
-        "MEng Computer Engineering"
+        "MEng Computer Engineering",
+        "JavaScript",
+        "PWA",
+        "Service Worker"
     ]
 }

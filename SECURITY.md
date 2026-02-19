@@ -25,15 +25,15 @@ Submissions include:
   2. Demonstrable steps or technical evidence sufficient to contextualize the finding.
   3. An explanation of the issue’s relevance within the defined scope of the project.
 
-## Implementation Context: MATLAB Execution Model
+## Implementation Context: Multi-Stack Execution Model
+This project is implemented across two distinct technological environments, as defined by the project’s technical scope.
 
-This project is implemented using the MATLAB technical stack and the Arduino Hardware Support Package, as defined by the project’s technical scope.
+- **MATLAB/Arduino Environment**: Execution occurs within the MATLAB (R2023a+) environment, utilizing specialized hardware abstraction layers for real-time sensor integration and LCD output.
+- **Web Simulation & PWA**: The interactive simulation executes client-side within modern web browsers. It utilizes a Service Worker architecture for offline persistence and high-fidelity JavaScript logic for behavioral modeling.
 
-- **Execution Environment**: Execution occurs within the MATLAB (R2023a+) environment, utilizing specialized hardware abstraction layers for real-time sensor integration and LCD output.
 - **Scope Limitation**: This policy applies exclusively to the source code and academic materials contained within this repository and does not extend to external tools, runtime environments, or platform-level security guarantees.
 
 ## Technical Integrity Statement
-
 This repository is preserved as a fixed academic and engineering project. Security-related submissions are recorded for documentation and contextual reference and do not imply active monitoring, response obligations, or subsequent modification of the repository.
 
 ---
