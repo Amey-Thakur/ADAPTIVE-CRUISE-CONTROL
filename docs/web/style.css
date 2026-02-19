@@ -1,6 +1,7 @@
 /* =========================================================================================
-   ADAPTIVE CRUISE CONTROL — v3
-   Spacious · Symmetric · Side-by-side Controls + Serial
+   ADAPTIVE CRUISE CONTROL — v4
+   Spacious · Symmetric · Left panels + Right serial
+   Full-width road dashes · Scrollable serial monitor
    ========================================================================================= */
 
 /* ── DARK THEME ── */
@@ -99,9 +100,10 @@ body {
   font-family: 'Inter', -apple-system, sans-serif;
   background: var(--bg);
   color: var(--text);
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   transition: background .3s, color .3s;
 }
@@ -121,18 +123,18 @@ body {
 
 
 /* =========================================================================================
-   HEADER — Spacious with centered mode badge
+   HEADER
    ========================================================================================= */
 #header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: .65rem 1.75rem;
+  padding: .6rem 1.5rem;
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 100;
+  flex-shrink: 0;
   transition: background .3s, border-color .3s;
 }
 
@@ -147,14 +149,14 @@ body {
 }
 
 .h-left h1 {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: -.02em;
   line-height: 1.2
 }
 
 .h-sub {
-  font-size: .6rem;
+  font-size: .58rem;
   color: var(--text3);
   text-transform: uppercase;
   letter-spacing: .08em;
@@ -174,7 +176,6 @@ body {
   gap: .5rem
 }
 
-/* Mode Badge — Prominent */
 .mode-badge {
   font-size: .7rem;
   font-weight: 700;
@@ -186,6 +187,7 @@ body {
   color: var(--green);
   border: 1px solid rgba(34, 197, 94, .2);
   transition: all .3s;
+  white-space: nowrap;
 }
 
 .mode-badge.cruise {
@@ -200,7 +202,6 @@ body {
   border-color: rgba(168, 85, 247, .2)
 }
 
-/* Icon buttons (theme + github) */
 .icon-btn {
   width: 32px;
   height: 32px;
@@ -229,11 +230,12 @@ body {
   display: flex;
   align-items: center;
   gap: .6rem;
-  padding: .4rem 1.75rem;
+  padding: .4rem 1.5rem;
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
-  font-size: .7rem;
+  font-size: .68rem;
   color: var(--text2);
+  flex-shrink: 0;
   transition: background .3s, border-color .3s;
 }
 
@@ -271,33 +273,36 @@ body {
 
 
 /* =========================================================================================
-   MAIN
+   MAIN — fills remaining viewport
    ========================================================================================= */
 #main {
   flex: 1;
-  padding: .75rem 1.25rem;
+  padding: .6rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: .7rem;
+  gap: .5rem;
+  min-height: 0;
+  overflow: hidden;
 }
 
 
 /* =========================================================================================
-   ROAD
+   ROAD — full width, dashes edge to edge
    ========================================================================================= */
 #road-section {
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   box-shadow: var(--shadow);
+  flex-shrink: 0;
   transition: background .3s, border-color .3s;
 }
 
 #road {
   position: relative;
   width: 100%;
-  height: 160px;
+  height: 140px;
   background: var(--road-bg);
   overflow: hidden;
 }
@@ -320,13 +325,13 @@ body {
 }
 
 .road-edge.top {
-  top: 12px;
+  top: 10px;
   background: var(--road-edge);
   box-shadow: 0 0 8px rgba(217, 119, 6, .3)
 }
 
 .road-edge.bottom {
-  bottom: 12px;
+  bottom: 10px;
   background: var(--road-edge);
   box-shadow: 0 0 8px rgba(217, 119, 6, .3)
 }
@@ -339,8 +344,8 @@ body {
   transform: translateY(-50%);
   height: 3px;
   display: flex;
-  gap: 28px;
-  padding-left: 10px;
+  gap: 25px;
+  overflow: hidden;
 }
 
 .dash {
@@ -359,7 +364,7 @@ body {
   }
 
   100% {
-    transform: translateX(-68px)
+    transform: translateX(-65px)
   }
 }
 
@@ -383,8 +388,8 @@ body {
 
 .car-body {
   position: relative;
-  width: 105px;
-  height: 42px
+  width: 100px;
+  height: 40px
 }
 
 .car-body::before {
@@ -393,7 +398,7 @@ body {
   bottom: 4px;
   left: 4px;
   right: 4px;
-  height: 22px;
+  height: 20px;
   border-radius: 4px 4px 3px 3px;
   z-index: 1;
 }
@@ -411,10 +416,10 @@ body {
 
 .car-top {
   position: absolute;
-  bottom: 22px;
+  bottom: 20px;
   left: 22%;
   width: 56%;
-  height: 19px;
+  height: 18px;
   border-radius: 10px 10px 0 0;
   z-index: 2
 }
@@ -433,10 +438,10 @@ body {
 
 .car-window {
   position: absolute;
-  bottom: 24px;
+  bottom: 22px;
   left: 26%;
   width: 22%;
-  height: 13px;
+  height: 12px;
   background: rgba(148, 200, 255, .2);
   border-radius: 5px 3px 0 0;
   z-index: 3;
@@ -447,10 +452,10 @@ body {
 .car-body::after {
   content: '';
   position: absolute;
-  bottom: 24px;
+  bottom: 22px;
   left: 52%;
   width: 20%;
-  height: 13px;
+  height: 12px;
   background: rgba(148, 200, 255, .15);
   border-radius: 3px 5px 0 0;
   z-index: 3;
@@ -461,8 +466,8 @@ body {
 .car-wheel {
   position: absolute;
   bottom: 0;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: radial-gradient(circle at 40% 40%, #3a3a4a, #111);
   border: 2px solid #2a2a3a;
@@ -476,25 +481,25 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: #555
 }
 
 .car-wheel.front {
-  right: 10px
+  right: 8px
 }
 
 .car-wheel.rear {
-  left: 10px
+  left: 8px
 }
 
 .tail-light {
   position: absolute;
-  bottom: 12px;
-  width: 6px;
-  height: 10px;
+  bottom: 10px;
+  width: 5px;
+  height: 9px;
   border-radius: 2px;
   background: #4a2020;
   z-index: 4;
@@ -517,7 +522,7 @@ body {
 .headlight {
   position: absolute;
   width: 5px;
-  height: 8px;
+  height: 7px;
   border-radius: 2px;
   background: rgba(255, 253, 220, .15);
   z-index: 4;
@@ -526,12 +531,12 @@ body {
 
 .headlight.l {
   right: 4px;
-  bottom: 16px
+  bottom: 14px
 }
 
 .headlight.r {
   right: 4px;
-  bottom: 8px
+  bottom: 7px
 }
 
 .headlight.on {
@@ -542,7 +547,7 @@ body {
 .car-tag {
   display: block;
   margin-top: 2px;
-  font-size: .48rem;
+  font-size: .46rem;
   color: var(--road-dash);
   text-transform: uppercase;
   letter-spacing: .1em;
@@ -587,7 +592,7 @@ body {
 
 #dist-label {
   position: absolute;
-  top: 14px;
+  top: 12px;
   left: 28%;
   right: 28%;
   display: flex;
@@ -618,7 +623,7 @@ body {
   background: rgba(6, 182, 212, .12);
   color: var(--cyan);
   font-family: 'JetBrains Mono', monospace;
-  font-size: .58rem;
+  font-size: .56rem;
   font-weight: 600;
   padding: 1px 7px;
   border-radius: 3px;
@@ -627,19 +632,48 @@ body {
 
 
 /* =========================================================================================
-   INSTRUMENTS — 4 symmetric panels
+   CONTENT ROW — Left panels + Right serial
    ========================================================================================= */
-#instruments {
+#content-row {
+  flex: 1;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: .7rem;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Left Column ── */
+#left-col {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Top instruments: LCD + Gauge side by side */
+#instruments-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+
+/* Bottom instruments: Telemetry + Arduino side by side */
+#instruments-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+  flex-shrink: 0;
 }
 
 .panel {
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: .6rem .7rem;
+  border-radius: 8px;
+  padding: .5rem .6rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
@@ -650,11 +684,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: .4rem
+  margin-bottom: .3rem
 }
 
 .panel-title {
-  font-size: .55rem;
+  font-size: .5rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .1em;
@@ -663,7 +697,7 @@ body {
 
 .panel-pin {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .48rem;
+  font-size: .44rem;
   color: var(--text4)
 }
 
@@ -675,8 +709,8 @@ body {
 /* LCD */
 #lcd {
   background: var(--lcd-bg);
-  border-radius: 5px;
-  padding: 8px 12px;
+  border-radius: 4px;
+  padding: 6px 10px;
   box-shadow: inset 0 0 20px rgba(57, 255, 20, .05);
   flex: 1;
   display: flex;
@@ -686,15 +720,15 @@ body {
 
 .lcd-line {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .88rem;
+  font-size: .8rem;
   font-weight: 700;
   color: var(--lcd-text);
   text-shadow: 0 0 6px var(--lcd-glow), 0 0 14px var(--lcd-glow);
   letter-spacing: .12em;
   white-space: nowrap;
   overflow: hidden;
-  min-height: 1.3em;
-  line-height: 1.3;
+  min-height: 1.2em;
+  line-height: 1.2;
 }
 
 /* Gauge */
@@ -707,12 +741,12 @@ body {
 
 #gauge-svg {
   width: 100%;
-  max-width: 130px
+  max-width: 110px
 }
 
 .gauge-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
   fill: var(--text)
 }
@@ -728,14 +762,14 @@ body {
 #info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: .35rem;
+  gap: .25rem;
   flex: 1
 }
 
 .info-cell {
   background: var(--bg3);
-  border-radius: 6px;
-  padding: .4rem .5rem;
+  border-radius: 5px;
+  padding: .3rem .4rem;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -744,17 +778,17 @@ body {
 
 .info-label {
   display: block;
-  font-size: .48rem;
+  font-size: .42rem;
   color: var(--text4);
   text-transform: uppercase;
   letter-spacing: .08em;
   font-weight: 600;
-  margin-bottom: 2px
+  margin-bottom: 1px
 }
 
 .info-val {
   display: block;
-  font-size: .82rem;
+  font-size: .75rem;
   font-weight: 700;
   color: var(--text)
 }
@@ -766,9 +800,9 @@ body {
 /* HW Panel */
 #hw-grid {
   display: flex;
-  gap: .4rem;
+  gap: .35rem;
   justify-content: center;
-  margin-bottom: .4rem;
+  margin-bottom: .3rem;
   flex-wrap: wrap
 }
 
@@ -777,19 +811,19 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  min-width: 38px
+  min-width: 34px
 }
 
 .led-pair span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .4rem;
+  font-size: .36rem;
   color: var(--text4);
   text-transform: uppercase
 }
 
 .hw-led {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--bg3);
   border: 1px solid var(--border);
@@ -816,7 +850,7 @@ body {
 
 #pin-bars {
   display: flex;
-  gap: 4px
+  gap: 3px
 }
 
 .pbar {
@@ -829,7 +863,7 @@ body {
 
 .pbar span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .4rem;
+  font-size: .36rem;
   color: var(--text4);
   font-weight: 600
 }
@@ -861,80 +895,69 @@ body {
 }
 
 
-/* =========================================================================================
-   BOTTOM ROW — Controls (left) + Serial (right)
-   ========================================================================================= */
-#bottom-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: .7rem;
-  flex: 1;
-  min-height: 0;
-}
-
-/* ── Controls Column ── */
-#controls-col {
+/* ── Controls Area ── */
+#controls-area {
   display: flex;
   flex-direction: column;
-  gap: .6rem;
+  gap: .4rem;
+  flex-shrink: 0;
 }
 
-/* Arrow Grid */
 #arrow-grid {
   display: flex;
-  gap: .7rem;
+  gap: .5rem
 }
 
 .arrow-group {
   flex: 1;
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: .6rem;
+  border-radius: 8px;
+  padding: .45rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .4rem;
+  gap: .3rem;
   transition: background .3s, border-color .3s;
 }
 
 .arrow-title {
-  font-size: .55rem;
+  font-size: .5rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .1em;
-  color: var(--text3);
+  color: var(--text3)
 }
 
 .arrow-pair {
   display: flex;
-  gap: .4rem
+  gap: .35rem
 }
 
 .btn-arrow-key {
-  width: 52px;
-  height: 44px;
+  width: 48px;
+  height: 40px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 7px;
   background: var(--btn-bg);
   color: var(--text);
-  font-size: 1rem;
+  font-size: .9rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 1px;
   user-select: none;
   transition: all .12s;
 }
 
 .btn-arrow-key kbd {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .42rem;
+  font-size: .4rem;
   color: var(--kbd-text);
-  font-weight: 400;
+  font-weight: 400
 }
 
 .btn-arrow-key:hover {
@@ -987,27 +1010,26 @@ body {
   box-shadow: 0 0 10px rgba(6, 182, 212, .1)
 }
 
-/* Mode Row */
 #mode-row {
   display: flex;
-  gap: .4rem;
+  gap: .35rem
 }
 
 .btn {
   flex: 1;
-  padding: .5rem .6rem;
+  padding: .4rem .5rem;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 7px;
   background: var(--btn-bg);
   color: var(--text);
   font-family: 'Inter', sans-serif;
-  font-size: .65rem;
+  font-size: .6rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .3rem;
+  gap: .25rem;
   user-select: none;
   white-space: nowrap;
   transition: all .12s;
@@ -1024,7 +1046,7 @@ body {
 
 .btn kbd {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .42rem;
+  font-size: .4rem;
   padding: 1px 3px;
   border-radius: 2px;
   background: var(--kbd-bg);
@@ -1034,10 +1056,10 @@ body {
 
 .mode-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .5rem;
+  font-size: .48rem;
   font-weight: 700;
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   border-radius: 3px;
   display: inline-flex;
   align-items: center;
@@ -1081,23 +1103,22 @@ body {
   color: white
 }
 
-/* Slider Box */
 #slider-box {
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: .5rem .75rem;
+  border-radius: 8px;
+  padding: .4rem .6rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   transition: background .3s, border-color .3s;
 }
 
 .slider-head {
   display: flex;
   justify-content: space-between;
-  font-size: .6rem;
+  font-size: .55rem;
   color: var(--text2);
   font-weight: 500
 }
@@ -1143,7 +1164,7 @@ input[type="range"]::-moz-range-thumb {
   display: flex;
   justify-content: space-between;
   font-family: 'JetBrains Mono', monospace;
-  font-size: .42rem;
+  font-size: .4rem;
   color: var(--text4)
 }
 
@@ -1160,25 +1181,26 @@ input[type="range"]::-moz-range-thumb {
 }
 
 
-/* ── Serial Monitor Column ── */
+/* ── Right Column: Serial Monitor ── */
 #serial-col {
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
+  min-height: 0;
   transition: background .3s, border-color .3s;
 }
 
 .serial-head {
   display: flex;
   justify-content: space-between;
-  padding: .4rem .7rem;
+  padding: .35rem .6rem;
   background: var(--bg3);
   border-bottom: 1px solid var(--border);
-  font-size: .55rem;
+  font-size: .5rem;
   font-weight: 600;
   color: var(--text3);
   text-transform: uppercase;
@@ -1193,11 +1215,12 @@ input[type="range"]::-moz-range-thumb {
 
 #serial {
   background: var(--serial-bg);
-  padding: .4rem .7rem;
+  padding: .35rem .6rem;
   flex: 1;
   overflow-y: auto;
+  min-height: 0;
   font-family: 'JetBrains Mono', monospace;
-  font-size: .58rem;
+  font-size: .55rem;
   line-height: 1.5;
   color: #94a3b8;
 }
@@ -1228,18 +1251,19 @@ input[type="range"]::-moz-range-thumb {
 
 
 /* =========================================================================================
-   FOOTER — Simple two-liner
+   FOOTER
    ========================================================================================= */
 #footer {
-  padding: .65rem 1.5rem;
+  padding: .5rem 1.25rem;
   text-align: center;
   border-top: 1px solid var(--border);
   background: var(--bg2);
+  flex-shrink: 0;
   transition: background .3s, border-color .3s;
 }
 
 #footer p {
-  font-size: .65rem;
+  font-size: .6rem;
   color: var(--text3);
   line-height: 1.6
 }
@@ -1258,18 +1282,33 @@ input[type="range"]::-moz-range-thumb {
    RESPONSIVE
    ========================================================================================= */
 @media(max-width:1024px) {
-  #instruments {
-    grid-template-columns: 1fr 1fr
+  body {
+    height: auto;
+    overflow: auto
   }
 
-  #bottom-row {
-    grid-template-columns: 1fr
+  #content-row {
+    grid-template-columns: 1fr;
+    overflow: visible
+  }
+
+  #left-col {
+    overflow: visible
+  }
+
+  #serial-col {
+    max-height: 200px
   }
 }
 
 @media(max-width:640px) {
+  body {
+    height: auto;
+    overflow: auto
+  }
+
   #header {
-    padding: .45rem .75rem
+    padding: .4rem .75rem
   }
 
   .h-center {
@@ -1283,14 +1322,20 @@ input[type="range"]::-moz-range-thumb {
   }
 
   #main {
-    padding: .5rem
+    padding: .4rem .5rem
   }
 
-  #instruments {
-    grid-template-columns: 1fr 1fr
+  #content-row {
+    grid-template-columns: 1fr;
+    overflow: visible
   }
 
-  #bottom-row {
+  #left-col {
+    overflow: visible
+  }
+
+  #instruments-top,
+  #instruments-bottom {
     grid-template-columns: 1fr
   }
 
@@ -1303,11 +1348,15 @@ input[type="range"]::-moz-range-thumb {
   }
 
   #road {
-    height: 120px
+    height: 110px
   }
 
   .car-body {
-    width: 75px;
-    height: 32px
+    width: 70px;
+    height: 30px
+  }
+
+  #serial-col {
+    max-height: 180px
   }
 }
