@@ -129,8 +129,19 @@ ADAPTIVE-CRUISE-CONTROL/
 
 <div align="center">
 
-  ### Component Table
-  <img src="Source Code/figures/Component Table.jpg" width="80%" alt="Component Table">
+  ### Bill of Materials: Component Table
+  
+  | Name | Quantity | Component |
+  | :--- | :---: | :--- |
+  | **U2** | 1 | Arduino Uno R3 |
+  | **S1 – S5** | 5 | Pushbutton |
+  | **R1, R2** | 2 | 10 mΩ Resistor |
+  | **R3, R4, R5** | 3 | 50 mΩ Resistor |
+  | **U3** | 1 | LCD 16 x 2 |
+  | **Rpot2** | 1 | 250 kΩ Potentiometer |
+  | **DIST1** | 1 | Ultrasonic Distance Sensor |
+  | **D1, D2** | 2 | Red LED |
+  | **R6, R7** | 2 | 10 kΩ Resistor |
 
   ### Core Components
   
