@@ -1,19 +1,19 @@
 /* ┌──────────────────────────────────────────────────────────────────────────────┐
- * │  File:         style.css                                                   │
- * │  Author:       Amey Thakur                                                 │
- * │  Profile:      https://github.com/Amey-Thakur                              │
- * │  Repository:   https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL      │
- * │                                                                             │
- * │  Description:  Complete stylesheet for the Adaptive Cruise Control web      │
- * │                simulation. Defines the dark and light theme color systems,  │
- * │                loading screen animation, layout grid, road and vehicle      │
- * │                rendering, instrument panel styling, interactive controls,   │
- * │                serial monitor aesthetics, cinematic overlay effects, and    │
- * │                responsive breakpoints for tablet and mobile viewports.      │
- * │                                                                             │
- * │  Technology:   CSS3, Custom Properties, Flexbox, Grid, Keyframe Animations │
- * │  Released:     September 08, 2023                                           │
- * │  License:      MIT                                                          │
+ * │  File:         style.css                                                     │
+ * │  Author:       Amey Thakur                                                   │
+ * │  Profile:      https://github.com/Amey-Thakur                                │
+ * │  Repository:   https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL        │
+ * │                                                                              │
+ * │  Description:  Complete stylesheet for the Adaptive Cruise Control web       │
+ * │                simulation. Defines the dark and light theme color systems,   │
+ * │                loading screen animation, layout grid, road and vehicle       │
+ * │                rendering, instrument panel styling, interactive controls,    │
+ * │                serial monitor aesthetics, cinematic overlay effects, and     │
+ * │                responsive breakpoints for tablet and mobile viewports.       │
+ * │                                                                              │
+ * │  Technology:   CSS3, Custom Properties, Flexbox, Grid, Keyframe Animations   │
+ * │  Released:     September 08, 2023                                            │
+ * │  License:      MIT                                                           │
  * └──────────────────────────────────────────────────────────────────────────────┘ */
 
 /* Dark Theme: Primary color palette applied when data-theme="dark" is set.

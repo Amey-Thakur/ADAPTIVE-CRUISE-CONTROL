@@ -1,22 +1,22 @@
 <!--
   ┌──────────────────────────────────────────────────────────────────────────────┐
-  │  File:         index.html                                                   │
-  │  Author:       Amey Thakur                                                 │
-  │  Profile:      https://github.com/Amey-Thakur                              │
-  │  Repository:   https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL      │
-  │                                                                             │
-  │  Description:  Root document for the Adaptive Cruise Control (ACC) web      │
+  │  File:         index.html                                                    │
+  │  Author:       Amey Thakur                                                   │
+  │  Profile:      https://github.com/Amey-Thakur                                │
+  │  Repository:   https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL        │
+  │                                                                              │
+  │  Description:  Root document for the Adaptive Cruise Control (ACC) web       │
   │                simulation. This file defines the complete structural         │
   │                layout of the interactive dashboard, including the loading    │
-  │                screen, status bar, road visualization, instrument panels,   │
-  │                control interfaces, serial monitor, and footer. All visual   │
-  │                styling is handled by style.css; all runtime behavior is     │
-  │                driven by simulation.js.                                     │
-  │                                                                             │
-  │  Technology:   HTML5, CSS3 (external), JavaScript (external)                │
-  │  Fonts:        Google Fonts — Play, JetBrains Mono                          │
-  │  Released:     September 08, 2023                                           │
-  │  License:      MIT                                                          │
+  │                screen, status bar, road visualization, instrument panels,    │
+  │                control interfaces, serial monitor, and footer. All visual    │
+  │                styling is handled by style.css; all runtime behavior is      │
+  │                driven by simulation.js.                                      │
+  │                                                                              │
+  │  Technology:   HTML5, CSS3 (external), JavaScript (external)                 │
+  │  Fonts:        Google Fonts — Play, JetBrains Mono                           │
+  │  Released:     September 08, 2023                                            │
+  │  License:      MIT                                                           │
   └──────────────────────────────────────────────────────────────────────────────┘
 -->
 <!DOCTYPE html>
@@ -25,9 +25,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d1a">
   <title>Adaptive Cruise Control | Amey Thakur</title>
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚘</text></svg>">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
   <meta name="description"
     content="Interactive browser-based simulation of an Arduino Uno Adaptive Cruise Control (ACC) system. Explore Normal, Cruise, and Adaptive modes with real-time sensor feedback.">
   <link rel="stylesheet" href="style.css">
@@ -359,6 +360,22 @@
   </footer>
 
   <script src="simulation.js"></script>
+  <script>
+    // ─── PWA SERVICE WORKER REGISTRATION ──────────────────────────────────
+    // Registers the sw.js service worker to enable offline capabilities
+    // and performance caching for high-speed local loading.
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then((reg) => {
+            // Personalized PWA activation log
+            console.log('%c⚡ PWA Engine Active:', 'color: #22c55e; font-weight: 800; font-size: 13px;',
+              'Offline support engaged. Designed & Developed by Amey Thakur.');
+          })
+          .catch(err => console.error('SW registration failed:', err));
+      });
+    }
+  </script>
 </body>
 
 </html>

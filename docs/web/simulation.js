@@ -1,25 +1,25 @@
 /* ┌──────────────────────────────────────────────────────────────────────────────┐
- * │  File:         simulation.js                                               │
- * │  Author:       Amey Thakur                                                 │
- * │  Profile:      https://github.com/Amey-Thakur                              │
- * │  Repository:   https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL      │
- * │                                                                             │
- * │  Description:  Core simulation engine for the Adaptive Cruise Control       │
+ * │  File:         simulation.js                                                 │
+ * │  Author:       Amey Thakur                                                   │
+ * │  Profile:      https://github.com/Amey-Thakur                                │
+ * │  Repository:   https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL        │
+ * │                                                                              │
+ * │  Description:  Core simulation engine for the Adaptive Cruise Control        │
  * │                (ACC) web application. This module is a faithful JavaScript   │
- * │                port of the original MATLAB ACC algorithm. It manages        │
- * │                three operating modes (Normal, Cruise, Adaptive), handles    │
- * │                simulated Arduino I/O (LEDs, pins, LCD, HC-SR04 sensor),     │
- * │                and drives all real-time dashboard updates including the     │
- * │                speedometer, telemetry, road visualization, and serial       │
- * │                monitor output.                                              │
- * │                                                                             │
- * │  Modes:        0 → Normal | 1 → Cruise Control | 2 → Adaptive Cruise       │
- * │  Pin Map:      A0 Accel | A1 Brake | A2 Cancel | A3 Cruise | A4 ACC        │
- * │                D13 Green LED | D12 Red LED | D10 Trig | D8 Echo             │
- * │                                                                             │
- * │  Technology:   Vanilla JavaScript (ES6+), Web Audio API                     │
- * │  Released:     September 08, 2023                                           │
- * │  License:      MIT                                                          │
+ * │                port of the original MATLAB ACC algorithm. It manages         │
+ * │                three operating modes (Normal, Cruise, Adaptive), handles     │
+ * │                simulated Arduino I/O (LEDs, pins, LCD, HC-SR04 sensor),      │
+ * │                and drives all real-time dashboard updates including the      │
+ * │                speedometer, telemetry, road visualization, and serial        │
+ * │                monitor output.                                               │
+ * │                                                                              │
+ * │  Modes:        0 → Normal | 1 → Cruise Control | 2 → Adaptive Cruise         │
+ * │  Pin Map:      A0 Accel | A1 Brake | A2 Cancel | A3 Cruise | A4 ACC          │
+ * │                D13 Green LED | D12 Red LED | D10 Trig | D8 Echo              │
+ * │                                                                              │
+ * │  Technology:   Vanilla JavaScript (ES6+), Web Audio API                      │
+ * │  Released:     September 08, 2023                                            │
+ * │  License:      MIT                                                           │
  * └──────────────────────────────────────────────────────────────────────────────┘ */
 
 'use strict';
