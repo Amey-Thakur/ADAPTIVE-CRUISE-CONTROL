@@ -27,14 +27,32 @@
         <span class="h-sub">Arduino Uno · Interactive Simulation</span>
       </div>
     </div>
-    <div class="h-right">
+    <div class="h-center">
       <div class="mode-badge" id="mode-badge">Normal Mode</div>
-      <button id="theme-toggle" class="theme-btn" title="Toggle Light/Dark Mode" aria-label="Toggle theme">
-        <span class="theme-icon" id="theme-icon">☀️</span>
+    </div>
+    <div class="h-right">
+      <!-- Subtle theme toggle (SVG icon like GitHub) -->
+      <button id="theme-toggle" class="icon-btn" title="Toggle Light/Dark Mode" aria-label="Toggle theme">
+        <svg id="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+        <svg id="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
       </button>
-      <a href="https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL" class="gh-link" target="_blank" rel="noopener"
+      <a href="https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL" class="icon-btn" target="_blank" rel="noopener"
         title="View on GitHub">
-        <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
           <path
             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
         </svg>
@@ -51,11 +69,11 @@
   <!-- ═══ MAIN DASHBOARD ═══ -->
   <main id="main">
 
-    <!-- ROW 1: Road Visualization -->
+    <!-- ── ROAD ── -->
     <section id="road-section">
       <div id="road">
         <div class="road-edge top"></div>
-        <div class="lane-markers" id="lane-markers">
+        <div class="lane-markers">
           <div class="dash"></div>
           <div class="dash"></div>
           <div class="dash"></div>
@@ -108,9 +126,8 @@
       </div>
     </section>
 
-    <!-- ROW 2: Instruments -->
+    <!-- ── INSTRUMENTS (4 panels) ── -->
     <div id="instruments">
-
       <!-- LCD -->
       <div class="panel" id="lcd-panel">
         <div class="panel-head">
@@ -134,13 +151,13 @@
               stroke-linecap="round" />
             <path d="M 10 70 A 50 50 0 0 1 110 70" fill="none" stroke="var(--gauge-fill)" stroke-width="8"
               stroke-linecap="round" id="gauge-arc" stroke-dasharray="157" stroke-dashoffset="157" />
-            <text x="60" y="58" text-anchor="middle" class="gauge-num" id="gauge-num">0</text>
-            <text x="60" y="72" text-anchor="middle" class="gauge-unit">km/h</text>
+            <text x="60" y="56" text-anchor="middle" class="gauge-num" id="gauge-num">0</text>
+            <text x="60" y="70" text-anchor="middle" class="gauge-unit">km/h</text>
           </svg>
         </div>
       </div>
 
-      <!-- Mode & Target -->
+      <!-- Telemetry -->
       <div class="panel" id="info-panel">
         <div class="panel-head">
           <span class="panel-title">Telemetry</span>
@@ -209,51 +226,67 @@
       </div>
     </div>
 
-    <!-- ROW 3: Controls -->
-    <div id="controls">
-      <div id="ctrl-left">
-        <button id="btn-up" class="btn btn-accel" title="Increase Speed (↑ or W)">
-          <span class="btn-arrow">▲</span> Accelerate <kbd>W</kbd>
-        </button>
-        <button id="btn-down" class="btn btn-brake" title="Decrease Speed (↓ or S)">
-          <span class="btn-arrow">▼</span> Brake <kbd>S</kbd>
-        </button>
+    <!-- ── BOTTOM ROW: Controls + Serial side by side ── -->
+    <div id="bottom-row">
+
+      <!-- Controls Column -->
+      <div id="controls-col">
+        <!-- Speed + Distance Arrows -->
+        <div id="arrow-grid">
+          <div class="arrow-group">
+            <span class="arrow-title">Speed</span>
+            <div class="arrow-pair">
+              <button id="btn-up" class="btn-arrow-key accel" title="Accelerate (↑ or W)">▲<kbd>W</kbd></button>
+              <button id="btn-down" class="btn-arrow-key brake" title="Brake (↓ or S)">▼<kbd>S</kbd></button>
+            </div>
+          </div>
+          <div class="arrow-group">
+            <span class="arrow-title">Distance</span>
+            <div class="arrow-pair">
+              <button id="btn-closer" class="btn-arrow-key dist-close" title="Closer (← or A)">◀<kbd>A</kbd></button>
+              <button id="btn-farther" class="btn-arrow-key dist-far" title="Farther (→ or D)">▶<kbd>D</kbd></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mode Buttons -->
+        <div id="mode-row">
+          <button id="btn-m0" class="btn btn-mode active" title="Normal Mode (Key: 1)">
+            <span class="mode-num">0</span> Normal <kbd>1</kbd>
+          </button>
+          <button id="btn-m1" class="btn btn-mode" title="Cruise Control (Key: 2)">
+            <span class="mode-num">1</span> Cruise <kbd>2</kbd>
+          </button>
+          <button id="btn-m2" class="btn btn-mode" title="Adaptive Cruise (Key: 3)">
+            <span class="mode-num">2</span> Adaptive <kbd>3</kbd>
+          </button>
+        </div>
+
+        <!-- Distance Slider -->
+        <div id="slider-box">
+          <div class="slider-head">
+            <span>HC-SR04 Distance</span>
+            <span class="slider-val" id="slider-val">0.50m</span>
+          </div>
+          <input type="range" id="dist-slider" min="0" max="100" value="50" step="1">
+          <div class="slider-labels">
+            <span class="lbl-danger">0.00</span>
+            <span class="lbl-warn">0.30</span>
+            <span class="lbl-safe">1.00</span>
+          </div>
+        </div>
       </div>
 
-      <div id="ctrl-modes">
-        <button id="btn-m0" class="btn btn-mode active" title="Normal Mode (Key: 1)">
-          <span class="mode-num">0</span> Normal <kbd>1</kbd>
-        </button>
-        <button id="btn-m1" class="btn btn-mode" title="Cruise Control (Key: 2)">
-          <span class="mode-num">1</span> Cruise <kbd>2</kbd>
-        </button>
-        <button id="btn-m2" class="btn btn-mode" title="Adaptive Cruise (Key: 3)">
-          <span class="mode-num">2</span> Adaptive <kbd>3</kbd>
-        </button>
+      <!-- Serial Monitor Column -->
+      <div id="serial-col">
+        <div class="serial-head">
+          <span>Serial Monitor</span>
+          <span class="serial-baud">COM5 · 9600 baud</span>
+        </div>
+        <div id="serial" role="log" aria-live="polite"></div>
       </div>
 
-      <div id="ctrl-slider">
-        <div class="slider-head">
-          <span>HC-SR04 Distance</span>
-          <span class="slider-val" id="slider-val">0.50m</span>
-        </div>
-        <input type="range" id="dist-slider" min="0" max="100" value="50" step="1">
-        <div class="slider-labels">
-          <span class="lbl-danger">0.00</span>
-          <span class="lbl-warn">0.30</span>
-          <span class="lbl-safe">1.00</span>
-        </div>
-      </div>
     </div>
-
-    <!-- ROW 4: Serial Monitor -->
-    <section id="serial-section">
-      <div class="serial-head">
-        <span>Serial Monitor</span>
-        <span class="serial-baud">COM5 · 9600 baud</span>
-      </div>
-      <div id="serial" role="log" aria-live="polite"></div>
-    </section>
 
   </main>
 
@@ -261,9 +294,7 @@
   <footer id="footer">
     <p>Designed and Developed by <a href="https://github.com/Amey-Thakur" target="_blank" rel="noopener"><strong>Amey
           Thakur</strong></a></p>
-    <p>Copyright © 2023 · All Rights Reserved · <a
-        href="https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/blob/main/LICENSE" target="_blank"
-        rel="noopener">MIT License</a></p>
+    <p>MATLAB Course &middot; &copy; 2023</p>
   </footer>
 
   <script src="simulation.js"></script>

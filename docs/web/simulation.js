@@ -43,8 +43,10 @@ const D = {
     leadCar: $('lead-car'), egoCar: $('ego-car'),
     sensorCone: $('sensor-cone'),
     btnUp: $('btn-up'), btnDown: $('btn-down'),
+    btnCloser: $('btn-closer'), btnFarther: $('btn-farther'),
     btnM0: $('btn-m0'), btnM1: $('btn-m1'), btnM2: $('btn-m2'),
-    themeToggle: $('theme-toggle'), themeIcon: $('theme-icon'),
+    themeToggle: $('theme-toggle'),
+    iconSun: $('icon-sun'), iconMoon: $('icon-moon'),
 };
 
 // Pin bar refs
@@ -70,7 +72,8 @@ function toggleTheme() {
 
 function updateThemeIcon() {
     const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    D.themeIcon.textContent = dark ? '☀️' : '🌙';
+    D.iconSun.style.display = dark ? 'block' : 'none';
+    D.iconMoon.style.display = dark ? 'none' : 'block';
 }
 
 
@@ -366,10 +369,45 @@ D.btnM2.addEventListener('click', () => {
 D.distSlider.addEventListener('input', () => { refreshSensor(); refreshHW(); });
 
 
+// ─── DISTANCE BUTTONS (← Closer / → Farther) ────────────────────────────────
+let distInt = null;
+
+function stepDistance(delta) {
+    const v = parseInt(D.distSlider.value) + delta;
+    D.distSlider.value = Math.max(0, Math.min(100, v));
+    refreshSensor(); refreshHW();
+}
+
+function startDist(delta, btn) {
+    btn.classList.add('pressed');
+    stepDistance(delta);
+    distInt = setInterval(() => stepDistance(delta), 100);
+}
+
+function stopDist(btn) {
+    btn.classList.remove('pressed');
+    clearInterval(distInt); distInt = null;
+}
+
+// Closer (decrease distance)
+D.btnCloser.addEventListener('mousedown', e => { e.preventDefault(); startDist(-2, D.btnCloser); });
+D.btnCloser.addEventListener('mouseup', () => stopDist(D.btnCloser));
+D.btnCloser.addEventListener('mouseleave', () => stopDist(D.btnCloser));
+D.btnCloser.addEventListener('touchstart', e => { e.preventDefault(); startDist(-2, D.btnCloser); });
+D.btnCloser.addEventListener('touchend', () => stopDist(D.btnCloser));
+
+// Farther (increase distance)
+D.btnFarther.addEventListener('mousedown', e => { e.preventDefault(); startDist(2, D.btnFarther); });
+D.btnFarther.addEventListener('mouseup', () => stopDist(D.btnFarther));
+D.btnFarther.addEventListener('mouseleave', () => stopDist(D.btnFarther));
+D.btnFarther.addEventListener('touchstart', e => { e.preventDefault(); startDist(2, D.btnFarther); });
+D.btnFarther.addEventListener('touchend', () => stopDist(D.btnFarther));
+
+
 // ─── KEYBOARD ────────────────────────────────────────────────────────────────
 document.addEventListener('keydown', e => {
     if (!S.running) return;
-    if (e.repeat) return; // Prevent key repeat stacking
+    if (e.repeat) return;
     switch (e.key.toLowerCase()) {
         case 'arrowup': case 'w':
             e.preventDefault();
@@ -378,6 +416,14 @@ document.addEventListener('keydown', e => {
         case 'arrowdown': case 's':
             e.preventDefault();
             if (!spdInt) { D.btnDown.classList.add('pressed'); startSpeed('A1'); }
+            break;
+        case 'arrowleft': case 'a':
+            e.preventDefault();
+            if (!distInt) startDist(-2, D.btnCloser);
+            break;
+        case 'arrowright': case 'd':
+            e.preventDefault();
+            if (!distInt) startDist(2, D.btnFarther);
             break;
         case '1': D.btnM0.click(); break;
         case '2': D.btnM1.click(); break;
@@ -391,6 +437,10 @@ document.addEventListener('keyup', e => {
             D.btnUp.classList.remove('pressed'); stopSpeed('A0'); break;
         case 'arrowdown': case 's':
             D.btnDown.classList.remove('pressed'); stopSpeed('A1'); break;
+        case 'arrowleft': case 'a':
+            stopDist(D.btnCloser); break;
+        case 'arrowright': case 'd':
+            stopDist(D.btnFarther); break;
     }
 });
 
@@ -449,7 +499,7 @@ function boot() {
         S.mode = 0;
         lcd('Vehicle Speed:', '0');
         log('System ready. Entering control loop.', 'success');
-        log('Keys: ↑/W Accel · ↓/S Brake · 1/2/3 Mode', 'info');
+        log('Keys: ↑/W Accel · ↓/S Brake · ←/A Closer · →/D Farther · 1/2/3 Mode', 'info');
         setStatus('normal_idle');
         refreshAll();
     }, 5500);
