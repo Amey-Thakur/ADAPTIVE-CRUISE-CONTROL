@@ -82,8 +82,11 @@ The **Adaptive Cruise Control (ACC)** system is a sophisticated embedded control
 ### Tech Stack
 - **Programming Language**: MATLAB (R2023a+)
 - **Hardware Abstraction**: MATLAB Support Package for Arduino
+- **Peripheral Libraries**: `Ultrasonic`, `ExampleLCD/LCDAddOn`
 - **Controller**: Arduino Uno
 - **Peripherals**: HC-SR04 Ultrasonic Sensor, 16x2 LCD Display (I2C/Parallel)
+- **Control Interface**: 5x Analog Potentiometers (Manual Control & Mode PWM)
+- **Safety Indicators**: Dual-LED Feedback System (Green: Accel | Red: Stop)
 - **Simulation Platform**: Tinkercad (Hardware & Schematic Prototyping)
 
 ---
