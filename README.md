@@ -145,10 +145,10 @@ ADAPTIVE-CRUISE-CONTROL/
 
   ### Main Controller & Display Interface
   
-  **Arduino Uno R3: Technical Pinout & Architecture**  
+  **Arduino Uno R3: Technical Pinout & Architecture**  <br>
   <img src="Source Code/figures/Hardware Components/02 - Arduino Uno.png" width="650" alt="Arduino Uno Technical Diagram">
 
-  **LCD Display (16x2): Pin Configuration & Interface**  
+  **LCD Display (16x2): Pin Configuration & Interface**  <br>
   <img src="Source Code/figures/Hardware Components/01 - LCD Display.png" width="350" alt="LCD Display Technical Diagram">
 
   ### Sensory & Connectivity
@@ -165,10 +165,10 @@ ADAPTIVE-CRUISE-CONTROL/
 
   ### Technical Reference Standards
   
-  **Resistor Color Code Diagram**  
+  **Resistor Color Code Diagram**  <br>
   <img src="Source Code/figures/Hardware Components/06 - Resistor.png" width="600" alt="Resistor Diagram">
 
-  **Breadboard Technical Layout**  
+  **Breadboard Technical Layout**  <br>
   <img src="Source Code/figures/Hardware Components/08 - Breadboard.png" width="600" alt="Breadboard Layout">
 
 </div>
@@ -181,9 +181,11 @@ ADAPTIVE-CRUISE-CONTROL/
 <div align="center">
 
   ### Circuit View
+  <br>
   <img src="Source Code/figures/Tinkercad Simulation/01 - Circuit View.jpg" width="80%" alt="Circuit View">
 
   ### Schematic View
+  <br>
   <img src="Source Code/figures/Tinkercad Simulation/02 - Schematic View.jpg" width="80%" alt="Schematic View">
 
   ### Simulation Logic
@@ -206,6 +208,7 @@ ADAPTIVE-CRUISE-CONTROL/
 <div align="center">
 
   ### Physical Circuit Connections
+  <br>
   <img src="Source Code/figures/Arduino Working Model/01 - Circuit Connections.jpg" width="80%" alt="Hardware Connections">
 
   ### Hardware States
@@ -228,9 +231,11 @@ ADAPTIVE-CRUISE-CONTROL/
 <div align="center">
 
   ### Project Flowchart
+  <br>
   <img src="Source Code/figures/Adaptive Cruise Control Flowchart.png" width="80%" alt="ACC Flowchart">
 
   ### Gantt Chart
+  <br>
   <img src="Source Code/figures/Project Gantt Chart.jpg" width="80%" alt="Gantt Chart">
 
 </div>
