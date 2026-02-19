@@ -742,9 +742,18 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshSensor();
     refreshRoad();
 
-    // Cinematic Trigger
-    const title = document.querySelector('#header h1');
-    if (title) title.addEventListener('click', startCinematic);
+    // Cinematic Easter Egg — type "amey" to trigger
+    let eggBuffer = '';
+    let eggTimer = null;
+    document.addEventListener('keydown', (e) => {
+        eggBuffer += e.key.toLowerCase();
+        clearTimeout(eggTimer);
+        eggTimer = setTimeout(() => eggBuffer = '', 2000);
+        if (eggBuffer.includes('amey')) {
+            eggBuffer = '';
+            startCinematic();
+        }
+    });
 
     // Horn interaction (ACC vehicle only)
     const egoBody = D.egoCar.querySelector('.car-body');
