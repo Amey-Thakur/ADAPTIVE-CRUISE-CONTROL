@@ -1,9 +1,9 @@
 /* =========================================================================================
-   ADAPTIVE CRUISE CONTROL — SIMULATION STYLES v2.1
-   Full-viewport, polished dashboard · Dark/Light · Better car visuals
+   ADAPTIVE CRUISE CONTROL — v3
+   Spacious · Symmetric · Side-by-side Controls + Serial
    ========================================================================================= */
 
-/* ── DARK THEME (Default) ── */
+/* ── DARK THEME ── */
 [data-theme="dark"] {
   --bg: #080d1a;
   --bg2: #0f1628;
@@ -15,40 +15,31 @@
   --text2: #94a3b8;
   --text3: #64748b;
   --text4: #3b4660;
-
   --accent: #3b82f6;
   --cyan: #06b6d4;
   --green: #22c55e;
   --red: #ef4444;
   --amber: #f59e0b;
   --purple: #a855f7;
-
   --lcd-bg: #0a2a0a;
   --lcd-text: #39ff14;
   --lcd-glow: rgba(57, 255, 20, 0.2);
-
   --gauge-track: #1e293b;
   --gauge-fill: #3b82f6;
-
-  --road-bg: linear-gradient(180deg, #0e1525 0%, #080d18 100%);
-  --road-surface: #141c2e;
+  --road-bg: linear-gradient(180deg, #0e1525, #080d18);
   --road-edge: #d97706;
   --road-dash: rgba(255, 255, 255, 0.4);
-
   --serial-bg: #060a14;
-
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   --btn-bg: #151d32;
   --btn-hover: #1e2845;
   --kbd-bg: rgba(255, 255, 255, 0.06);
-  --kbd-text: #64748b;
-
+  --kbd-text: #4b5a74;
   --car-ego: #3b82f6;
-  --car-ego-dark: #1d4ed8;
+  --car-ego-d: #1d4ed8;
   --car-ego-glow: rgba(59, 130, 246, 0.25);
   --car-lead: #6b7280;
-  --car-lead-dark: #4b5563;
+  --car-lead-d: #4b5563;
 }
 
 /* ── LIGHT THEME ── */
@@ -63,42 +54,32 @@
   --text2: #475569;
   --text3: #94a3b8;
   --text4: #cbd5e1;
-
   --accent: #2563eb;
   --cyan: #0891b2;
   --green: #16a34a;
   --red: #dc2626;
   --amber: #d97706;
   --purple: #7c3aed;
-
   --lcd-bg: #0f3a0f;
   --lcd-text: #39ff14;
   --lcd-glow: rgba(57, 255, 20, 0.25);
-
   --gauge-track: #e2e8f0;
   --gauge-fill: #2563eb;
-
-  --road-bg: linear-gradient(180deg, #374151 0%, #1f2937 100%);
-  --road-surface: #2d3748;
+  --road-bg: linear-gradient(180deg, #374151, #1f2937);
   --road-edge: #f59e0b;
   --road-dash: rgba(255, 255, 255, 0.55);
-
   --serial-bg: #0f172a;
-
   --shadow: 0 1px 4px rgba(0, 0, 0, 0.06), 0 2px 12px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.08);
   --btn-bg: #f8fafc;
   --btn-hover: #e2e8f0;
   --kbd-bg: rgba(0, 0, 0, 0.05);
   --kbd-text: #94a3b8;
-
   --car-ego: #3b82f6;
-  --car-ego-dark: #2563eb;
+  --car-ego-d: #2563eb;
   --car-ego-glow: rgba(59, 130, 246, 0.3);
   --car-lead: #9ca3af;
-  --car-lead-dark: #6b7280;
+  --car-lead-d: #6b7280;
 }
-
 
 /* ── RESET ── */
 *,
@@ -106,13 +87,12 @@
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box
 }
 
 html {
   font-size: 15px;
-  scroll-behavior: smooth;
-  height: 100%;
+  height: 100%
 }
 
 body {
@@ -123,122 +103,122 @@ body {
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
-  transition: background 0.3s, color 0.3s;
+  transition: background .3s, color .3s;
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 5px
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: transparent
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--text4);
-  border-radius: 3px;
+  border-radius: 3px
 }
 
 
 /* =========================================================================================
-   HEADER
+   HEADER — Spacious with centered mode badge
    ========================================================================================= */
 #header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.45rem 1.5rem;
+  padding: .65rem 1.75rem;
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 100;
-  gap: 0.75rem;
-  transition: background 0.3s, border-color 0.3s;
+  transition: background .3s, border-color .3s;
 }
 
 .h-left {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: .6rem
 }
 
 .h-icon {
-  font-size: 1.3rem;
+  font-size: 1.5rem
 }
 
 .h-left h1 {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  letter-spacing: -.02em;
+  line-height: 1.2
 }
 
 .h-sub {
-  font-size: 0.55rem;
+  font-size: .6rem;
   color: var(--text3);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: .08em;
+  display: block;
+  margin-top: 1px
+}
+
+.h-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%)
 }
 
 .h-right {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: .5rem
 }
 
+/* Mode Badge — Prominent */
 .mode-badge {
-  font-size: 0.55rem;
+  font-size: .7rem;
   font-weight: 700;
-  padding: 0.15rem 0.55rem;
+  padding: .3rem .9rem;
   border-radius: 20px;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  background: rgba(34, 197, 94, 0.12);
+  letter-spacing: .08em;
+  background: rgba(34, 197, 94, .1);
   color: var(--green);
-  border: 1px solid rgba(34, 197, 94, 0.25);
-  transition: all 0.3s;
+  border: 1px solid rgba(34, 197, 94, .2);
+  transition: all .3s;
 }
 
 .mode-badge.cruise {
-  background: rgba(59, 130, 246, 0.12);
+  background: rgba(59, 130, 246, .1);
   color: var(--accent);
-  border-color: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, .2)
 }
 
 .mode-badge.adaptive {
-  background: rgba(168, 85, 247, 0.12);
+  background: rgba(168, 85, 247, .1);
   color: var(--purple);
-  border-color: rgba(168, 85, 247, 0.25);
+  border-color: rgba(168, 85, 247, .2)
 }
 
-.theme-btn {
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--btn-bg);
+/* Icon buttons (theme + github) */
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text3);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
-  transition: all 0.2s;
+  transition: color .2s, background .2s;
+  text-decoration: none;
 }
 
-.theme-btn:hover {
-  background: var(--btn-hover);
-}
-
-.gh-link {
-  color: var(--text3);
-  display: flex;
-  align-items: center;
-  transition: color 0.2s;
-}
-
-.gh-link:hover {
+.icon-btn:hover {
   color: var(--text);
+  background: var(--btn-hover)
 }
 
 
@@ -248,19 +228,18 @@ body {
 #status-bar {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.3rem 1.5rem;
+  gap: .6rem;
+  padding: .4rem 1.75rem;
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
-  font-size: 0.6rem;
+  font-size: .7rem;
   color: var(--text2);
-  min-height: 26px;
-  transition: background 0.3s, border-color 0.3s;
+  transition: background .3s, border-color .3s;
 }
 
 .status-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--green);
   flex-shrink: 0;
@@ -276,63 +255,58 @@ body {
   }
 
   50% {
-    opacity: 0.3
+    opacity: .3
   }
 }
 
 .status-dot.warning {
   background: var(--amber);
-  box-shadow: 0 0 6px var(--amber);
+  box-shadow: 0 0 6px var(--amber)
 }
 
 .status-dot.danger {
   background: var(--red);
-  box-shadow: 0 0 6px var(--red);
+  box-shadow: 0 0 6px var(--red)
 }
 
 
 /* =========================================================================================
-   MAIN — Full viewport fill
+   MAIN
    ========================================================================================= */
 #main {
   flex: 1;
-  padding: 0.6rem 1rem;
+  padding: .75rem 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: .7rem;
 }
 
 
 /* =========================================================================================
-   ROAD — Wider, taller, premium asphalt look
+   ROAD
    ========================================================================================= */
 #road-section {
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: var(--shadow);
-  transition: background 0.3s, border-color 0.3s;
+  transition: background .3s, border-color .3s;
 }
 
 #road {
   position: relative;
   width: 100%;
-  height: 155px;
+  height: 160px;
   background: var(--road-bg);
   overflow: hidden;
 }
 
-/* Asphalt texture overlay */
 #road::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(90deg,
-      transparent,
-      transparent 2px,
-      rgba(255, 255, 255, 0.008) 2px,
-      rgba(255, 255, 255, 0.008) 4px);
+  background: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 255, 255, .006) 2px, rgba(255, 255, 255, .006) 4px);
   pointer-events: none;
   z-index: 1;
 }
@@ -342,19 +316,19 @@ body {
   left: 0;
   right: 0;
   height: 2px;
-  z-index: 2;
+  z-index: 2
 }
 
 .road-edge.top {
-  top: 10px;
+  top: 12px;
   background: var(--road-edge);
-  box-shadow: 0 0 8px rgba(217, 119, 6, 0.3);
+  box-shadow: 0 0 8px rgba(217, 119, 6, .3)
 }
 
 .road-edge.bottom {
-  bottom: 10px;
+  bottom: 12px;
   background: var(--road-edge);
-  box-shadow: 0 0 8px rgba(217, 119, 6, 0.3);
+  box-shadow: 0 0 8px rgba(217, 119, 6, .3)
 }
 
 .lane-markers {
@@ -381,40 +355,38 @@ body {
 
 @keyframes scrollDash {
   0% {
-    transform: translateX(0);
+    transform: translateX(0)
   }
 
   100% {
-    transform: translateX(-68px);
+    transform: translateX(-68px)
   }
 }
 
-
-/* ── CARS — Realistic silhouettes ── */
+/* Cars */
 .car {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 5;
   text-align: center;
-  transition: left 0.3s ease;
+  transition: left .3s ease
 }
 
 #lead-car {
-  left: 72%;
+  left: 72%
 }
 
 #ego-car {
-  left: 18%;
+  left: 18%
 }
 
 .car-body {
   position: relative;
   width: 105px;
-  height: 42px;
+  height: 42px
 }
 
-/* Sedan body shape */
 .car-body::before {
   content: '';
   position: absolute;
@@ -427,17 +399,16 @@ body {
 }
 
 .car-body.lead::before {
-  background: linear-gradient(180deg, var(--car-lead), var(--car-lead-dark));
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(180deg, var(--car-lead), var(--car-lead-d));
+  border: 1px solid rgba(255, 255, 255, .06)
 }
 
 .car-body.ego::before {
-  background: linear-gradient(180deg, var(--car-ego), var(--car-ego-dark));
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 14px var(--car-ego-glow);
+  background: linear-gradient(180deg, var(--car-ego), var(--car-ego-d));
+  border: 1px solid rgba(255, 255, 255, .15);
+  box-shadow: 0 0 14px var(--car-ego-glow)
 }
 
-/* Roof / cabin */
 .car-top {
   position: absolute;
   bottom: 22px;
@@ -445,36 +416,34 @@ body {
   width: 56%;
   height: 19px;
   border-radius: 10px 10px 0 0;
-  z-index: 2;
+  z-index: 2
 }
 
 .lead .car-top {
   background: linear-gradient(180deg, #7d8694, var(--car-lead));
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: none;
+  border: 1px solid rgba(255, 255, 255, .05);
+  border-bottom: none
 }
 
 .ego .car-top {
   background: linear-gradient(180deg, #93c5fd, var(--car-ego));
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-bottom: none;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-bottom: none
 }
 
-/* Windows */
 .car-window {
   position: absolute;
   bottom: 24px;
   left: 26%;
   width: 22%;
   height: 13px;
-  background: rgba(148, 200, 255, 0.2);
+  background: rgba(148, 200, 255, .2);
   border-radius: 5px 3px 0 0;
   z-index: 3;
-  border: 1px solid rgba(148, 200, 255, 0.1);
-  border-bottom: none;
+  border: 1px solid rgba(148, 200, 255, .1);
+  border-bottom: none
 }
 
-/* Rear window */
 .car-body::after {
   content: '';
   position: absolute;
@@ -482,14 +451,13 @@ body {
   left: 52%;
   width: 20%;
   height: 13px;
-  background: rgba(148, 200, 255, 0.15);
+  background: rgba(148, 200, 255, .15);
   border-radius: 3px 5px 0 0;
   z-index: 3;
-  border: 1px solid rgba(148, 200, 255, 0.08);
-  border-bottom: none;
+  border: 1px solid rgba(148, 200, 255, .08);
+  border-bottom: none
 }
 
-/* Wheels */
 .car-wheel {
   position: absolute;
   bottom: 0;
@@ -499,7 +467,7 @@ body {
   background: radial-gradient(circle at 40% 40%, #3a3a4a, #111);
   border: 2px solid #2a2a3a;
   z-index: 4;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .4);
 }
 
 .car-wheel::after {
@@ -511,18 +479,17 @@ body {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #555;
+  background: #555
 }
 
 .car-wheel.front {
-  right: 10px;
+  right: 10px
 }
 
 .car-wheel.rear {
-  left: 10px;
+  left: 10px
 }
 
-/* Tail lights (lead car) */
 .tail-light {
   position: absolute;
   bottom: 12px;
@@ -531,64 +498,57 @@ body {
   border-radius: 2px;
   background: #4a2020;
   z-index: 4;
-  transition: all 0.2s;
+  transition: all .2s
 }
 
 .tail-light.l {
-  left: 5px;
+  left: 5px
 }
 
 .tail-light.r {
-  right: 5px;
+  right: 5px
 }
 
 .tail-light.on {
   background: var(--red);
-  box-shadow: 0 0 8px var(--red), 0 0 18px rgba(239, 68, 68, 0.35);
+  box-shadow: 0 0 8px var(--red), 0 0 18px rgba(239, 68, 68, .35)
 }
 
-/* Headlights (ego car) */
 .headlight {
   position: absolute;
   width: 5px;
   height: 8px;
   border-radius: 2px;
-  background: rgba(255, 253, 220, 0.15);
+  background: rgba(255, 253, 220, .15);
   z-index: 4;
-  transition: all 0.2s;
+  transition: all .2s
 }
 
 .headlight.l {
   right: 4px;
-  bottom: 16px;
+  bottom: 16px
 }
 
 .headlight.r {
   right: 4px;
-  bottom: 8px;
+  bottom: 8px
 }
 
 .headlight.on {
   background: #fffde0;
-  box-shadow: 0 0 6px #fffde0, 0 0 14px rgba(255, 253, 224, 0.3);
-}
-
-/* Sedan body reflection strip */
-.car-body.ego::after {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 6px #fffde0, 0 0 14px rgba(255, 253, 224, .3)
 }
 
 .car-tag {
   display: block;
   margin-top: 2px;
-  font-size: 0.48rem;
+  font-size: .48rem;
   color: var(--road-dash);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 600;
+  letter-spacing: .1em;
+  font-weight: 600
 }
 
-/* Sensor Cone */
 .sensor-cone {
   position: absolute;
   right: -5px;
@@ -598,34 +558,33 @@ body {
   height: 0;
   border-top: 16px solid transparent;
   border-bottom: 16px solid transparent;
-  border-left: 80px solid rgba(6, 182, 212, 0.06);
+  border-left: 80px solid rgba(6, 182, 212, .06);
   opacity: 0;
   z-index: 0;
-  transition: opacity 0.3s;
+  transition: opacity .3s;
 }
 
 .sensor-cone.on {
   opacity: 1;
-  animation: conePulse 1.2s ease-in-out infinite;
+  animation: conePulse 1.2s ease-in-out infinite
 }
 
 @keyframes conePulse {
 
   0%,
   100% {
-    opacity: 0.7
+    opacity: .7
   }
 
   50% {
-    opacity: 0.15
+    opacity: .15
   }
 }
 
 .sensor-cone.danger {
-  border-left-color: rgba(239, 68, 68, 0.1);
+  border-left-color: rgba(239, 68, 68, .1)
 }
 
-/* Distance Label */
 #dist-label {
   position: absolute;
   top: 14px;
@@ -635,12 +594,12 @@ body {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.3s;
-  z-index: 8;
+  transition: opacity .3s;
+  z-index: 8
 }
 
 #dist-label.show {
-  opacity: 1;
+  opacity: 1
 }
 
 #dist-label::before {
@@ -651,93 +610,91 @@ body {
   right: 0;
   height: 1px;
   background: repeating-linear-gradient(90deg, var(--cyan), var(--cyan) 4px, transparent 4px, transparent 8px);
-  opacity: 0.4;
+  opacity: .4
 }
 
 #dist-label-val {
   position: relative;
-  background: rgba(6, 182, 212, 0.12);
+  background: rgba(6, 182, 212, .12);
   color: var(--cyan);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
+  font-size: .58rem;
   font-weight: 600;
   padding: 1px 7px;
   border-radius: 3px;
-  border: 1px solid rgba(6, 182, 212, 0.2);
+  border: 1px solid rgba(6, 182, 212, .2);
 }
 
 
 /* =========================================================================================
-   INSTRUMENTS — 4 panels in a row, equal height
+   INSTRUMENTS — 4 symmetric panels
    ========================================================================================= */
 #instruments {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr 1fr 1fr;
-  gap: 0.5rem;
-  flex-shrink: 0;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .7rem;
 }
 
 .panel {
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  padding: .6rem .7rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  transition: background 0.3s, border-color 0.3s;
+  transition: background .3s, border-color .3s;
 }
 
 .panel-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.35rem;
-  flex-shrink: 0;
+  margin-bottom: .4rem
 }
 
 .panel-title {
-  font-size: 0.5rem;
+  font-size: .55rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text3);
+  letter-spacing: .1em;
+  color: var(--text3)
 }
 
 .panel-pin {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.45rem;
-  color: var(--text4);
+  font-size: .48rem;
+  color: var(--text4)
 }
 
 .com-on {
   color: var(--green) !important;
-  font-weight: 600;
+  font-weight: 600
 }
 
 /* LCD */
 #lcd {
   background: var(--lcd-bg);
-  border-radius: 4px;
-  padding: 7px 10px;
-  box-shadow: inset 0 0 20px rgba(57, 255, 20, 0.05);
+  border-radius: 5px;
+  padding: 8px 12px;
+  box-shadow: inset 0 0 20px rgba(57, 255, 20, .05);
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center
 }
 
 .lcd-line {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.82rem;
+  font-size: .88rem;
   font-weight: 700;
   color: var(--lcd-text);
   text-shadow: 0 0 6px var(--lcd-glow), 0 0 14px var(--lcd-glow);
-  letter-spacing: 0.12em;
+  letter-spacing: .12em;
   white-space: nowrap;
   overflow: hidden;
-  min-height: 1.25em;
-  line-height: 1.25;
+  min-height: 1.3em;
+  line-height: 1.3;
 }
 
 /* Gauge */
@@ -745,75 +702,74 @@ body {
   display: flex;
   justify-content: center;
   flex: 1;
-  align-items: center;
+  align-items: center
 }
 
 #gauge-svg {
   width: 100%;
-  max-width: 120px;
+  max-width: 130px
 }
 
 .gauge-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 800;
-  fill: var(--text);
-  transition: fill 0.3s;
+  fill: var(--text)
 }
 
 .gauge-unit {
   font-family: 'Inter', sans-serif;
   font-size: 8px;
   fill: var(--text3);
-  font-weight: 500;
+  font-weight: 500
 }
 
 /* Info Grid */
 #info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.3rem;
-  flex: 1;
+  gap: .35rem;
+  flex: 1
 }
 
 .info-cell {
   background: var(--bg3);
-  border-radius: 5px;
-  padding: 0.3rem 0.4rem;
+  border-radius: 6px;
+  padding: .4rem .5rem;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center
 }
 
 .info-label {
   display: block;
-  font-size: 0.45rem;
+  font-size: .48rem;
   color: var(--text4);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: .08em;
   font-weight: 600;
-  margin-bottom: 1px;
+  margin-bottom: 2px
 }
 
 .info-val {
   display: block;
-  font-size: 0.78rem;
+  font-size: .82rem;
   font-weight: 700;
-  color: var(--text);
+  color: var(--text)
 }
 
 .info-val.mono {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'JetBrains Mono', monospace
 }
 
 /* HW Panel */
 #hw-grid {
   display: flex;
-  gap: 0.35rem;
+  gap: .4rem;
   justify-content: center;
-  margin-bottom: 0.35rem;
-  flex-wrap: wrap;
+  margin-bottom: .4rem;
+  flex-wrap: wrap
 }
 
 .led-pair {
@@ -821,47 +777,46 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  min-width: 36px;
+  min-width: 38px
 }
 
 .led-pair span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.38rem;
+  font-size: .4rem;
   color: var(--text4);
-  text-transform: uppercase;
+  text-transform: uppercase
 }
 
 .hw-led {
-  width: 12px;
-  height: 12px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
   background: var(--bg3);
   border: 1px solid var(--border);
-  transition: all 0.2s;
+  transition: all .2s
 }
 
 .hw-led.green.on {
   background: var(--green);
   border-color: var(--green);
-  box-shadow: 0 0 6px var(--green), 0 0 14px rgba(34, 197, 94, 0.2);
+  box-shadow: 0 0 6px var(--green), 0 0 14px rgba(34, 197, 94, .2)
 }
 
 .hw-led.red.on {
   background: var(--red);
   border-color: var(--red);
-  box-shadow: 0 0 6px var(--red), 0 0 14px rgba(239, 68, 68, 0.2);
+  box-shadow: 0 0 6px var(--red), 0 0 14px rgba(239, 68, 68, .2)
 }
 
 .hw-led.cyan.on {
   background: var(--cyan);
   border-color: var(--cyan);
-  box-shadow: 0 0 6px var(--cyan), 0 0 14px rgba(6, 182, 212, 0.2);
+  box-shadow: 0 0 6px var(--cyan), 0 0 14px rgba(6, 182, 212, .2)
 }
 
-/* Pin Bars */
 #pin-bars {
   display: flex;
-  gap: 3px;
+  gap: 4px
 }
 
 .pbar {
@@ -869,14 +824,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 2px
 }
 
 .pbar span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.38rem;
+  font-size: .4rem;
   color: var(--text4);
-  font-weight: 600;
+  font-weight: 600
 }
 
 .pbar-fill {
@@ -885,7 +840,7 @@ body {
   background: var(--bg3);
   border-radius: 2px;
   position: relative;
-  overflow: hidden;
+  overflow: hidden
 }
 
 .pbar-fill::after {
@@ -897,63 +852,260 @@ body {
   width: 0%;
   background: var(--amber);
   border-radius: 2px;
-  transition: width 0.15s;
+  transition: width .15s
 }
 
 .pbar-fill.on::after {
   width: 85%;
-  background: var(--green);
+  background: var(--green)
 }
 
 
 /* =========================================================================================
-   CONTROLS — Tight inline row
+   BOTTOM ROW — Controls (left) + Serial (right)
    ========================================================================================= */
-#controls {
-  display: flex;
-  gap: 0.5rem;
-  align-items: stretch;
-  flex-shrink: 0;
+#bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .7rem;
+  flex: 1;
+  min-height: 0;
 }
 
-#ctrl-left {
+/* ── Controls Column ── */
+#controls-col {
   display: flex;
-  gap: 0.35rem;
-  flex-shrink: 0;
+  flex-direction: column;
+  gap: .6rem;
 }
 
-#ctrl-modes {
+/* Arrow Grid */
+#arrow-grid {
   display: flex;
-  gap: 0.35rem;
-  flex-shrink: 0;
+  gap: .7rem;
 }
 
-#ctrl-slider {
+.arrow-group {
   flex: 1;
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.4rem 0.65rem;
+  border-radius: 10px;
+  padding: .6rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+  transition: background .3s, border-color .3s;
+}
+
+.arrow-title {
+  font-size: .55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text3);
+}
+
+.arrow-pair {
+  display: flex;
+  gap: .4rem
+}
+
+.btn-arrow-key {
+  width: 52px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--btn-bg);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 3px;
-  transition: background 0.3s, border-color 0.3s;
+  gap: 2px;
+  user-select: none;
+  transition: all .12s;
+}
+
+.btn-arrow-key kbd {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .42rem;
+  color: var(--kbd-text);
+  font-weight: 400;
+}
+
+.btn-arrow-key:hover {
+  background: var(--btn-hover);
+  border-color: var(--border-h)
+}
+
+.btn-arrow-key:active,
+.btn-arrow-key.pressed {
+  transform: scale(.95)
+}
+
+.btn-arrow-key.accel {
+  color: var(--green)
+}
+
+.btn-arrow-key.accel:hover,
+.btn-arrow-key.accel.pressed {
+  border-color: var(--green);
+  box-shadow: 0 0 10px rgba(34, 197, 94, .1)
+}
+
+.btn-arrow-key.brake {
+  color: var(--red)
+}
+
+.btn-arrow-key.brake:hover,
+.btn-arrow-key.brake.pressed {
+  border-color: var(--red);
+  box-shadow: 0 0 10px rgba(239, 68, 68, .1)
+}
+
+.btn-arrow-key.dist-close {
+  color: var(--amber)
+}
+
+.btn-arrow-key.dist-close:hover,
+.btn-arrow-key.dist-close.pressed {
+  border-color: var(--amber);
+  box-shadow: 0 0 10px rgba(245, 158, 11, .1)
+}
+
+.btn-arrow-key.dist-far {
+  color: var(--cyan)
+}
+
+.btn-arrow-key.dist-far:hover,
+.btn-arrow-key.dist-far.pressed {
+  border-color: var(--cyan);
+  box-shadow: 0 0 10px rgba(6, 182, 212, .1)
+}
+
+/* Mode Row */
+#mode-row {
+  display: flex;
+  gap: .4rem;
+}
+
+.btn {
+  flex: 1;
+  padding: .5rem .6rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--btn-bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: .65rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .3rem;
+  user-select: none;
+  white-space: nowrap;
+  transition: all .12s;
+}
+
+.btn:hover {
+  background: var(--btn-hover);
+  border-color: var(--border-h)
+}
+
+.btn:active {
+  transform: scale(.97)
+}
+
+.btn kbd {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .42rem;
+  padding: 1px 3px;
+  border-radius: 2px;
+  background: var(--kbd-bg);
+  color: var(--kbd-text);
+  font-weight: 400
+}
+
+.mode-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .5rem;
+  font-weight: 700;
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--kbd-bg);
+  color: var(--text3);
+  transition: all .2s;
+}
+
+.btn-mode.active {
+  border-width: 1.5px
+}
+
+.btn-mode.m0-active {
+  border-color: var(--green);
+  box-shadow: 0 0 8px rgba(34, 197, 94, .08)
+}
+
+.btn-mode.m0-active .mode-num {
+  background: var(--green);
+  color: white
+}
+
+.btn-mode.m1-active {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(59, 130, 246, .08)
+}
+
+.btn-mode.m1-active .mode-num {
+  background: var(--accent);
+  color: white
+}
+
+.btn-mode.m2-active {
+  border-color: var(--purple);
+  box-shadow: 0 0 8px rgba(168, 85, 247, .08)
+}
+
+.btn-mode.m2-active .mode-num {
+  background: var(--purple);
+  color: white
+}
+
+/* Slider Box */
+#slider-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: .5rem .75rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: background .3s, border-color .3s;
 }
 
 .slider-head {
   display: flex;
   justify-content: space-between;
-  font-size: 0.55rem;
+  font-size: .6rem;
   color: var(--text2);
-  font-weight: 500;
+  font-weight: 500
 }
 
 .slider-val {
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
-  color: var(--cyan);
+  color: var(--cyan)
 }
 
 input[type="range"] {
@@ -961,10 +1113,7 @@ input[type="range"] {
   appearance: none;
   width: 100%;
   height: 5px;
-  background: linear-gradient(90deg,
-      var(--red) 0%, var(--red) 30%,
-      var(--amber) 30%, var(--amber) 35%,
-      var(--green) 35%, var(--green) 100%);
+  background: linear-gradient(90deg, var(--red) 0%, var(--red) 30%, var(--amber) 30%, var(--amber) 35%, var(--green) 35%, var(--green) 100%);
   border-radius: 3px;
   outline: none;
   cursor: pointer;
@@ -977,7 +1126,7 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 50%;
   background: white;
   border: 2px solid var(--cyan);
-  box-shadow: 0 0 4px rgba(6, 182, 212, 0.3);
+  box-shadow: 0 0 4px rgba(6, 182, 212, .3);
   cursor: pointer;
 }
 
@@ -994,294 +1143,171 @@ input[type="range"]::-moz-range-thumb {
   display: flex;
   justify-content: space-between;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.4rem;
-  color: var(--text4);
+  font-size: .42rem;
+  color: var(--text4)
 }
 
 .lbl-danger {
-  color: var(--red);
+  color: var(--red)
 }
 
 .lbl-warn {
-  color: var(--amber);
+  color: var(--amber)
 }
 
 .lbl-safe {
-  color: var(--green);
-}
-
-/* Buttons */
-.btn {
-  padding: 0.4rem 0.65rem;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  background: var(--btn-bg);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.6rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  user-select: none;
-  white-space: nowrap;
-  transition: all 0.12s;
-}
-
-.btn:hover {
-  background: var(--btn-hover);
-  border-color: var(--border-h);
-}
-
-.btn:active,
-.btn.pressed {
-  transform: scale(0.97);
-}
-
-.btn kbd {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.42rem;
-  padding: 1px 3px;
-  border-radius: 2px;
-  background: var(--kbd-bg);
-  color: var(--kbd-text);
-  font-weight: 400;
-}
-
-.btn-arrow {
-  font-size: 0.7rem;
-}
-
-.btn-accel .btn-arrow {
-  color: var(--green);
-}
-
-.btn-brake .btn-arrow {
-  color: var(--red);
-}
-
-.btn-accel:hover,
-.btn-accel.pressed {
-  border-color: var(--green);
-  box-shadow: 0 0 10px rgba(34, 197, 94, 0.1);
-}
-
-.btn-brake:hover,
-.btn-brake.pressed {
-  border-color: var(--red);
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);
-}
-
-.mode-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.5rem;
-  font-weight: 700;
-  width: 15px;
-  height: 15px;
-  border-radius: 3px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--kbd-bg);
-  color: var(--text3);
-  transition: all 0.2s;
-}
-
-.btn-mode.active {
-  border-width: 1.5px;
-}
-
-.btn-mode.m0-active {
-  border-color: var(--green);
-  box-shadow: 0 0 8px rgba(34, 197, 94, 0.08);
-}
-
-.btn-mode.m0-active .mode-num {
-  background: var(--green);
-  color: white;
-}
-
-.btn-mode.m1-active {
-  border-color: var(--accent);
-  box-shadow: 0 0 8px rgba(59, 130, 246, 0.08);
-}
-
-.btn-mode.m1-active .mode-num {
-  background: var(--accent);
-  color: white;
-}
-
-.btn-mode.m2-active {
-  border-color: var(--purple);
-  box-shadow: 0 0 8px rgba(168, 85, 247, 0.08);
-}
-
-.btn-mode.m2-active .mode-num {
-  background: var(--purple);
-  color: white;
+  color: var(--green)
 }
 
 
-/* =========================================================================================
-   SERIAL MONITOR — Fills remaining space
-   ========================================================================================= */
-#serial-section {
+/* ── Serial Monitor Column ── */
+#serial-col {
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   box-shadow: var(--shadow);
-  flex: 1;
-  min-height: 80px;
   display: flex;
   flex-direction: column;
-  transition: background 0.3s, border-color 0.3s;
+  transition: background .3s, border-color .3s;
 }
 
 .serial-head {
   display: flex;
   justify-content: space-between;
-  padding: 0.3rem 0.6rem;
+  padding: .4rem .7rem;
   background: var(--bg3);
   border-bottom: 1px solid var(--border);
-  font-size: 0.5rem;
+  font-size: .55rem;
   font-weight: 600;
   color: var(--text3);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: .06em;
   flex-shrink: 0;
 }
 
 .serial-baud {
   font-family: 'JetBrains Mono', monospace;
-  font-weight: 400;
+  font-weight: 400
 }
 
 #serial {
   background: var(--serial-bg);
-  padding: 0.35rem 0.6rem;
+  padding: .4rem .7rem;
   flex: 1;
   overflow-y: auto;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
+  font-size: .58rem;
   line-height: 1.5;
   color: #94a3b8;
 }
 
 #serial .ts {
-  color: #475569;
+  color: #475569
 }
 
 #serial .info {
-  color: var(--cyan);
+  color: var(--cyan)
 }
 
 #serial .success {
-  color: var(--green);
+  color: var(--green)
 }
 
 #serial .warn {
-  color: var(--amber);
+  color: var(--amber)
 }
 
 #serial .danger {
-  color: var(--red);
+  color: var(--red)
 }
 
 #serial .sys {
-  color: var(--purple);
+  color: var(--purple)
 }
 
 
 /* =========================================================================================
-   FOOTER
+   FOOTER — Simple two-liner
    ========================================================================================= */
 #footer {
-  padding: 0.5rem 1.25rem;
+  padding: .65rem 1.5rem;
   text-align: center;
   border-top: 1px solid var(--border);
   background: var(--bg2);
-  flex-shrink: 0;
-  transition: background 0.3s, border-color 0.3s;
+  transition: background .3s, border-color .3s;
 }
 
 #footer p {
-  font-size: 0.55rem;
+  font-size: .65rem;
   color: var(--text3);
-  margin-bottom: 0.1rem;
+  line-height: 1.6
 }
 
 #footer a {
   color: var(--accent);
-  text-decoration: none;
+  text-decoration: none
 }
 
 #footer a:hover {
-  text-decoration: underline;
+  text-decoration: underline
 }
 
 
 /* =========================================================================================
    RESPONSIVE
    ========================================================================================= */
-@media (max-width: 1024px) {
+@media(max-width:1024px) {
   #instruments {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr
   }
 
-  #controls {
-    flex-wrap: wrap;
-  }
-
-  #ctrl-slider {
-    min-width: 100%;
-    order: 3;
+  #bottom-row {
+    grid-template-columns: 1fr
   }
 }
 
-@media (max-width: 640px) {
+@media(max-width:640px) {
   #header {
-    padding: 0.35rem 0.75rem;
+    padding: .45rem .75rem
+  }
+
+  .h-center {
+    position: static;
+    transform: none
   }
 
   #status-bar {
-    padding: 0.25rem 0.75rem;
+    padding: .3rem .75rem;
+    font-size: .6rem
   }
 
   #main {
-    padding: 0.4rem 0.5rem;
-  }
-
-  .h-left h1 {
-    font-size: 0.85rem;
+    padding: .5rem
   }
 
   #instruments {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr
   }
 
-  #controls {
-    flex-direction: column;
+  #bottom-row {
+    grid-template-columns: 1fr
   }
 
-  #ctrl-left,
-  #ctrl-modes {
-    width: 100%;
+  #arrow-grid {
+    flex-direction: column
   }
 
-  #ctrl-left .btn,
-  #ctrl-modes .btn {
-    flex: 1;
-    justify-content: center;
+  #mode-row {
+    flex-wrap: wrap
   }
 
   #road {
-    height: 115px;
+    height: 120px
   }
 
   .car-body {
     width: 75px;
-    height: 32px;
+    height: 32px
   }
 }
