@@ -189,11 +189,13 @@ ADAPTIVE-CRUISE-CONTROL/
   ### Simulation Logic
   *Visualizing discrete state transitions between manual cruise and autonomous adaptive speed control.*
   <br><br>
-  | Welcome Message | Group Details | Initial Resting State |
-  | :---: | :---: | :---: |
-  | <img src="Source Code/figures/Tinkercad Simulation/03 - Welcome Message.jpg" width="250"> | <img src="Source Code/figures/Tinkercad Simulation/04 - Group Number & Names.jpg" width="250"> | <img src="Source Code/figures/Tinkercad Simulation/05 - Circuit at Initial (Zero Speed).jpg" width="250"> |
-  | **Cruise Active** | **Cruise (Zero Speed)** | **Adaptive (Safe)** |
-  | <img src="Source Code/figures/Tinkercad Simulation/06 - Circuit in Cruise Mode (Non-Zero Speed).jpg" width="250"> | <img src="Source Code/figures/Tinkercad Simulation/07 - Circuit in Cruise Mode (Zero Speed).jpg" width="250"> | <img src="Source Code/figures/Tinkercad Simulation/08 - Adaptive Cruise Mode (Safe Distance).jpg" width="250"> |
+  | Welcome Message | Group Details |
+  | :---: | :---: |
+  | <img src="Source Code/figures/Tinkercad Simulation/03 - Welcome Message.jpg" width="380"> | <img src="Source Code/figures/Tinkercad Simulation/04 - Group Number & Names.jpg" width="380"> |
+  | **Initial Resting State** | **Cruise Active** |
+  | <img src="Source Code/figures/Tinkercad Simulation/05 - Circuit at Initial (Zero Speed).jpg" width="380"> | <img src="Source Code/figures/Tinkercad Simulation/06 - Circuit in Cruise Mode (Non-Zero Speed).jpg" width="380"> |
+  | **Cruise (Zero Speed)** | **Adaptive (Safe)** |
+  | <img src="Source Code/figures/Tinkercad Simulation/07 - Circuit in Cruise Mode (Zero Speed).jpg" width="380"> | <img src="Source Code/figures/Tinkercad Simulation/08 - Adaptive Cruise Mode (Safe Distance).jpg" width="380"> |
 
 </div>
 
@@ -212,11 +214,13 @@ ADAPTIVE-CRUISE-CONTROL/
   ### Hardware States
   *Real-time performance of the physical system across various cruise and safety scenarios.*
   <br><br>
-  | Activation Screen | Member Display | System Resting |
-  | :---: | :---: | :---: |
-  | <img src="Source Code/figures/Arduino Working Model/02 - Welcome Message.jpg" width="250"> | <img src="Source Code/figures/Arduino Working Model/03 - Group Number & Names.jpg" width="250"> | <img src="Source Code/figures/Arduino Working Model/04 - Circuit at Initial (Zero Speed).jpg" width="250"> |
-  | **Cruise Velocity** | **Adaptive Control** | **Hazard Detected** |
-  | <img src="Source Code/figures/Arduino Working Model/05 - Circuit in Cruise Mode (Non-Zero Speed).jpg" width="250"> | <img src="Source Code/figures/Arduino Working Model/07 - Adaptive Cruise Mode (No Object in Front of Sensor).jpg" width="250"> | <img src="Source Code/figures/Arduino Working Model/08 - Adaptive Cruise Mode (Object in Front of Sensor).jpg" width="250"> |
+  | Activation Screen | Member Display |
+  | :---: | :---: |
+  | <img src="Source Code/figures/Arduino Working Model/02 - Welcome Message.jpg" width="380"> | <img src="Source Code/figures/Arduino Working Model/03 - Group Number & Names.jpg" width="380"> |
+  | **System Resting** | **Cruise Velocity** |
+  | <img src="Source Code/figures/Arduino Working Model/04 - Circuit at Initial (Zero Speed).jpg" width="380"> | <img src="Source Code/figures/Arduino Working Model/05 - Circuit in Cruise Mode (Non-Zero Speed).jpg" width="380"> |
+  | **Adaptive Control** | **Hazard Detected** |
+  | <img src="Source Code/figures/Arduino Working Model/07 - Adaptive Cruise Mode (No Object in Front of Sensor).jpg" width="380"> | <img src="Source Code/figures/Arduino Working Model/08 - Adaptive Cruise Mode (Object in Front of Sensor).jpg" width="380"> |
 
 </div>
 
