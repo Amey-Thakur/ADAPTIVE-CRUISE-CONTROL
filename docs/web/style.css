@@ -658,28 +658,33 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: .75rem;
-  margin-bottom: .75rem;
 }
 
 #instruments-bottom {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: .75rem;
-  margin-bottom: .75rem;
 }
 
 .panel {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: .4rem .5rem;
+  padding: .5rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   min-height: 0;
   height: 105px;
+  /* Default for top row */
   transition: background .3s, border-color .3s;
   overflow: hidden;
+}
+
+#info-panel,
+#hw-panel {
+  height: 130px;
+  /* Increased size for Telemetry & Arduino */
 }
 
 .panel-head {
@@ -777,12 +782,13 @@ body {
 .info-cell {
   background: var(--bg3);
   border-radius: 6px;
-  padding: .6rem .5rem;
+  padding: .5rem .5rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-height: 0;
+  flex: 1;
 }
 
 .info-label {
@@ -797,7 +803,7 @@ body {
 
 .info-val {
   display: block;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--text);
 }
@@ -811,7 +817,7 @@ body {
   justify-content: space-around;
   align-items: center;
   flex: 1;
-  padding: .8rem 0;
+  padding: .4rem 0;
 }
 
 .led-pair {
@@ -921,13 +927,16 @@ body {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: .35rem .45rem;
+  padding: .35rem .6rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: .25rem;
   transition: background .3s, border-color .3s;
+  height: 85px;
+  /* Slightly more compact */
+  justify-content: center;
 }
 
 .arrow-title {
