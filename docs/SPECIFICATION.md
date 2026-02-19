@@ -64,4 +64,4 @@ The system includes a high-fidelity web-based simulation engine designed to repl
 The web port maintains a 1.0 parity with the MATLAB implementation's logic, specifically the **0.3m safety threshold** and simulated kinetic drag coefficients. This allows for rigorous logic validation without access to physical hardware components.
 
 ---
-*Technical Specification | MEng Computer Engineering Project | Version 1.1*
+*Technical Specification | MEng Computer Engineering Project | Version 1.0*
