@@ -569,21 +569,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('selectstart', e => e.preventDefault());
 
-    // System Handshake
+    // Easter Egg
     console.log(
         "%c🚘 Adaptive Cruise Control",
-        "color: #3b82f6; font-size: 20px; font-weight: bold; font-family: 'Play', sans-serif;"
+        "color: #3b82f6; font-size: 24px; font-weight: 800; font-family: 'Inter', sans-serif;"
     );
     console.log(
-        "%cDesigned & Developed by Amey Thakur\n" +
-        "%c👤 Profile: https://github.com/Amey-Thakur\n" +
-        "%c📂 Repo: https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL\n\n" +
-        "%c💡 Engineering Tip: %cImplementing a Constant Time-Gap Policy (CTGP) is essential for 'String Stability'. This ensures that speed fluctuations do not amplify across vehicle platoons, maintaining smooth and safe traffic flow dynamics.",
-        "color: #94a3b8; font-size: 14px; font-style: italic;",
-        "color: #3b82f6; font-size: 12px; font-family: 'JetBrains Mono', monospace;",
-        "color: #feb900; font-size: 12px; font-family: 'JetBrains Mono', monospace;",
-        "color: #22c55e; font-size: 13px; font-weight: bold;",
-        "color: #cbd5e1; font-size: 12px; font-weight: 400; font-style: italic; line-height: 1.4;"
+        "%cDesigned & Developed by Amey Thakur %c______________________________________________________",
+        "color: #94a3b8; font-size: 13px; font-style: italic; font-family: 'Inter', sans-serif;",
+        "color: #334155; font-size: 10px;"
+    );
+    console.log(
+        "%c 👤 Profile: %chttps://github.com/Amey-Thakur\n%c 📂 Repo:    %chttps://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL",
+        "color: #818cf8; font-size: 12px; font-weight: bold;", "color: #94a3b8; font-size: 12px; text-decoration: none;",
+        "color: #fbbf24; font-size: 12px; font-weight: bold;", "color: #94a3b8; font-size: 12px; text-decoration: none;"
+    );
+    console.log(
+        "\n%c 💡 Engineering Tip:\n%c Implementing a Constant Time-Gap Policy (CTGP) is essential for 'String Stability'. This ensures that speed fluctuations do not amplify across vehicle platoons, maintaining smooth and safe traffic flow dynamics.",
+        "color: #22c55e; font-size: 12px; font-weight: bold; font-family: 'Inter', sans-serif;",
+        "color: #cbd5e1; font-size: 12px; font-style: italic; line-height: 1.5; font-family: 'Inter', sans-serif;"
     );
 
     initTheme();
