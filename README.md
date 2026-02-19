@@ -295,13 +295,11 @@ This project showcases the **Adaptive Cruise Control (ACC)** system, a real-time
 
 ### Acknowledgments
 
-Grateful acknowledgment to [**Mega Satish**](https://github.com/msatmod) for her meaningful contributions, guidance, and support that helped shape this work. Her collaboration and technical insights were instrumental in achieving the project's functional objectives.
+Grateful acknowledgment to project partners **Nandeshwar Royal Uppalapati** and **Brano Bruno Barshmen** for their collaborative spirit and technical contributions during the development of this adaptive cruise control system. Their shared commitment to engineering rigor was instrumental in achieving the project's functional objectives.
 
-Grateful acknowledgment to project partners **Brano Bruno Barshmen** and **Nandeshwar Royal Uppalapati** for their collaborative spirit and technical contributions during the development of this adaptive cruise control system.
+Grateful acknowledgment to **Jason Horn**, **[Writing Support Desk](https://github.com/Amey-Thakur/WRITING-SUPPORT)**, **University of Windsor**, for his distinguished mentorship and scholarly guidance. His thoughtful feedback and methodological precision were instrumental in strengthening the analytical depth and professional quality of my academic work. His commitment to excellence and integrity is gratefully acknowledged.
 
-Grateful acknowledgment to the faculty members of the Department of Electrical and Computer Engineering at the University of Windsor for their guidance and instruction. Their expertise in computational modeling and embedded systems was vital to the successful realization of this project.
-
-Special thanks to the engineering project partners and peers for their continuous support and collaborative spirit throughout the 2023-2024 academic cycle.
+Special thanks to the **mentors** and **peers** whose encouragement, discussions, and support contributed meaningfully to this learning experience.
 
 ---
 
