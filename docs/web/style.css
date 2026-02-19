@@ -1,9 +1,24 @@
-/* =========================================================================================
-   ADAPTIVE CRUISE CONTROL — v7
-   Single Lane · Original Layout · Premium Aesthetics
-   ========================================================================================= */
+/* ┌──────────────────────────────────────────────────────────────────────────────┐
+ * │  File:         style.css                                                   │
+ * │  Author:       Amey Thakur                                                 │
+ * │  Profile:      https://github.com/Amey-Thakur                              │
+ * │  Repository:   https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL      │
+ * │                                                                             │
+ * │  Description:  Complete stylesheet for the Adaptive Cruise Control web      │
+ * │                simulation. Defines the dark and light theme color systems,  │
+ * │                loading screen animation, layout grid, road and vehicle      │
+ * │                rendering, instrument panel styling, interactive controls,   │
+ * │                serial monitor aesthetics, cinematic overlay effects, and    │
+ * │                responsive breakpoints for tablet and mobile viewports.      │
+ * │                                                                             │
+ * │  Technology:   CSS3, Custom Properties, Flexbox, Grid, Keyframe Animations │
+ * │  Released:     September 08, 2023                                           │
+ * │  License:      MIT                                                          │
+ * └──────────────────────────────────────────────────────────────────────────────┘ */
 
-/* ── DARK THEME ── */
+/* Dark Theme: Primary color palette applied when data-theme="dark" is set.
+   Defines all CSS custom properties for backgrounds, text, accents, and
+   component-specific colors used throughout the simulation interface. */
 [data-theme="dark"] {
   --bg: #080d1a;
   --bg2: #0f1628;
@@ -42,7 +57,9 @@
   --car-lead-d: #4b5563;
 }
 
-/* ── LIGHT THEME ── */
+/* Light Theme: Alternate color palette for data-theme="light".
+   Overrides all custom properties with lighter values while maintaining
+   the same variable names for seamless theme switching. */
 [data-theme="light"] {
   --bg: #eef2f7;
   --bg2: #ffffff;
@@ -75,7 +92,7 @@
   --kbd-text: #94a3b8;
   --kbd-bg: #1e293b;
 
-  /* Cinematic Extra */
+  /* Cinematic overlay colors (shared across both themes) */
   --hl-glow: #22d3ee;
   --hl-text: rgba(34, 211, 238, 0.9);
   --blueprint-bg: rgba(6, 18, 36, 0.95);
@@ -86,7 +103,9 @@
   --car-lead-d: #6b7280;
 }
 
-/* ── LOADING SCREEN ── */
+/* Loading Screen: Full-viewport overlay shown during initial page load.
+   Contains a CSS-rendered car animation, gradient progress bar, project title,
+   and author attribution. Fades out once the simulation engine initializes. */
 #loader-screen {
   position: fixed;
   inset: 0;
@@ -112,7 +131,7 @@
   gap: 28px;
 }
 
-/* Car Track */
+/* Car Track: Container for the animated car on the loading screen. */
 .loader-car-track {
   width: 420px;
   height: 60px;
@@ -138,7 +157,9 @@
   }
 }
 
-/* Car Parts */
+/* Car Body Parts: CSS-rendered vehicle components — body, roof, windows,
+   wheels, headlight, and taillight. Proportions are designed for the
+   loading screen only; the main simulation has its own car styles. */
 .lc-body {
   position: absolute;
   bottom: 8px;
@@ -251,7 +272,8 @@
   }
 }
 
-/* Progress Bar */
+/* Progress Bar: Horizontal bar below the car, filling left to right.
+   Width is animated via JavaScript from 0% to 100%. */
 .loader-bar-wrap {
   width: 420px;
   height: 6px;
@@ -269,7 +291,7 @@
   box-shadow: 0 0 12px rgba(239, 68, 68, 0.5);
 }
 
-/* Title */
+/* Title: "Adaptive Cruise Control" displayed below the progress bar. */
 .loader-title {
   font-family: 'Play', -apple-system, sans-serif;
   font-size: 1.4rem;
@@ -280,7 +302,7 @@
   opacity: 0.9;
 }
 
-/* Footer */
+/* Author Footer: Positioned at the bottom of the loading screen. */
 .loader-footer {
   position: absolute;
   bottom: 32px;
@@ -294,7 +316,7 @@
   color: #94a3b8;
 }
 
-/* Responsive loader */
+/* Responsive adjustments for loading screen on small viewports. */
 @media (max-width: 480px) {
 
   .loader-car-track,
@@ -307,7 +329,8 @@
   }
 }
 
-/* ── RESET ── */
+/* Global Reset: Removes default margins, padding, and sets border-box
+   sizing on all elements for consistent layout calculations. */
 *,
 *::before,
 *::after {
@@ -347,9 +370,8 @@ body {
 }
 
 
-/* =========================================================================================
-   HEADER
-   ========================================================================================= */
+/* Header Bar: Fixed top navigation containing the project branding (icon, title,
+   subtitle), active mode badge, theme toggle button, and GitHub link. */
 #header {
   display: flex;
   align-items: center;
@@ -388,7 +410,8 @@ body {
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
 }
 
-/* Cinematic Layer */
+/* Cinematic Overlay: Full-screen layer for the Easter egg holographic
+   algorithm animation. Appears above all content when activated. */
 #cinematic-layer {
   position: fixed;
   inset: 0;
@@ -453,7 +476,8 @@ body.cinematic-active #main {
   transition: filter 0.8s;
 }
 
-/* Blueprint State */
+/* Blueprint State: Applied to the ACC vehicle during the cinematic
+   sequence, transforming it into a glowing wireframe schematic. */
 .ego-blueprint .car-body::before {
   background: transparent !important;
   border: 2px solid var(--hl-glow) !important;
@@ -557,9 +581,8 @@ body.cinematic-active #main {
 }
 
 
-/* =========================================================================================
-   STATUS BAR
-   ========================================================================================= */
+/* Status Bar: Horizontal bar below the header showing real-time system messages.
+   Contains a pulsing dot indicator that reflects operational state. */
 #status-bar {
   display: flex;
   align-items: center;
@@ -606,9 +629,8 @@ body.cinematic-active #main {
 }
 
 
-/* =========================================================================================
-   MAIN
-   ========================================================================================= */
+/* Main Container: Primary flex column holding the road section and
+   the two-column content grid (instruments + serial monitor). */
 #main {
   flex: 1;
   padding: .4rem .6rem;
@@ -620,9 +642,8 @@ body.cinematic-active #main {
 }
 
 
-/* =========================================================================================
-   ROAD (Single Lane)
-   ========================================================================================= */
+/* Road Section: Single-lane road visualization with animated lane markers,
+   orange edge lines, CSS-rendered vehicles, and a distance label overlay. */
 #road-section {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -709,7 +730,9 @@ body.cinematic-active #main {
   }
 }
 
-/* Cars */
+/* Vehicle Rendering: CSS-built car components including body, roof, windows,
+   wheels, headlights, and tail lights. Both ACC (ego) and lead vehicles
+   share the same structural classes with different color overrides. */
 .car {
   position: absolute;
   top: 50%;
@@ -981,9 +1004,9 @@ body.cinematic-active #main {
 }
 
 
-/* =========================================================================================
-   CONTENT ROW
-   ========================================================================================= */
+/* Content Row: Two-column grid layout. The left column (1.15fr) holds
+   instrument panels and controls; the right column (0.85fr) holds the
+   serial monitor. Collapses to single column on mobile. */
 #content-row {
   flex: 1;
   display: grid;
@@ -1024,7 +1047,7 @@ body.cinematic-active #main {
   flex-direction: column;
   min-height: 0;
   height: 105px;
-  /* Default for top row */
+  /* Top instrument row: LCD and speedometer side by side. */
   transition: background .3s, border-color .3s;
   overflow: hidden;
 }
@@ -1032,7 +1055,7 @@ body.cinematic-active #main {
 #info-panel,
 #hw-panel {
   height: 140px;
-  /* Increased size for Telemetry & Arduino */
+  /* Bottom instrument row: Telemetry and Arduino panels, slightly taller. */
 }
 
 .panel-head {

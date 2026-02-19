@@ -1,3 +1,24 @@
+<!--
+  ┌──────────────────────────────────────────────────────────────────────────────┐
+  │  File:         index.html                                                   │
+  │  Author:       Amey Thakur                                                 │
+  │  Profile:      https://github.com/Amey-Thakur                              │
+  │  Repository:   https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL      │
+  │                                                                             │
+  │  Description:  Root document for the Adaptive Cruise Control (ACC) web      │
+  │                simulation. This file defines the complete structural         │
+  │                layout of the interactive dashboard, including the loading    │
+  │                screen, status bar, road visualization, instrument panels,   │
+  │                control interfaces, serial monitor, and footer. All visual   │
+  │                styling is handled by style.css; all runtime behavior is     │
+  │                driven by simulation.js.                                     │
+  │                                                                             │
+  │  Technology:   HTML5, CSS3 (external), JavaScript (external)                │
+  │  Fonts:        Google Fonts — Play, JetBrains Mono                          │
+  │  Released:     September 08, 2023                                           │
+  │  License:      MIT                                                          │
+  └──────────────────────────────────────────────────────────────────────────────┘
+-->
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 
@@ -16,7 +37,9 @@
 </head>
 
 <body>
-  <!-- ═══ LOADING SCREEN ═══ -->
+  <!-- Loading Screen: Full-viewport overlay displayed during initial page load.
+       Contains a CSS-animated car, progress bar, and project branding.
+       Removed from the DOM automatically once the simulation engine initializes. -->
   <div id="loader-screen">
     <div class="loader-content">
       <div class="loader-car-track">
@@ -41,7 +64,8 @@
 
   <div id="cinematic-layer"></div>
 
-  <!-- ═══ HEADER ═══ -->
+  <!-- Header Bar: Top navigation containing the project title, active mode badge,
+       theme toggle (dark/light), and GitHub repository link. -->
   <header id="header">
     <div class="h-left">
       <span class="h-icon">🚘</span>
@@ -82,16 +106,20 @@
     </div>
   </header>
 
-  <!-- ═══ STATUS BAR ═══ -->
+  <!-- Status Bar: Real-time status indicator displaying the current system state.
+       The colored dot reflects Normal (green), Warning (amber), or Danger (red). -->
   <div id="status-bar" title="Real-time system status messages from the ACC controller">
     <span class="status-dot" id="status-dot"></span>
     <span id="status-text">Initializing system — Arduino Uno connecting on COM5...</span>
   </div>
 
-  <!-- ═══ MAIN DASHBOARD ═══ -->
+  <!-- Main Dashboard: Primary content area containing the road visualization,
+       instrument panels, user controls, and serial monitor output. -->
   <main id="main">
 
-    <!-- ── ROAD (Single Lane) ── -->
+    <!-- Road Visualization: Single-lane road with animated lane markers,
+         two CSS-rendered vehicles (ACC and Lead), and a distance label overlay.
+         Vehicle positions update dynamically based on the HC-SR04 distance value. -->
     <section id="road-section"
       title="Simulated road. The ACC vehicle uses ultrasonic distance sensing to track the lead vehicle ahead.">
       <div id="road">
@@ -101,7 +129,8 @@
         </div>
         <div class="road-edge bottom"></div>
 
-        <!-- Lead Vehicle -->
+        <!-- Lead Vehicle: The vehicle ahead. Its horizontal position is determined
+             by the ultrasonic distance reading. Tail lights activate on proximity. -->
         <div id="lead-car" class="car" title="Lead Vehicle">
           <div class="car-body lead">
             <div class="car-top"></div>
@@ -116,7 +145,9 @@
           <span class="car-tag">Lead Vehicle</span>
         </div>
 
-        <!-- ACC Vehicle -->
+        <!-- ACC Vehicle (Ego): The controlled vehicle running the ACC algorithm.
+             Headlights follow D13 state; tail lights follow D12 (brake) state.
+             Includes a sensor cone overlay that appears during Adaptive Mode. -->
         <div id="ego-car" class="car" title="ACC Vehicle · Click to Horn 🔊">
           <div class="car-body ego">
             <div class="car-top"></div>
@@ -138,13 +169,17 @@
       </div>
     </section>
 
-    <!-- ── CONTENT ROW ── -->
+    <!-- Content Row: Two-column grid layout. Left column holds the instrument
+         panels and user controls; right column holds the serial monitor. -->
     <div id="content-row">
 
-      <!-- Left Column -->
+      <!-- Left Column: Contains the LCD display, speedometer, telemetry panel,
+           Arduino hardware status, speed/distance controls, mode buttons,
+           and the HC-SR04 distance slider. -->
       <div id="left-col">
         <div id="instruments-top">
-          <!-- LCD Panel -->
+          <!-- LCD Panel: Simulated 16×2 character LCD display.
+               Communicates via digital pins D2–D7. Shows current mode and speed. -->
           <div class="panel" id="lcd-panel"
             title="Simulated 16×2 character LCD display (pins D2-D7). Shows current mode and speed.">
             <div class="panel-head">
@@ -159,7 +194,8 @@
             </div>
           </div>
 
-          <!-- Speedometer -->
+          <!-- Speedometer: SVG arc gauge displaying current velocity in km/h.
+               The arc fill and color shift based on speed thresholds. -->
           <div class="panel" id="gauge-panel" title="Visual speedometer showing current vehicle velocity in km/h.">
             <div class="panel-head">
               <span class="panel-title">Speedometer</span>
@@ -178,7 +214,8 @@
         </div>
 
         <div id="instruments-bottom">
-          <!-- Telemetry -->
+          <!-- Telemetry Panel: Displays real-time operating data including
+               active mode, numeric mode code, cruise target, and sensor distance. -->
           <div class="panel" id="info-panel" title="Real-time telemetry showing active mode and sensor data.">
             <div class="panel-head">
               <span class="panel-title">Telemetry</span>
@@ -201,7 +238,9 @@
             </div>
           </div>
 
-          <!-- Arduino Uno -->
+          <!-- Arduino Uno Panel: Hardware status display showing LED states
+               (Accel, Brake, Trigger, Echo) and analog pin bar indicators (A0–A4).
+               Reflects the simulated I/O state of the Arduino Uno R3. -->
           <div class="panel" id="hw-panel"
             title="Arduino Uno R3 hardware status. Connected via USB on COM5 at 9600 baud.">
             <div class="panel-head">
@@ -247,7 +286,9 @@
           </div>
         </div>
 
-        <!-- Controls -->
+        <!-- Controls Area: Speed buttons (accelerate/brake), distance buttons
+             (closer/farther), mode selection (Normal/Cruise/Adaptive),
+             and the HC-SR04 distance slider. Supports mouse, touch, and keyboard. -->
         <div id="controls-area">
           <div id="arrow-grid">
             <div class="arrow-group" title="Speed control: Simulates accelerator (A0) and brake (A1).">
@@ -296,7 +337,9 @@
         </div>
       </div>
 
-      <!-- Serial Monitor -->
+      <!-- Serial Monitor: Simulated Arduino serial output (9600 baud).
+           Displays timestamped log entries for all ACC state transitions,
+           mode changes, and sensor readings. Auto-scrolls to newest entry. -->
       <div id="serial-col" title="Simulated Arduino Serial Monitor (9600 baud).">
         <div class="serial-head">
           <span>Serial Monitor</span>
@@ -309,7 +352,7 @@
 
   </main>
 
-  <!-- ═══ FOOTER ═══ -->
+  <!-- Footer: Copyright notice and author attribution. -->
   <footer id="footer">
     <p>2023 &copy; All Rights Reserved &nbsp;|&nbsp; Designed &amp; Developed by <a
         href="https://github.com/Amey-Thakur" target="_blank" rel="noopener"><strong>Amey Thakur</strong></a></p>
