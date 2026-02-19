@@ -639,8 +639,9 @@ body {
 #content-row {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: .4rem;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: .75rem;
+  padding: .75rem 1.25rem;
   min-height: 0;
   overflow: hidden;
 }
@@ -648,47 +649,44 @@ body {
 #left-col {
   display: flex;
   flex-direction: column;
-  gap: .4rem;
+  gap: 1.5rem;
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 #instruments-top {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: .4rem;
-  flex: 1;
-  min-height: 0;
+  gap: .75rem;
+  margin-bottom: .75rem;
 }
 
 #instruments-bottom {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: .4rem;
-  flex: 1;
-  min-height: 0;
+  gap: .75rem;
+  margin-bottom: .75rem;
 }
 
 .panel {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: .35rem .45rem;
+  padding: .4rem .5rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   min-height: 0;
-  overflow: hidden;
+  height: 105px;
   transition: background .3s, border-color .3s;
-  height: 135px;
-  /* More spacious height for instrument panels */
+  overflow: hidden;
 }
 
 .panel-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: .3rem;
+  margin-bottom: .2rem;
   flex-shrink: 0
 }
 
@@ -725,15 +723,16 @@ body {
 }
 
 .lcd-line {
-  font-size: 1.15rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .85rem;
   font-weight: 700;
   color: var(--lcd-text);
-  text-shadow: 0 0 8px var(--lcd-glow);
+  text-shadow: 0 0 6px var(--lcd-glow);
   letter-spacing: .08em;
   white-space: nowrap;
   overflow: hidden;
-  min-height: 1.3em;
-  line-height: 1.5;
+  min-height: 1.25em;
+  line-height: 1.4;
 }
 
 #gauge {
@@ -746,8 +745,8 @@ body {
 
 #gauge-svg {
   width: 100%;
-  max-width: 160px;
-  margin-top: 0;
+  max-width: 125px;
+  margin-top: -5px;
   flex: 1;
 }
 
@@ -798,9 +797,9 @@ body {
 
 .info-val {
   display: block;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  color: var(--text)
+  color: var(--text);
 }
 
 .info-val.mono {
@@ -903,19 +902,18 @@ body {
 
 .pbar-fill.on::after {
   width: 85%;
-  background: var(--green)
+  background: var(--green);
 }
 
 #controls-area {
   display: flex;
   flex-direction: column;
-  gap: .4rem;
-  flex-shrink: 0
+  gap: .75rem;
 }
 
 #arrow-grid {
   display: flex;
-  gap: .4rem
+  gap: .75rem;
 }
 
 .arrow-group {
@@ -1022,7 +1020,8 @@ body {
 
 #mode-row {
   display: flex;
-  gap: .35rem
+  gap: .4rem;
+  padding: 0;
 }
 
 .btn {
@@ -1117,7 +1116,7 @@ body {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: .85rem 1rem;
+  padding: .4rem .6rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
