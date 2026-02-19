@@ -644,16 +644,14 @@ body {
   padding: .5rem 1rem;
   min-height: 0;
   overflow: hidden;
-  align-items: stretch;
 }
 
 #left-col {
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: .4rem;
   min-height: 0;
-  height: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 #instruments-top {
@@ -1182,23 +1180,31 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .slider-labels {
-  display: flex;
-  justify-content: space-between;
+  position: relative;
+  height: 12px;
   font-family: 'JetBrains Mono', monospace;
   font-size: .55rem;
-  color: var(--text4)
+  color: var(--text4);
+  margin-top: 4px;
 }
 
 .lbl-danger {
-  color: var(--red)
+  position: absolute;
+  left: 0;
+  color: var(--red);
 }
 
 .lbl-warn {
-  color: var(--amber)
+  position: absolute;
+  left: 30%;
+  transform: translateX(-50%);
+  color: var(--amber);
 }
 
 .lbl-safe {
-  color: var(--green)
+  position: absolute;
+  right: 0;
+  color: var(--green);
 }
 
 #serial-col {
@@ -1212,7 +1218,6 @@ input[type="range"]::-moz-range-thumb {
   height: 100%;
   min-height: 0;
   transition: background .3s, border-color .3s;
-  align-self: stretch;
 }
 
 .serial-head {
