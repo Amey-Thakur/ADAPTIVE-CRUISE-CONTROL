@@ -270,13 +270,21 @@ function tick() {
         if (S.pins.A0 >= 4) {
             setPin('D13', 1); setPin('D12', 0);
             S.speed += 1;
+            log(`NORMAL MODE: Acceleration active. Speed: ${S.speed} km/h`, 'success');
             setStatus('normal_accel');
         } else if (S.pins.A1 >= 4) {
             S.speed -= 1;
+            if (S.speed < 0) S.speed = 0;
+            log(`NORMAL MODE: Braking active. Speed decreased: ${S.speed} km/h`, 'warn');
             setStatus('normal_brake');
         }
-        if (S.speed < 0) { setPin('D13', 0); setPin('D12', 1); S.speed = 0; }
-        if (S.speed === 0 && S.pins.A0 < 4 && S.pins.A1 < 4) setStatus('normal_idle');
+        if (S.speed === 0 && S.pins.A0 < 4 && S.pins.A1 < 4) {
+            setPin('D13', 0); setPin('D12', 1);
+            if (S.lastLog !== 'NORMAL MODE: Vehicle stopped (0 km/h)') {
+                log('NORMAL MODE: Vehicle stopped (0 km/h)', 'danger');
+            }
+            setStatus('normal_idle');
+        }
         lcd('Vehicle Speed:', String(S.speed));
     }
 
@@ -285,14 +293,21 @@ function tick() {
         if (S.pins.A0 >= 4) {
             setPin('D13', 1); setPin('D12', 0);
             S.speed += 1;
+            log(`CRUISE MODE: Manual acceleration. Speed: ${S.speed} km/h`, 'success');
             setStatus('cruise_accel');
         } else if (S.pins.A1 >= 4) {
             S.speed -= 1;
+            if (S.speed < 0) S.speed = 0;
+            if (S.speed === 0) {
+                log('CRUISE MODE: Manual brake applied. Vehicle stopped.', 'danger');
+            } else {
+                log(`CRUISE MODE: Manual braking. Speed decreased: ${S.speed} km/h`, 'warn');
+            }
             setStatus('cruise_brake');
         } else {
             setStatus('cruise_hold');
         }
-        if (S.speed < 0) { setPin('D13', 0); setPin('D12', 1); S.speed = 0; }
+        if (S.speed === 0 && S.pins.A0 < 4 && S.pins.A1 < 4) { setPin('D13', 0); setPin('D12', 1); }
         lcd('Cruise Mode:', String(S.speed));
     }
 
@@ -301,20 +316,25 @@ function tick() {
         setPin('D13', 1); setPin('D12', 0);
 
         if (S.distance < 0.3) {
-            log(`PROXIMITY WARNING: ${S.distance.toFixed(2)}m — Auto-decelerating`, 'danger');
             S.speed -= 1;
+            if (S.speed < 0) S.speed = 0;
+            log(`ADAPTIVE WARNING: Dist ${S.distance.toFixed(2)}m | Speed decreased: ${S.speed} km/h`, 'danger');
             setStatus('adaptive_danger');
         } else {
-            log(`PATH CLEAR: ${S.distance.toFixed(2)}m`, 'success');
-            S.speed += 1;
+            if (S.speed < S.constant) {
+                S.speed += 1;
+                log(`ADAPTIVE MODE: Path clear | Speed returning to ${S.speed} km/h`, 'success');
+            }
             setStatus('adaptive_safe', S.constant + ' km/h');
         }
 
-        if (S.speed > S.constant) {
-            S.speed = S.constant;
-            setStatus('adaptive_cap');
+        if (S.speed > S.constant) S.speed = S.constant;
+        if (S.speed === 0) {
+            setPin('D13', 0); setPin('D12', 1);
+            if (S.lastLog !== 'ADAPTIVE MODE: Collision avoidance - Vehicle stopped.') {
+                log('ADAPTIVE MODE: Collision avoidance - Vehicle stopped.', 'danger');
+            }
         }
-        if (S.speed < 0) { setPin('D13', 0); setPin('D12', 1); S.speed = 0; }
         lcd('Adaptive Cruise:', String(S.speed));
     }
 
@@ -481,7 +501,12 @@ setInterval(() => {
     if (S.speed > 0) {
         S.speed -= 1;
         setPin('D13', 0);
-        if (S.speed <= 0) { S.speed = 0; setPin('D12', 1); }
+        log(`KINETIC DRAG: Speed decreased: ${S.speed} km/h`, 'warn');
+        if (S.speed <= 0) {
+            S.speed = 0;
+            setPin('D12', 1);
+            log('KINETIC DRAG: Momentum lost. Vehicle stopped.', 'danger');
+        }
         setStatus(S.speed > 0 ? 'normal_drag' : 'normal_idle');
         lcd('Vehicle Speed:', String(S.speed));
         refreshAll();
