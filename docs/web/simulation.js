@@ -686,6 +686,33 @@ function boot() {
 
 // ─── INIT ────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+    // ── Loading Screen ──
+    const loaderScreen = document.getElementById('loader-screen');
+    const loaderBar = document.getElementById('loader-bar');
+    const loadDuration = 3000; // 3 seconds — synced with car animation
+    const loadStart = performance.now();
+
+    function animateLoader(now) {
+        const elapsed = now - loadStart;
+        const progress = Math.min((elapsed / loadDuration) * 100, 100);
+        loaderBar.style.width = progress + '%';
+
+        if (progress < 100) {
+            requestAnimationFrame(animateLoader);
+        } else {
+            // Loading complete — fade out
+            setTimeout(() => {
+                loaderScreen.classList.add('fade');
+                loaderScreen.addEventListener('transitionend', () => {
+                    loaderScreen.remove();
+                }, { once: true });
+                // Start simulation
+                boot();
+            }, 300);
+        }
+    }
+    requestAnimationFrame(animateLoader);
+
     // Security: Anti-right-click & Anti-select
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('selectstart', e => e.preventDefault());
@@ -728,5 +755,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    boot();
 });
