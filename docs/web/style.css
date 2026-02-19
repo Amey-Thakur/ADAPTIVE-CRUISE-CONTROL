@@ -1649,18 +1649,18 @@ input[type="range"]::-moz-range-thumb {
 }
 
 #footer {
-  padding: .25rem 1.25rem;
+  padding: .2rem 1.25rem;
   text-align: center;
   border-top: none;
-  background: var(--bg);
+  background: transparent;
   flex-shrink: 0;
   transition: background .3s, border-color .3s;
 }
 
 #footer p {
-  font-size: .58rem;
+  font-size: .7rem;
   color: var(--text3);
-  line-height: 1.5
+  line-height: 1.2
 }
 
 #footer a {
