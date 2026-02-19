@@ -8,7 +8,7 @@
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚘</text></svg>">
   <meta name="description"
-    content="Interactive browser-based simulation of an Arduino Uno Adaptive Cruise Control (ACC) system. Explore Normal, Cruise, and Adaptive modes with real-time sensor feedback.">
+    content="Interactive browser-based simulation of an Arduino Uno Adaptive Cruise Control (ACC) system with lane changing and overtaking. Explore Normal, Cruise, and Adaptive modes with real-time sensor feedback.">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
@@ -68,11 +68,13 @@
   <!-- ═══ MAIN DASHBOARD ═══ -->
   <main id="main">
 
-    <!-- ── ROAD (full width, dashes edge to edge) ── -->
+    <!-- ── ROAD (2 lanes, 3 cars) ── -->
     <section id="road-section">
       <div id="road">
         <div class="road-edge top"></div>
-        <div class="lane-markers">
+
+        <!-- Top lane dashes (lane divider) -->
+        <div class="lane-markers center-lane">
           <div class="dash"></div>
           <div class="dash"></div>
           <div class="dash"></div>
@@ -104,10 +106,26 @@
           <div class="dash"></div>
           <div class="dash"></div>
         </div>
+
         <div class="road-edge bottom"></div>
 
-        <!-- Lead Vehicle -->
-        <div id="lead-car" class="car">
+        <!-- Lane labels -->
+        <div class="lane-label top-label">Overtake Lane</div>
+        <div class="lane-label bottom-label">Main Lane</div>
+
+        <!-- Traffic Vehicle (top lane) -->
+        <div id="traffic-car" class="car lane-top">
+          <div class="car-body traffic">
+            <div class="car-top"></div>
+            <div class="car-window"></div>
+            <div class="car-wheel front"></div>
+            <div class="car-wheel rear"></div>
+          </div>
+          <span class="car-tag">Traffic</span>
+        </div>
+
+        <!-- Lead Vehicle (bottom lane) -->
+        <div id="lead-car" class="car lane-bottom">
           <div class="car-body lead">
             <div class="car-top"></div>
             <div class="car-window"></div>
@@ -119,8 +137,8 @@
           <span class="car-tag">Lead Vehicle</span>
         </div>
 
-        <!-- ACC Vehicle -->
-        <div id="ego-car" class="car">
+        <!-- ACC Vehicle (starts in bottom lane) -->
+        <div id="ego-car" class="car lane-bottom">
           <div class="car-body ego">
             <div class="car-top"></div>
             <div class="car-window"></div>
@@ -143,9 +161,8 @@
     <!-- ── CONTENT: Left panels + Right serial ── -->
     <div id="content-row">
 
-      <!-- Left Column: instruments + controls -->
+      <!-- Left Column -->
       <div id="left-col">
-        <!-- Top instruments: LCD + Gauge -->
         <div id="instruments-top">
           <div class="panel" id="lcd-panel">
             <div class="panel-head">
@@ -157,7 +174,6 @@
               <div class="lcd-line" id="lcd-2">ACC PROJECT</div>
             </div>
           </div>
-
           <div class="panel" id="gauge-panel">
             <div class="panel-head">
               <span class="panel-title">Speedometer</span>
@@ -175,32 +191,22 @@
           </div>
         </div>
 
-        <!-- Bottom instruments: Telemetry + Arduino -->
         <div id="instruments-bottom">
           <div class="panel" id="info-panel">
             <div class="panel-head">
               <span class="panel-title">Telemetry</span>
             </div>
             <div id="info-grid">
-              <div class="info-cell">
-                <span class="info-label">Mode</span>
-                <span class="info-val" id="info-mode">Normal</span>
-              </div>
-              <div class="info-cell">
-                <span class="info-label">Code</span>
-                <span class="info-val mono" id="info-code">0</span>
-              </div>
-              <div class="info-cell">
-                <span class="info-label">Target</span>
-                <span class="info-val mono" id="info-target">—</span>
-              </div>
-              <div class="info-cell">
-                <span class="info-label">Distance</span>
-                <span class="info-val mono" id="info-dist">0.50m</span>
-              </div>
+              <div class="info-cell"><span class="info-label">Mode</span><span class="info-val"
+                  id="info-mode">Normal</span></div>
+              <div class="info-cell"><span class="info-label">Code</span><span class="info-val mono"
+                  id="info-code">0</span></div>
+              <div class="info-cell"><span class="info-label">Target</span><span class="info-val mono"
+                  id="info-target">—</span></div>
+              <div class="info-cell"><span class="info-label">Distance</span><span class="info-val mono"
+                  id="info-dist">0.50m</span></div>
             </div>
           </div>
-
           <div class="panel" id="hw-panel">
             <div class="panel-head">
               <span class="panel-title">Arduino Uno</span>
@@ -208,20 +214,16 @@
             </div>
             <div id="hw-grid">
               <div class="led-pair">
-                <div class="hw-led green" id="hw-led-g"></div>
-                <span>D13 Accel</span>
+                <div class="hw-led green" id="hw-led-g"></div><span>D13</span>
               </div>
               <div class="led-pair">
-                <div class="hw-led red" id="hw-led-r"></div>
-                <span>D12 Brake</span>
+                <div class="hw-led red" id="hw-led-r"></div><span>D12</span>
               </div>
               <div class="led-pair">
-                <div class="hw-led cyan" id="hw-led-t"></div>
-                <span>D10 Trig</span>
+                <div class="hw-led cyan" id="hw-led-t"></div><span>D10</span>
               </div>
               <div class="led-pair">
-                <div class="hw-led cyan" id="hw-led-e"></div>
-                <span>D8 Echo</span>
+                <div class="hw-led cyan" id="hw-led-e"></div><span>D8</span>
               </div>
             </div>
             <div id="pin-bars">
@@ -244,7 +246,7 @@
           </div>
         </div>
 
-        <!-- Controls -->
+        <!-- Controls: Speed | Distance | Lane -->
         <div id="controls-area">
           <div id="arrow-grid">
             <div class="arrow-group">
@@ -261,18 +263,22 @@
                 <button id="btn-farther" class="btn-arrow-key dist-far" title="Farther (→ or D)">▶<kbd>D</kbd></button>
               </div>
             </div>
+            <div class="arrow-group">
+              <span class="arrow-title">Lane</span>
+              <div class="arrow-pair">
+                <button id="btn-lane-up" class="btn-arrow-key lane-up" title="Overtake Lane (Q)">▲<kbd>Q</kbd></button>
+                <button id="btn-lane-down" class="btn-arrow-key lane-dn" title="Main Lane (E)">▼<kbd>E</kbd></button>
+              </div>
+            </div>
           </div>
 
           <div id="mode-row">
-            <button id="btn-m0" class="btn btn-mode active" title="Normal Mode (Key: 1)">
-              <span class="mode-num">0</span> Normal <kbd>1</kbd>
-            </button>
-            <button id="btn-m1" class="btn btn-mode" title="Cruise Control (Key: 2)">
-              <span class="mode-num">1</span> Cruise <kbd>2</kbd>
-            </button>
-            <button id="btn-m2" class="btn btn-mode" title="Adaptive Cruise (Key: 3)">
-              <span class="mode-num">2</span> Adaptive <kbd>3</kbd>
-            </button>
+            <button id="btn-m0" class="btn btn-mode active" title="Normal Mode (Key: 1)"><span class="mode-num">0</span>
+              Normal <kbd>1</kbd></button>
+            <button id="btn-m1" class="btn btn-mode" title="Cruise Control (Key: 2)"><span class="mode-num">1</span>
+              Cruise <kbd>2</kbd></button>
+            <button id="btn-m2" class="btn btn-mode" title="Adaptive Cruise (Key: 3)"><span class="mode-num">2</span>
+              Adaptive <kbd>3</kbd></button>
           </div>
 
           <div id="slider-box">
@@ -290,7 +296,7 @@
         </div>
       </div>
 
-      <!-- Right Column: Serial Monitor (tall, scrollable) -->
+      <!-- Right Column: Serial Monitor -->
       <div id="serial-col">
         <div class="serial-head">
           <span>Serial Monitor</span>
