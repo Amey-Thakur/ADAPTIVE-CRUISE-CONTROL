@@ -149,30 +149,23 @@ ADAPTIVE-CRUISE-CONTROL/
   <img src="Source Code/figures/Hardware Components/02 - Arduino Uno.png" width="650" alt="Arduino Uno Technical Diagram">
 
   **LCD Display (16x2): Pin Configuration & Interface**  <br><br>
-  <img src="Source Code/figures/Hardware Components/01 - LCD Display.png" width="350" alt="LCD Display Technical Diagram">
+  <img src="Source Code/figures/Hardware Components/01 - LCD Display.png" width="400" alt="LCD Display Technical Diagram">
 
   ### Sensory & Connectivity
-  
-  **Ultrasonic Sensor (HC-SR04): Wave Propagation & Pinout**  <br><br>
-  <img src="Source Code/figures/Hardware Components/05 - Ultrasonic Sensor.png" width="600" alt="Ultrasonic Sensor Diagram">
+  <br>
 
-  **Jumper Wires: Connectivity Standards**  <br><br>
-  <img src="Source Code/figures/Hardware Components/07 - Jumper Wires.jpg" width="400" alt="Jumper Wires">
+  | Ultrasonic Sensor (HC-SR04) | Jumper Wires: Connectivity |
+  | :---: | :---: |
+  | <img src="Source Code/figures/Hardware Components/05 - Ultrasonic Sensor.png" width="400" alt="Ultrasonic Sensor"> | <img src="Source Code/figures/Hardware Components/07 - Jumper Wires.jpg" width="400" alt="Jumper Wires"> |
+  | **Resistor Color Codes** | **Breadboard Technical Layout** |
+  | <img src="Source Code/figures/Hardware Components/06 - Resistor.png" width="400" alt="Resistor"> | <img src="Source Code/figures/Hardware Components/08 - Breadboard.png" width="400" alt="Breadboard"> |
 
   ### User Interface & Input Controls
   <br>
 
-  | Potentiometer | Push Button | Digital Input |
+  | Potentiometer Control | Push Button | Digital Input |
   | :---: | :---: | :---: |
-  | <img src="Source Code/figures/Hardware Components/09 - Potentiometer.png" width="200"> | <img src="Source Code/figures/Hardware Components/03 - Push Button.jpg" width="200"> | <img src="Source Code/figures/Hardware Components/04 - Digital Input.jpg" width="200"> |
-
-  ### Technical Reference Standards
-  
-  **Resistor Color Code Diagram**  <br><br>
-  <img src="Source Code/figures/Hardware Components/06 - Resistor.png" width="600" alt="Resistor Diagram">
-
-  **Breadboard Technical Layout**  <br><br>
-  <img src="Source Code/figures/Hardware Components/08 - Breadboard.png" width="600" alt="Breadboard Layout">
+  | <img src="Source Code/figures/Hardware Components/09 - Potentiometer.png" width="230" alt="Potentiometer"> | <img src="Source Code/figures/Hardware Components/03 - Push Button.jpg" width="230" alt="Push Button"> | <img src="Source Code/figures/Hardware Components/04 - Digital Input.jpg" width="230" alt="Digital Input"> |
 
 </div>
 
