@@ -49,6 +49,9 @@
 
 The **Adaptive Cruise Control (ACC)** system is a sophisticated embedded control project developed during the **2nd Semester** of the **MEng in Computer Engineering** program at the **University of Windsor**. The project implements a closed-loop control system that manages vehicle velocity through real-time telemetry. By utilizing an ultrasonic sensor to monitor the distance to leading vehicles, the system dynamically adjusts speed to maintain a safe threshold of **0.3 meters**. This project demonstrates the practical application of the **MATLAB Support Package for Arduino**, bridge-linking high-level computational logic with physical hardware actuators and indicators.
 
+> [!NOTE]
+> **Engineering Synthesis**: The development of this Adaptive Cruise Control system explores the critical transition from manual open-loop participation to automated **Closed-Loop Feedback Control**. By utilizing deterministic logic to bridge real-time telemetric distance acquisition with variable motor-speed actuation, the project demonstrates the fundamental principles of **cyber-physical systems**. This implementation serves as a scholarly milestone in understanding how digital abstractions can reliably govern physical safety parameters in automotive environments.
+
 ### Resources
 
 | # | Resource | Description |
