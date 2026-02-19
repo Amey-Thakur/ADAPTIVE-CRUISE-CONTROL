@@ -79,17 +79,21 @@ The **Adaptive Cruise Control (ACC)** system is a sophisticated embedded control
 | **Adaptive Logic** | Proximity-aware deceleration when safety buffers are breached (< 0.3m). |
 | **Real-time Feedback** | Standard LCD telemetry showing vehicle speed and operational mode. |
 | **Safety Indicators** | Dual-LED system for real-time acceleration (Green) and braking (Red) status. |
-| **Hardware Integration** | Direct interface with Arduino Uno and HC-SR04 Ultrasonic sensors. |
+| **Interactive Simulation** | High-fidelity Web PWA mirroring the MATLAB control logic for hardware-agnostic system validation. |
+| **Hardware Integration** | Direct interface with Arduino Uno and HC-SR04 Ultrasonic sensors via MATLAB API. |
+
+> [!TIP]
+> **Cyber-Physical Feedback Control**: The transition from manual open-loop actuators to automated **Closed-Loop Feedback Control** is a fundamental paradigm in automotive engineering. By synthesizing real-time telemetric distance data from the **HC-SR04** and mapping it through a deterministic control law, this system achieves autonomous speed regulation. Implementing concepts such as the **Constant Time-Gap Policy (CTGP)** is essential for ensuring "String Stability," which prevents the propagation and amplification of speed disturbances within vehicle platoons.
 
 ### Tech Stack
-- **Programming Language**: MATLAB (R2023a+)
-- **Hardware Abstraction**: MATLAB Support Package for Arduino
-- **Peripheral Libraries**: `Ultrasonic`, `ExampleLCD/LCDAddOn`
-- **Controller**: Arduino Uno
-- **Peripherals**: HC-SR04 Ultrasonic Sensor, 16x2 LCD Display (I2C/Parallel)
-- **Control Interface**: 5x Analog Potentiometers (Manual Control & Mode PWM)
-- **Safety Indicators**: Dual-LED Feedback System (Green: Accel | Red: Stop)
-- **Simulation Platform**: Tinkercad (Hardware & Schematic Prototyping)
+- **Numerical Computing**: MATLAB (R2023a+) & Control System Toolbox
+- **Embedded Controller**: Arduino Uno R3 (ATmega328P Architecture)
+- **Hardware Abstraction**: MATLAB Support Package for Arduino Hardware
+- **Peripheral Peripherals**: HC-SR04 Ultrasonic Sensor, 16x2 I2C/Parallel LCD Display
+- **Simulation Web Engine**: Vanilla JavaScript (ES6+), CSS3 Flexbox/Grid, and Web Audio API
+- **Deployment & Architecture**: Progressive Web App (PWA) with Service Worker offline caching
+- **Prototyping Environment**: Tinkercad for electrical schematic validation and transient logic modeling
+- **Libraries & Drivers**: `Ultrasonic.h`, `LiquidCrystal_I2C.h` (Hardware), `sw.js` (Web)
 
 ---
 
