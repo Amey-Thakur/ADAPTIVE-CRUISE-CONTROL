@@ -1,116 +1,277 @@
-# ADAPTIVE-CRUISE-CONTROL
+<div align="center">
 
- 👍🏻 GENG8030: MATLAB - Project [SEMESTER II]
- 
- - [X] **GENG8030: [MATLAB](https://github.com/Amey-Thakur/COMPUTATIONAL-METHODS-AND-MODELING-FOR-ENGINEERING-APPLICATIONS)**
+  # Adaptive Cruise Control (ACC)
 
----
+  [![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
+  ![Status](https://img.shields.io/badge/Status-Completed-success)
+  ![MATLAB](https://img.shields.io/badge/MATLAB-R2023a-blue?style=flat&logo=mathworks&logoColor=white)
+  [![Developed by Amey Thakur](https://img.shields.io/badge/Developed%20by-Amey%20Thakur-blue.svg)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL)
 
->**[MATLAB code](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/blob/main/Adaptive%20Cruise%20Control.m)**
+  A high-fidelity Adaptive Cruise Control (ACC) system developed as a **2nd-Semester Project** for the **MEng Computer Engineering** program. This implementation utilizes MATLAB and Arduino to demonstrate real-time sensory feedback, automated speed regulation, and proximity-aware safety logic.
 
-![ACC Circuit View](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/66e33659-2604-45a3-b138-b829941594d5)
+  **[Source Code](Source%20Code/)** &nbsp;·&nbsp; **[Technical Specification](docs/SPECIFICATION.md)** &nbsp;·&nbsp; **[Adaptive Cruise Control Algorithm](Source%20Code/Adaptive%20Cruise%20Control%20Algorithm.txt)**
 
----
+  <img src="Source Code/figures/Adaptive Cruise Control Overview.jpg" width="80%" alt="ACC Overview">
 
-### Flowchart
-
-![Flowchart](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/3d4f8413-2923-4855-b758-851bf653572f)
-
----
-
-### Algorithm: ACC
-
-    1.	Initialize the Arduino board and Ultrasonic Sensor.
-    2.	Initialize the LCD display and clear its content.
-    3.	Print project name and group number on the first two lines of the LCD display.
-    4.	Pause execution for 5 seconds to display the information.
-    5.	Clear the LCD display.
-    6.	Print team members' names on the LCD display.
-    7.	Pause execution for 5 seconds to display the information.
-    8.	Declare and initialize variables for various inputs and modes:
-        -	speed: current vehicle speed
-        -	increase_speed: input from the increase speed button
-        -	decrease_speed: input from the decrease speed button
-        -	cancel: input from the cancel button
-        -	set_speed: input from the set speed button
-        -	adaptive_cruise_speed: input from the adaptive cruise control button
-        -	distance: distance measured by the ultrasonic sensor
-        -	mode: variable to indicate the current mode of operation (0 = Normal Mode, 1 = Cruise Control Mode, 2 = Adaptive Cruise Control Mode)
-    9.	Enter an infinite loop to continuously monitor and update the vehicle speed.
-        -	Read inputs from the analog pins on the Arduino board for the various buttons and the ultrasonic sensor.
-        -	Determine the mode of operation based on button inputs:
-        -	If the cancel button is pressed (voltage value >= 4), set mode to 0 (Normal Mode).
-        -	If the set speed button is pressed (voltage value >= 4), set mode to 1 (Cruise Control Mode).
-        -	If the adaptive cruise control button is pressed (voltage value >= 4), set mode to 2 (Adaptive Cruise Control Mode) and store the current speed in 'constant'.
-
-    10.	Implement different behaviors based on the current mode:
-        -	Normal Mode:
-        -	Increase speed if the increase speed button is pressed.
-        -	Decrease speed if the decrease speed button is pressed.
-        -	Gradually decrease speed if no button is pressed.
-        -	Ensure speed doesn't go below 0.
-        -	Display the current speed on the LCD display with the label "Vehicle Speed: ".
-
-        -	Cruise Control Mode:
-        -	Increase speed if the increase speed button is pressed.
-        -	Decrease speed if the decrease speed button is pressed.
-        -	Ensure speed doesn't go below 0.
-        -	Display the current speed on the LCD display with the label "Cruise mode: ".
-        
-        -	Adaptive Cruise Control Mode:
-        -	Clear the LCD display and display a blinking effect.
-        -	Reinitialize the LCD display.
-        -	Activate the vehicle's motor (D13) and deactivate the brake (D12).
-        -	Adjust speed based on the distance measured by the ultrasonic sensor:
-        -	If the distance is less than 0.3 units, decrease the speed.
-        -	If the distance is greater than or equal to 0.3 units, increase the speed.
-        -	Ensure the speed doesn't exceed the constant value (stored previously).
-        -	Ensure speed doesn't go below 0.
-        -	Display the current speed on the LCD display with the label "Adap_Cruise_mode".
-
-    11.	End of the infinite loop.
+</div>
 
 ---
 
-### Working Model
+<div align="center">
 
-A. Circuit Connections
+  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [Hardware Gallery](#hardware-gallery) &nbsp;·&nbsp; [Simulation Results](#simulation-results) &nbsp;·&nbsp; [Working Model](#working-model-gallery) &nbsp;·&nbsp; [Usage Guidelines](#usage-guidelines) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
 
-![Circuit Connections](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/622277b5-b2b8-461e-8d48-7099bd46342d)
-
-B. Welcome Message
-
- ![Welcome message](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/9d45eef8-df90-4f74-9881-49fd9664f90a)
-
-C.	Group Number & Names
-
- ![Group Number   Names](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/0c4f6580-c18c-4445-a4a6-35247d9c3dbc)
-
-D.	Circuit at initial (zero speed)
-
- ![Circuit at initial (zero speed)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/03f5102e-808f-47ec-9a63-78bd2adf1edf)
-
-E.	Circuit in Cruise Mode (non-zero speed)
-
- ![Circuit in Cruise Mode (non-zero speed)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/44df42e4-3892-41ba-9ed0-9689ece2e6ea)
-
-F.	Circuit in Cruise Mode (zero speed)
-
- ![Circuit in Cruise Mode (zero speed)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/d6665663-4968-4c11-bf7a-9d7aabfae584)
-
-G.	Circuit in Adaptive Cruise Control Mode (no object in front of the ultrasonic sensor)
-
- ![Circuit in Adaptive Cruise Control Mode (no object in front of ultrasonic sensor)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/9a0aa4e9-0bb7-4b6f-ae79-059dd163e5f0)
-
-H.	Circuit in Adaptive Cruise Control Mode (an object in front of the ultrasonic sensor)
-
-![Circuit in Adaptive Cruise Control Mode (an object in front of ultrasonic sensor)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL/assets/54937357/f583253e-b616-4e5d-bf90-248a140ba1b1)
+</div>
 
 ---
 
-<p align="center"> <b> 👉🏻 Presented as a part of the 2nd Semester Project @ University of Windsor 👈🏻 </b> </p>
+<!-- AUTHORS -->
+<div align="center">
 
-<p align="center"> <b> 👷 Project Authors: Amey Thakur, Nandeshwar Royal Uppalapati and Brano Bruno Barshmen (Batch of 2024) </b> </p>
- 
-<p align="center"><a href="https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING" style="color: greenyellow;"> ✌🏻 Back To Engineering ✌🏻 </a></p>
- 
+  ## Authors
+
+  **University of Windsor | MEng Computer Engineering | Batch of 2024**
+
+| <a href="https://github.com/Amey-Thakur"><img src="https://github.com/Amey-Thakur.png" width="150" height="150" alt="Amey Thakur"></a><br>[**Amey Thakur**](https://github.com/Amey-Thakur)<br><br>[![ORCID](https://img.shields.io/badge/ORCID-0000--0001--5644--1575-green.svg)](https://orcid.org/0000-0001-5644-1575) |
+| :---: |
+
+</div>
+
+> [!IMPORTANT]
+> ### 🤝🏻 Special Acknowledgement
+> *Special thanks to **Brano Bruno Barshmen** and **Nandeshwar Royal Uppalapati** for their meaningful contributions, guidance, and support that helped shape this work.*
+
+---
+
+<!-- OVERVIEW -->
+## Overview
+
+The **Adaptive Cruise Control (ACC)** system is a sophisticated embedded control project developed during the **2nd Semester** of the **MEng in Computer Engineering** program at the **University of Windsor**. The project implements a closed-loop control system that manages vehicle velocity through real-time telemetry. By utilizing an ultrasonic sensor to monitor the distance to leading vehicles, the system dynamically adjusts speed to maintain a safe threshold of **0.3 meters**. This project demonstrates the practical application of the **MATLAB Support Package for Arduino**, bridge-linking high-level computational logic with physical hardware actuators and indicators.
+
+### Resources
+
+| # | Resource | Description |
+|---|---|---|
+| 1 | [Technical Specification](docs/SPECIFICATION.md) | Technical architecture and control logic specification |
+| 2 | [ACC Algorithm](Source%20Code/Adaptive%20Cruise%20Control%20Algorithm.txt) | Step-by-step logic for speed and proximity regulation |
+| 3 | [Source Code](Source%20Code/Adaptive%20Cruise%20Control.m) | Primary MATLAB implementation script |
+| 4 | [Engineering Repo](https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING) | Master repository for MEng Computer Engineering |
+
+---
+
+<!-- FEATURES -->
+## Features
+
+| Feature | Description |
+|---------|-------------|
+| **Normal Mode** | Manual velocity regulation via potentiometers with simulated kinetic drag. |
+| **Cruise Control** | Automated maintenance of a user-defined target velocity. |
+| **Adaptive Logic** | Proximity-aware deceleration when safety buffers are breached (< 0.3m). |
+| **Real-time Feedback** | High-fidelity LCD telemetry showing vehicle speed and operational mode. |
+| **Safety Indicators** | Dual-LED system for real-time acceleration (Green) and braking (Red) status. |
+| **Hardware Integration** | Direct interface with Arduino Uno and HC-SR04 Ultrasonic sensors. |
+
+### Tech Stack
+- **Programming Language**: MATLAB (R2023a+)
+- **Hardware Abstraction**: MATLAB Support Package for Arduino
+- **Controller**: Arduino Uno
+- **Peripherals**: HC-SR04 Ultrasonic Sensor, 16x2 LCD Display (I2C/Parallel)
+- **Simulation Platform**: Tinkercad (Hardware & Schematic Prototyping)
+
+---
+
+<!-- STRUCTURE -->
+## Project Structure
+
+```python
+ADAPTIVE-CRUISE-CONTROL/
+│
+├── docs/                                    # Formal Documentation
+│   └── SPECIFICATION.md                     # Technical Architecture & Specification
+│
+├── Source Code/                             # Core Implementation
+│   ├── figures/                             # Visual Documentation Assets
+│   │   ├── Arduino Working Model/           # Real-world Hardware Gallery
+│   │   ├── Hardware Components/             # Standalone Component Visuals
+│   │   ├── Tinkercad Simulation/            # Virtual Prototyping Results
+│   │   ├── Adaptive Cruise Control Flowchart.png
+│   │   ├── Adaptive Cruise Control Overview.jpg
+│   │   ├── Component Table.jpg
+│   │   └── Project Gantt Chart.jpg
+│   │
+│   ├── Adaptive Cruise Control.m            # Main MATLAB Control Script
+│   └── Adaptive Cruise Control Algorithm.txt# Logistical Algorithm Steps
+│
+├── .gitattributes                           # Git Configuration
+├── .gitignore                               # Git Ignore Rules
+├── CITATION.cff                             # Citation Metadata
+├── codemeta.json                            # Project Metadata (JSON-LD)
+├── LICENSE                                  # MIT License
+├── README.md                                # Main Documentation
+└── SECURITY.md                              # Security Policy & Posture
+```
+
+---
+
+<!-- HARDWARE GALLERY -->
+## Hardware Gallery
+
+<div align="center">
+
+  ### Component Table
+  <img src="Source Code/figures/Component Table.jpg" width="80%" alt="Component Table">
+
+  ### Core Components
+  
+  | LCD Display | Arduino Uno | Ultrasonic Sensor |
+  | :---: | :---: | :---: |
+  | <img src="Source Code/figures/Hardware Components/01 - LCD Display.png" width="200"> | <img src="Source Code/figures/Hardware Components/02 - Arduino Uno.png" width="200"> | <img src="Source Code/figures/Hardware Components/05 - Ultrasonic Sensor.png" width="200"> |
+  
+  | Push Button | Digital Input | Resistor |
+  | :---: | :---: | :---: |
+  | <img src="Source Code/figures/Hardware Components/03 - Push Button.jpg" width="200"> | <img src="Source Code/figures/Hardware Components/04 - Digital Input.jpg" width="200"> | <img src="Source Code/figures/Hardware Components/06 - Resistor.png" width="200"> |
+  
+  | Jumper Wires | Breadboard | Potentiometer |
+  | :---: | :---: | :---: |
+  | <img src="Source Code/figures/Hardware Components/07 - Jumper Wires.jpg" width="200"> | <img src="Source Code/figures/Hardware Components/08 - Breadboard.png" width="200"> | <img src="Source Code/figures/Hardware Components/09 - Potentiometer.png" width="200"> |
+
+</div>
+
+---
+
+<!-- SIMULATION RESULTS -->
+## Simulation Results
+
+<div align="center">
+
+  ### Circuit View
+  <img src="Source Code/figures/Tinkercad Simulation/01 - Circuit View.jpg" width="80%" alt="Circuit View">
+
+  ### Schematic View
+  <img src="Source Code/figures/Tinkercad Simulation/02 - Schematic View.jpg" width="80%" alt="Schematic View">
+
+  ### Simulation Logic
+  
+  | Welcome Message | Group Details | Initial Resting State |
+  | :---: | :---: | :---: |
+  | <img src="Source Code/figures/Tinkercad Simulation/03 - Welcome Message.jpg" width="250"> | <img src="Source Code/figures/Tinkercad Simulation/04 - Group Number & Names.jpg" width="250"> | <img src="Source Code/figures/Tinkercad Simulation/05 - Circuit at Initial (Zero Speed).jpg" width="250"> |
+  
+  | Cruise Active | Cruise (Zero Speed) | Adaptive (Safe) |
+  | :---: | :---: | :---: |
+  | <img src="Source Code/figures/Tinkercad Simulation/06 - Circuit in Cruise Mode (Non-Zero Speed).jpg" width="250"> | <img src="Source Code/figures/Tinkercad Simulation/07 - Circuit in Cruise Mode (Zero Speed).jpg" width="250"> | <img src="Source Code/figures/Tinkercad Simulation/08 - Adaptive Cruise Mode (Safe Distance).jpg" width="250"> |
+
+</div>
+
+---
+
+<!-- WORKING MODEL -->
+## Working Model Gallery
+
+<div align="center">
+
+  ### Physical Circuit Connections
+  <img src="Source Code/figures/Arduino Working Model/01 - Circuit Connections.jpg" width="80%" alt="Hardware Connections">
+
+  ### Hardware States
+  
+  | Activation Screen | Member Display | System Resting |
+  | :---: | :---: | :---: |
+  | <img src="Source Code/figures/Arduino Working Model/02 - Welcome Message.jpg" width="250"> | <img src="Source Code/figures/Arduino Working Model/03 - Group Number & Names.jpg" width="250"> | <img src="Source Code/figures/Arduino Working Model/04 - Circuit at Initial (Zero Speed).jpg" width="250"> |
+  
+  | Cruise Velocity | Adaptive Control | Hazard Detected |
+  | :---: | :---: | :---: |
+  | <img src="Source Code/figures/Arduino Working Model/05 - Circuit in Cruise Mode (Non-Zero Speed).jpg" width="250"> | <img src="Source Code/figures/Arduino Working Model/07 - Adaptive Cruise Mode (No Object in Front of Sensor).jpg" width="250"> | <img src="Source Code/figures/Arduino Working Model/08 - Adaptive Cruise Mode (Object in Front of Sensor).jpg" width="250"> |
+
+</div>
+
+---
+
+<!-- LOGISTICS -->
+## Project Logistics
+
+<div align="center">
+
+  ### Project Flowchart
+  <img src="Source Code/figures/Adaptive Cruise Control Flowchart.png" width="80%" alt="ACC Flowchart">
+
+  ### Gantt Chart
+  <img src="Source Code/figures/Project Gantt Chart.jpg" width="80%" alt="Gantt Chart">
+
+</div>
+
+---
+
+<!-- USAGE SECTION -->
+## Usage Guidelines
+
+This repository is shared to support scholarly exchange and advance ideas in modern automotive control systems.
+
+**For Students**  
+Utilize this project as a reference for MATLAB-Arduino interfacing, sensor fusion, and closed-loop control logic. The source code and simulation screenshots provide a comprehensive roadmap for hardware-level programming.
+
+**For Educators**  
+This repository serves as a practical implementation of real-time control systems. Attribution is appreciated when utilizing the architectural flow or technical visuals for instructional purposes.
+
+**For Researchers**  
+The technical specification and modular code structure provide insights into the behavioral modeling of adaptive cruise systems in a controlled academic environment.
+
+---
+
+<!-- LICENSE -->
+## License
+
+This repository and its technical assets are made available under the **MIT License**. See the [LICENSE](LICENSE) file for complete terms.
+
+> [!NOTE]
+> **Summary**: You are free to share and adapt this content for any purpose, even commercially, as long as you provide appropriate attribution to the original author.
+
+Copyright © 2023 Amey Thakur
+
+---
+
+<!-- ABOUT -->
+## About This Repository
+
+**Created & Maintained by**: [Amey Thakur](https://github.com/Amey-Thakur)  
+**Academic Journey**: Master of Engineering in Computer Engineering (2023-2024)  
+**Institution**: [University of Windsor](https://www.uwindsor.ca/), Windsor, Ontario  
+**Faculty**: [Faculty of Engineering](https://www.uwindsor.ca/engineering/)
+
+This project showcases the **Adaptive Cruise Control (ACC)** system, a real-time engineering solution developed to address automotive safety and efficiency. It serves as a milestone in the academic study of computational methods and modeling for engineering applications.
+
+**Connect:** [GitHub](https://github.com/Amey-Thakur) &nbsp;·&nbsp; [LinkedIn](https://www.linkedin.com/in/amey-thakur) &nbsp;·&nbsp; [ORCID](https://orcid.org/0000-0001-5644-1575)
+
+### Acknowledgments
+
+Grateful acknowledgment to [**Mega Satish**](https://github.com/msatmod) for her meaningful contributions, guidance, and support that helped shape this work. Her collaboration and technical insights were instrumental in achieving the project's functional objectives.
+
+Grateful acknowledgment to the faculty members of the Department of Electrical and Computer Engineering at the University of Windsor for their guidance and instruction. Their expertise in computational modeling and embedded systems was vital to the successful realization of this project.
+
+Special thanks to the engineering project partners and peers for their continuous support and collaborative spirit throughout the 2023-2024 academic cycle.
+
+---
+
+<!-- FOOTER SECTION -->
+<div align="center">
+
+  [↑ Back to Top](#adaptive-cruise-control-acc)
+
+  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
+
+  <br>
+
+  🏎️ **[MEng Repository](https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING)** &nbsp;·&nbsp; 💻 **[ACC Project](#adaptive-cruise-control-acc)**
+
+  ---
+
+  #### Presented as part of the 2nd Semester Project @ University of Windsor
+
+  ---
+
+  ### 🎓 [Computer Engineering Repository](https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING)
+
+  **Master of Engineering (M.Eng.) - University of Windsor**
+
+  *Coursework, simulations, engineering projects, and academic research.*
+
+</div>
