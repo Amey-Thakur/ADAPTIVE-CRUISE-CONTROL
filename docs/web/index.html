@@ -67,10 +67,8 @@
 
   <!-- ═══ MAIN DASHBOARD ═══ -->
   <main id="main">
-
-    <!-- ── ROAD (2 lanes, 3 cars) ── -->
     <section id="road-section"
-      title="Simulated 2-lane road. The ACC vehicle uses ultrasonic distance sensing to track the lead vehicle ahead. Press Q to overtake, E to return.">
+      title="Simulated 2-lane road. The ACC vehicle uses ultrasonic distance sensing to track the lead vehicle ahead. Press Q to change lanes, E to return.">
       <div id="road">
         <div class="road-edge top"></div>
         <div class="lane-markers center-lane">
@@ -109,18 +107,6 @@
         <div class="lane-label top-label">Overtake Lane</div>
         <div class="lane-label bottom-label">Main Lane</div>
 
-        <!-- Traffic Vehicle (moves independently in top lane) -->
-        <div id="traffic-car" class="car lane-top"
-          title="Independent traffic vehicle driving in the overtake lane at its own speed">
-          <div class="car-body traffic">
-            <div class="car-top"></div>
-            <div class="car-window"></div>
-            <div class="car-wheel front"></div>
-            <div class="car-wheel rear"></div>
-          </div>
-          <span class="car-tag">Traffic</span>
-        </div>
-
         <!-- Lead Vehicle (bottom lane) -->
         <div id="lead-car" class="car lane-bottom"
           title="Lead vehicle in the main lane. Distance is measured from ACC vehicle to this car using HC-SR04 ultrasonic sensor.">
@@ -137,7 +123,7 @@
 
         <!-- ACC Vehicle -->
         <div id="ego-car" class="car lane-bottom"
-          title="Your ACC-equipped vehicle. Uses closed-loop feedback control with ultrasonic sensing for adaptive speed regulation.">
+          title="Your ACC-equipped vehicle. Uses closed-loop feedback control with ultrasonic sensing for adaptive speed regulation. Change lanes with Q/E to overtake.">
           <div class="car-body ego">
             <div class="car-top"></div>
             <div class="car-window"></div>

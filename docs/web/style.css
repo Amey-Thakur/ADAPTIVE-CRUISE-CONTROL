@@ -1,7 +1,7 @@
 /* =========================================================================================
    ADAPTIVE CRUISE CONTROL — v6
-   2 Lanes · 3 Cars · Lane Changing · Overtaking
-   Readable panels · Meaningful tooltips · Moving traffic
+   2 Lanes · 2 Cars · Lane Changing · Overtaking
+   Readable panels · Meaningful tooltips
    ========================================================================================= */
 
 /* ── DARK THEME ── */
@@ -41,8 +41,6 @@
   --car-ego-glow: rgba(59, 130, 246, 0.25);
   --car-lead: #6b7280;
   --car-lead-d: #4b5563;
-  --car-traffic: #f97316;
-  --car-traffic-d: #ea580c;
 }
 
 /* ── LIGHT THEME ── */
@@ -82,8 +80,6 @@
   --car-ego-glow: rgba(59, 130, 246, 0.3);
   --car-lead: #9ca3af;
   --car-lead-d: #6b7280;
-  --car-traffic: #fb923c;
-  --car-traffic-d: #f97316;
 }
 
 /* ── RESET ── */
@@ -416,9 +412,7 @@ body {
   left: 18%
 }
 
-#traffic-car {
-  left: 55%
-}
+
 
 .car-body {
   position: relative;
@@ -448,10 +442,7 @@ body {
   box-shadow: 0 0 14px var(--car-ego-glow)
 }
 
-.car-body.traffic::before {
-  background: linear-gradient(180deg, var(--car-traffic), var(--car-traffic-d));
-  border: 1px solid rgba(255, 255, 255, .08)
-}
+
 
 .car-top {
   position: absolute;
@@ -475,11 +466,7 @@ body {
   border-bottom: none
 }
 
-.traffic .car-top {
-  background: linear-gradient(180deg, #fdba74, var(--car-traffic));
-  border: 1px solid rgba(255, 255, 255, .08);
-  border-bottom: none
-}
+
 
 .car-window {
   position: absolute;
