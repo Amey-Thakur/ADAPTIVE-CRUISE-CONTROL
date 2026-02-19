@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adaptive Cruise Control — Interactive Simulation</title>
+  <meta name="description" content="Interactive browser-based simulation of an Arduino Uno Adaptive Cruise Control (ACC) system. Explore Normal, Cruise, and Adaptive modes with real-time sensor feedback.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       HEADER
+       ═══════════════════════════════════════════════════════════════════ -->
+  <header id="header">
+    <div class="header-content">
+      <div class="header-brand">
+        <span class="header-icon">🚘</span>
+        <div>
+          <h1>Adaptive Cruise Control</h1>
+          <p class="header-subtitle">Arduino Uno · Interactive Simulation</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="badge badge-matlab">MATLAB · Simulink</span>
+        <span class="badge badge-arduino">Arduino Uno</span>
+        <a href="https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL" class="badge badge-repo" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       MAIN SIMULATION LAYOUT
+       ═══════════════════════════════════════════════════════════════════ -->
+  <main id="main">
+
+    <!-- ─── ROAD VISUALIZATION ─── -->
+    <section id="road-section">
+      <h2 class="section-label">Road Visualization</h2>
+      <div id="road-container">
+        <div id="road">
+          <div class="lane-marker"></div>
+          <div class="lane-marker"></div>
+          <div class="lane-marker"></div>
+          <div class="lane-marker"></div>
+          <div class="lane-marker"></div>
+          <div class="lane-marker"></div>
+          <div class="lane-marker"></div>
+          <div class="lane-marker"></div>
+          <div class="lane-marker"></div>
+          <div class="lane-marker"></div>
+          <div class="lane-marker"></div>
+          <div class="lane-marker"></div>
+
+          <!-- Lead Vehicle -->
+          <div id="lead-vehicle" class="vehicle">
+            <div class="vehicle-body lead-body">
+              <div class="vehicle-roof lead-roof"></div>
+              <div class="vehicle-window lead-window"></div>
+              <div class="brake-light left"></div>
+              <div class="brake-light right"></div>
+            </div>
+            <div class="vehicle-label">Lead Vehicle</div>
+          </div>
+
+          <!-- Ego Vehicle (ACC) -->
+          <div id="ego-vehicle" class="vehicle">
+            <div class="vehicle-body ego-body">
+              <div class="vehicle-roof ego-roof"></div>
+              <div class="vehicle-window ego-window"></div>
+              <div class="headlight left"></div>
+              <div class="headlight right"></div>
+              <div class="sensor-beam" id="sensor-beam"></div>
+            </div>
+            <div class="vehicle-label">ACC Vehicle</div>
+          </div>
+
+          <!-- Distance Indicator -->
+          <div id="distance-indicator">
+            <div class="distance-line"></div>
+            <span id="distance-value-road">0.50 m</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── DASHBOARD GRID ─── -->
+    <div id="dashboard-grid">
+
+      <!-- ─── ARDUINO BOARD ─── -->
+      <section id="arduino-section">
+        <h2 class="section-label">Arduino Uno R3</h2>
+        <div id="arduino-board">
+          <div class="board-header">
+            <span class="board-chip">ATmega328P</span>
+            <span class="board-label">ARDUINO UNO</span>
+          </div>
+
+          <!-- Pin Status Indicators -->
+          <div class="pin-row">
+            <div class="pin-group">
+              <span class="pin-label">D13</span>
+              <div class="pin-led" id="pin-d13"></div>
+              <span class="pin-desc">Accel LED</span>
+            </div>
+            <div class="pin-group">
+              <span class="pin-label">D12</span>
+              <div class="pin-led" id="pin-d12"></div>
+              <span class="pin-desc">Brake LED</span>
+            </div>
+            <div class="pin-group">
+              <span class="pin-label">D10</span>
+              <div class="pin-led" id="pin-d10"></div>
+              <span class="pin-desc">Trig</span>
+            </div>
+            <div class="pin-group">
+              <span class="pin-label">D8</span>
+              <div class="pin-led" id="pin-d8"></div>
+              <span class="pin-desc">Echo</span>
+            </div>
+          </div>
+
+          <!-- Analog Pins -->
+          <div class="analog-row">
+            <div class="analog-pin"><span>A0</span><div class="analog-bar" id="bar-a0"></div></div>
+            <div class="analog-pin"><span>A1</span><div class="analog-bar" id="bar-a1"></div></div>
+            <div class="analog-pin"><span>A2</span><div class="analog-bar" id="bar-a2"></div></div>
+            <div class="analog-pin"><span>A3</span><div class="analog-bar" id="bar-a3"></div></div>
+            <div class="analog-pin"><span>A4</span><div class="analog-bar" id="bar-a4"></div></div>
+          </div>
+
+          <!-- COM Port -->
+          <div class="com-port">
+            <span class="com-label">COM5</span>
+            <div class="com-indicator" id="com-indicator"></div>
+            <span class="com-status" id="com-status">Connected</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── LCD DISPLAY ─── -->
+      <section id="lcd-section">
+        <h2 class="section-label">LCD Display 16×2</h2>
+        <div id="lcd-display">
+          <div class="lcd-bezel">
+            <div class="lcd-screen">
+              <div class="lcd-row" id="lcd-row-1">WELCOME TO</div>
+              <div class="lcd-row" id="lcd-row-2">ACC PROJECT</div>
+            </div>
+            <div class="lcd-backlight"></div>
+          </div>
+          <div class="lcd-pins">
+            <span>RS:D7</span><span>EN:D6</span><span>D5</span><span>D4</span><span>D3</span><span>D2</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── LED INDICATORS ─── -->
+      <section id="led-section">
+        <h2 class="section-label">Status Indicators</h2>
+        <div id="led-panel">
+          <div class="led-unit">
+            <div class="led-bulb green" id="led-green"></div>
+            <span class="led-label">D13 · Accelerating</span>
+          </div>
+          <div class="led-unit">
+            <div class="led-bulb red" id="led-red"></div>
+            <span class="led-label">D12 · Braking / Stop</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── ULTRASONIC SENSOR ─── -->
+      <section id="sensor-section">
+        <h2 class="section-label">HC-SR04 Ultrasonic Sensor</h2>
+        <div id="sensor-panel">
+          <div class="sensor-visual">
+            <div class="sensor-chip">
+              <div class="sensor-eye left"></div>
+              <div class="sensor-eye right"></div>
+              <div class="sensor-crystal"></div>
+            </div>
+            <div class="sensor-waves" id="sensor-waves">
+              <div class="wave"></div>
+              <div class="wave"></div>
+              <div class="wave"></div>
+            </div>
+          </div>
+          <div class="sensor-readout">
+            <div class="readout-item">
+              <span class="readout-label">Distance</span>
+              <span class="readout-value" id="distance-display">0.50 m</span>
+            </div>
+            <div class="readout-item">
+              <span class="readout-label">Threshold</span>
+              <span class="readout-value threshold">0.30 m</span>
+            </div>
+            <div class="readout-item">
+              <span class="readout-label">Status</span>
+              <span class="readout-value" id="proximity-status">SAFE</span>
+            </div>
+          </div>
+          <div class="distance-slider-group">
+            <label for="distance-slider">Simulated Object Distance</label>
+            <input type="range" id="distance-slider" min="0" max="100" value="50" step="1">
+            <div class="slider-markers">
+              <span>0.00m</span>
+              <span class="threshold-mark">0.30m</span>
+              <span>1.00m</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ─── CONTROL PANEL ─── -->
+    <section id="controls-section">
+      <h2 class="section-label">Control Interface · Analog Potentiometers &amp; Push Buttons</h2>
+      <div id="controls-panel">
+
+        <div class="control-group" id="speed-controls">
+          <h3>Speed Control</h3>
+          <div class="button-row">
+            <button id="btn-increase" class="ctrl-btn accel" data-pin="A0">
+              <span class="btn-icon">▲</span>
+              <span class="btn-text">Increase Speed</span>
+              <span class="btn-pin">A0 · Potentiometer</span>
+            </button>
+            <button id="btn-decrease" class="ctrl-btn brake" data-pin="A1">
+              <span class="btn-icon">▼</span>
+              <span class="btn-text">Decrease Speed</span>
+              <span class="btn-pin">A1 · Potentiometer</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="control-group" id="mode-controls">
+          <h3>Mode Selection</h3>
+          <div class="button-row">
+            <button id="btn-cancel" class="ctrl-btn cancel" data-pin="A2">
+              <span class="btn-icon">✕</span>
+              <span class="btn-text">Normal Mode</span>
+              <span class="btn-pin">A2 · Cancel</span>
+            </button>
+            <button id="btn-cruise" class="ctrl-btn cruise" data-pin="A3">
+              <span class="btn-icon">⟐</span>
+              <span class="btn-text">Cruise Control</span>
+              <span class="btn-pin">A3 · Set Speed</span>
+            </button>
+            <button id="btn-adaptive" class="ctrl-btn adaptive" data-pin="A4">
+              <span class="btn-icon">◎</span>
+              <span class="btn-text">Adaptive Cruise</span>
+              <span class="btn-pin">A4 · ACC</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── TELEMETRY PANEL ─── -->
+    <section id="telemetry-section">
+      <h2 class="section-label">Real-Time Telemetry</h2>
+      <div id="telemetry-panel">
+        <div class="telemetry-card">
+          <span class="tele-label">Current Speed</span>
+          <span class="tele-value" id="tele-speed">0</span>
+          <span class="tele-unit">km/h</span>
+        </div>
+        <div class="telemetry-card">
+          <span class="tele-label">Operating Mode</span>
+          <span class="tele-value mode-text" id="tele-mode">Normal</span>
+          <span class="tele-unit" id="tele-mode-code">Mode 0</span>
+        </div>
+        <div class="telemetry-card">
+          <span class="tele-label">Cruise Target</span>
+          <span class="tele-value" id="tele-target">—</span>
+          <span class="tele-unit">km/h</span>
+        </div>
+        <div class="telemetry-card">
+          <span class="tele-label">Distance</span>
+          <span class="tele-value" id="tele-distance">0.50</span>
+          <span class="tele-unit">meters</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SERIAL MONITOR ─── -->
+    <section id="serial-section">
+      <h2 class="section-label">Serial Monitor · COM5 @ 9600 baud</h2>
+      <div id="serial-monitor">
+        <div id="serial-output"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════════════ -->
+  <footer id="footer">
+    <div class="footer-content">
+      <p><strong>Adaptive Cruise Control</strong> · GENG 8030 · University of Windsor</p>
+      <p>Developed by <a href="https://github.com/Amey-Thakur" target="_blank" rel="noopener">Amey Thakur</a> · Group 32 · MEng Computer Engineering</p>
+      <p class="footer-links">
+        <a href="https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL" target="_blank" rel="noopener">GitHub Repository</a>
+        <span>·</span>
+        <a href="https://github.com/Amey-Thakur/COMPUTATIONAL-METHODS-AND-MODELING-FOR-ENGINEERING-APPLICATIONS" target="_blank" rel="noopener">MATLAB Repository</a>
+        <span>·</span>
+        <a href="https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING" target="_blank" rel="noopener">MEng Repository</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="simulation.js"></script>
+</body>
+</html>
