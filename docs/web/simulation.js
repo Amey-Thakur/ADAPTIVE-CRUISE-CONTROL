@@ -1,5 +1,5 @@
 /* =========================================================================================
-   ADAPTIVE CRUISE CONTROL — SIMULATION ENGINE v5
+   ADAPTIVE CRUISE CONTROL — SIMULATION ENGINE
 
    Faithful JS port of the MATLAB ACC algorithm (Adaptive Cruise Control.m)
    MODES: 0 → Normal | 1 → Cruise Control | 2 → Adaptive Cruise
@@ -137,6 +137,108 @@ function playHorn() {
         }
     } catch (e) {
         console.warn('Audio blocked or not supported');
+    }
+}
+
+// ─── CINEMATIC FX (Thakur Engineering Protocol) ──────────────────────────────
+function playPowerUpSound() {
+    try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        if (ctx.state === 'suspended') ctx.resume();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(100, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 3);
+        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 4);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 4);
+    } catch (e) { }
+}
+
+function startCinematic() {
+    const layer = $('cinematic-layer');
+    if (layer.classList.contains('on')) return;
+
+    const algorithm = [
+        "// ═══ ADAPTIVE CRUISE CONTROL ═══",
+        "// Arduino Uno R3 · MATLAB Port",
+        "// Author: Amey Thakur",
+        "",
+        "void ACC_Tick() {",
+        "  float dist = ultrasonic.read();",
+        "  int speed = get_speed();",
+        "",
+        "  digitalWrite(D13, HIGH);  // Accel LED",
+        "  digitalWrite(D12, LOW);   // Brake LED",
+        "",
+        "  if (dist < 0.30) {",
+        "    // PROXIMITY: Decelerate",
+        "    if (speed > 0) speed -= 1;",
+        "    lcd.print(\"Adaptive:\", speed);",
+        "    setStatus(ADAPTIVE_DANGER);",
+        "  } else {",
+        "    // CLEAR: Accelerate to target",
+        "    if (speed < v_constant) speed += 1;",
+        "    setStatus(ADAPTIVE_SAFE);",
+        "  }",
+        "",
+        "  if (speed > v_constant) speed = v_constant;",
+        "  if (speed == 0) {",
+        "    digitalWrite(D13, LOW);",
+        "    digitalWrite(D12, HIGH);",
+        "    Serial.println(\"Collision Avoidance\");",
+        "  }",
+        "",
+        "  lcd.print(\"Adaptive Cruise:\", speed);",
+        "  refreshAll();",
+        "}",
+        "",
+        "// ═══ CONTROL LOOP: STABLE ═══"
+    ];
+
+    layer.innerHTML = `
+        <div class="hologram-title">
+            <h2>Adaptive Cruise Control</h2>
+            <div class="holo-sub">Designed & Developed by Amey Thakur</div>
+            <div class="holo-tip">
+                In vehicle platoons, maintaining a safe following distance is critical.
+                The Constant Time-Gap Policy (CTGP) ensures that as speed increases,
+                the gap between vehicles scales proportionally &mdash; preventing
+                chain-reaction collisions and preserving String Stability across
+                the entire convoy.
+            </div>
+        </div>
+    `;
+
+    layer.classList.add('on');
+    document.body.classList.add('cinematic-active');
+    D.egoCar.classList.add('ego-blueprint');
+    $('road').classList.add('supersonic');
+
+    playPowerUpSound();
+
+    // Stream algorithm into Serial Monitor only
+    let line = 0;
+    const streamInterval = setInterval(() => {
+        if (line < algorithm.length) {
+            log(algorithm[line], 'sys');
+            line++;
+        } else {
+            clearInterval(streamInterval);
+            setTimeout(endSequence, 2500);
+        }
+    }, 150);
+
+    function endSequence() {
+        layer.classList.remove('on');
+        document.body.classList.remove('cinematic-active');
+        D.egoCar.classList.remove('ego-blueprint');
+        $('road').classList.remove('supersonic');
+        setTimeout(() => { layer.innerHTML = ''; }, 500);
     }
 }
 
@@ -292,12 +394,12 @@ function tick() {
         if (S.pins.A0 >= 4) {
             setPin('D13', 1); setPin('D12', 0);
             S.speed += 1;
-            log(`NORMAL MODE: Acceleration active. Speed: ${S.speed} km/h`, 'success');
+            log(`NORMAL MODE: Acceleration active.Speed: ${S.speed} km / h`, 'success');
             setStatus('normal_accel');
         } else if (S.pins.A1 >= 4) {
             if (S.speed > 0) {
                 S.speed -= 1;
-                log(`NORMAL MODE: Braking active. Speed decreased: ${S.speed} km/h`, 'warn');
+                log(`NORMAL MODE: Braking active.Speed decreased: ${S.speed} km / h`, 'warn');
             }
             setStatus('normal_brake');
         }
@@ -316,7 +418,7 @@ function tick() {
         if (S.pins.A0 >= 4) {
             setPin('D13', 1); setPin('D12', 0);
             S.speed += 1;
-            log(`CRUISE MODE: Manual acceleration. Speed: ${S.speed} km/h`, 'success');
+            log(`CRUISE MODE: Manual acceleration.Speed: ${S.speed} km / h`, 'success');
             setStatus('cruise_accel');
         } else if (S.speed === 0 && S.pins.A1 >= 4) {
             if (S.lastLog !== 'CRUISE MODE: Manual brake applied. Vehicle stopped.') {
@@ -325,7 +427,7 @@ function tick() {
             setStatus('cruise_brake');
         } else if (S.pins.A1 >= 4) {
             S.speed -= 1;
-            log(`CRUISE MODE: Manual braking. Speed decreased: ${S.speed} km/h`, 'warn');
+            log(`CRUISE MODE: Manual braking.Speed decreased: ${S.speed} km / h`, 'warn');
             setStatus('cruise_brake');
         } else {
             setStatus('cruise_hold');
@@ -341,13 +443,13 @@ function tick() {
         if (S.distance < 0.3) {
             if (S.speed > 0) {
                 S.speed -= 1;
-                log(`ADAPTIVE WARNING: Dist ${S.distance.toFixed(2)}m | Speed decreased: ${S.speed} km/h`, 'danger');
+                log(`ADAPTIVE WARNING: Dist ${S.distance.toFixed(2)} m | Speed decreased: ${S.speed} km / h`, 'danger');
             }
             setStatus('adaptive_danger');
         } else {
             if (S.speed < S.constant) {
                 S.speed += 1;
-                log(`ADAPTIVE MODE: Path clear | Speed returning to ${S.speed} km/h`, 'success');
+                log(`ADAPTIVE MODE: Path clear | Speed returning to ${S.speed} km / h`, 'success');
             }
             setStatus('adaptive_safe', S.constant + ' km/h');
         }
@@ -421,7 +523,7 @@ D.btnM0.addEventListener('click', () => {
 D.btnM1.addEventListener('click', () => {
     S.pins.A3 = 5; refreshPinBars('A3');
     S.mode = 1;
-    log(`Mode → CRUISE CONTROL (Mode 1) | Maintaining ${S.speed} km/h`, 'sys');
+    log(`Mode → CRUISE CONTROL(Mode 1) | Maintaining ${S.speed} km / h`, 'sys');
     setStatus('cruise_hold');
     tick();
     setTimeout(() => { S.pins.A3 = 0; refreshPinBars(null); }, 250);
@@ -431,7 +533,7 @@ D.btnM2.addEventListener('click', () => {
     S.pins.A4 = 5; refreshPinBars('A4');
     S.constant = S.speed;
     S.mode = 2;
-    log(`Mode → ADAPTIVE CRUISE (Mode 2) | Target: ${S.constant} km/h`, 'sys');
+    log(`Mode → ADAPTIVE CRUISE(Mode 2) | Target: ${S.constant} km / h`, 'sys');
     setStatus('adaptive_safe', S.constant + ' km/h');
     tick();
     setTimeout(() => { S.pins.A4 = 0; refreshPinBars(null); }, 250);
@@ -526,7 +628,7 @@ setInterval(() => {
         S.speed -= 1;
         setPin('D13', 0);
         if (S.speed > 0) {
-            log(`KINETIC DRAG: Speed decreased: ${S.speed} km/h`, 'warn');
+            log(`KINETIC DRAG: Speed decreased: ${S.speed} km / h`, 'warn');
         } else {
             S.speed = 0;
             setPin('D12', 1);
@@ -615,6 +717,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     refreshSensor();
     refreshRoad();
+
+    // Cinematic Trigger
+    const title = document.querySelector('#header h1');
+    if (title) title.addEventListener('click', startCinematic);
 
     // Horn interaction (ACC vehicle only)
     const egoBody = D.egoCar.querySelector('.car-body');

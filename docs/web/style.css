@@ -72,8 +72,13 @@
   --shadow: 0 1px 4px rgba(0, 0, 0, 0.06), 0 2px 12px rgba(0, 0, 0, 0.03);
   --btn-bg: #f8fafc;
   --btn-hover: #e2e8f0;
-  --kbd-bg: rgba(0, 0, 0, 0.05);
   --kbd-text: #94a3b8;
+  --kbd-bg: #1e293b;
+
+  /* Cinematic Extra */
+  --hl-glow: #22d3ee;
+  --hl-text: rgba(34, 211, 238, 0.9);
+  --blueprint-bg: rgba(6, 18, 36, 0.95);
   --car-ego: #3b82f6;
   --car-ego-d: #2563eb;
   --car-ego-glow: rgba(59, 130, 246, 0.3);
@@ -145,6 +150,115 @@ body {
 
 .h-icon {
   font-size: 1.5rem
+}
+
+#header h1 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--text), var(--text2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+#header h1:hover {
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+/* Cinematic Layer */
+#cinematic-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(3, 7, 18, 0.75);
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+
+#cinematic-layer.on {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hologram-title {
+  text-align: center;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 2rem;
+}
+
+.hologram-title h2 {
+  font-size: 3rem;
+  margin: 0;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+}
+
+.hologram-title .holo-sub {
+  font-size: 1.15rem;
+  font-family: 'Play', sans-serif;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hologram-title .holo-tip {
+  max-width: 560px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: #94ecbe;
+  background: rgba(34, 197, 94, 0.08);
+  padding: 14px 22px;
+  border-radius: 8px;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  text-align: center;
+  line-height: 1.65;
+}
+
+body.cinematic-active #main {
+  transition: filter 0.8s;
+}
+
+/* Blueprint State */
+.ego-blueprint .car-body::before {
+  background: transparent !important;
+  border: 2px solid var(--hl-glow) !important;
+  box-shadow: 0 0 25px var(--hl-glow), inset 0 0 15px var(--hl-glow) !important;
+  animation: blueprintPulse 1s infinite alternate !important;
+}
+
+@keyframes blueprintPulse {
+  from {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+.ego-blueprint .headlight {
+  background: var(--hl-glow) !important;
+  box-shadow: 0 0 30px var(--hl-glow) !important;
+}
+
+.supersonic #lane-strip {
+  --road-speed: 0.05s !important;
 }
 
 .h-left h1 {
@@ -1317,30 +1431,82 @@ input[type="range"]::-moz-range-thumb {
 @media(max-width:1024px) {
   body {
     height: auto;
-    overflow: auto
-  }
-
-  #content-row {
-    grid-template-columns: 1fr;
-    overflow: visible
-  }
-
-  #left-col {
-    overflow: visible
-  }
-
-  #serial-col {
-    max-height: 200px
-  }
-}
-
-@media(max-width:640px) {
-  body {
-    height: auto;
     overflow-x: hidden;
     overflow-y: auto;
   }
 
+  #main {
+    padding: .5rem;
+    height: auto;
+    width: 100%;
+  }
+
+  #content-row {
+    grid-template-columns: 1fr;
+    gap: .75rem;
+    padding: 0 .5rem;
+    width: 100%;
+    overflow: visible;
+  }
+
+  #left-col {
+    overflow: visible;
+    gap: .75rem;
+    width: 100%;
+  }
+
+  #road {
+    height: 140px;
+    margin: 0 -0.5rem;
+    width: calc(100% + 1rem);
+  }
+
+  #dist-label {
+    left: 10%;
+    right: 10%;
+    width: 80%;
+  }
+
+  #serial-col {
+    height: 400px;
+    max-height: none;
+  }
+
+  #instruments-top,
+  #instruments-bottom {
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem;
+  }
+
+  .panel {
+    height: auto;
+    min-height: 110px;
+  }
+
+  #info-panel,
+  #hw-panel {
+    height: auto;
+    min-height: 140px;
+  }
+}
+
+@media(max-width:768px) {
+
+  #instruments-top,
+  #instruments-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .h-center {
+    display: none;
+  }
+
+  #road {
+    height: 130px;
+  }
+}
+
+@media(max-width:640px) {
   #header {
     padding: .4rem .75rem;
     flex-direction: column;
@@ -1362,6 +1528,7 @@ input[type="range"]::-moz-range-thumb {
     position: static;
     transform: none;
     order: -1;
+    display: flex;
   }
 
   #status-bar {
@@ -1380,29 +1547,6 @@ input[type="range"]::-moz-range-thumb {
     grid-template-columns: 1fr;
     padding: 0 .4rem;
     gap: .6rem;
-    overflow: visible;
-  }
-
-  #left-col {
-    overflow: visible;
-    gap: .6rem;
-  }
-
-  #instruments-top,
-  #instruments-bottom {
-    grid-template-columns: 1fr;
-    gap: .6rem;
-  }
-
-  .panel {
-    height: auto;
-    min-height: 100px;
-  }
-
-  #info-panel,
-  #hw-panel {
-    height: auto;
-    min-height: 140px;
   }
 
   #mode-row {
@@ -1461,6 +1605,5 @@ input[type="range"]::-moz-range-thumb {
 
   #serial-col {
     height: 300px;
-    max-height: none;
   }
 }
