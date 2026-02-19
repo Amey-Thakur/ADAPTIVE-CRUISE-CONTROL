@@ -143,11 +143,13 @@ ADAPTIVE-CRUISE-CONTROL/
   | **D1, D2** | 2 | Red LED |
   | **R6, R7** | 2 | 10 kΩ Resistor |
 
-  ### Core Control & Visualization
+  ### Main Controller & Display Interface
   
-  | Arduino Uno | LCD Display |
-  | :---: | :---: |
-  | <img src="Source Code/figures/Hardware Components/02 - Arduino Uno.png" width="300"> | <img src="Source Code/figures/Hardware Components/01 - LCD Display.png" width="300"> |
+  **Arduino Uno R3: Technical Pinout & Architecture**  
+  <img src="Source Code/figures/Hardware Components/02 - Arduino Uno.png" width="650" alt="Arduino Uno Technical Diagram">
+
+  **LCD Display (16x2): Pin Configuration & Interface**  
+  <img src="Source Code/figures/Hardware Components/01 - LCD Display.png" width="350" alt="LCD Display Technical Diagram">
 
   ### Sensory & Connectivity
   
