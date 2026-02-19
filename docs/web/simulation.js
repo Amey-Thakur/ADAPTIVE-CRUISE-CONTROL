@@ -111,7 +111,7 @@ function playHorn() {
         const now = ctx.currentTime;
         playTone(440, now, 0.15); // Beep
         playTone(440, now + 0.2, 0.15); // Beep
-        log('Vehicle Horn: Beep Beep! 🔊', 'sys');
+        log('ACC Vehicle Horn: Beep Beep! 🔊', 'sys');
     } catch (e) {
         console.warn('Audio blocked or not supported');
     }
@@ -549,9 +549,8 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshSensor();
     refreshRoad();
 
-    // Horn interaction
+    // Horn interaction (ACC vehicle only)
     D.egoCar.addEventListener('click', playHorn);
-    D.leadCar.addEventListener('click', playHorn);
 
     boot();
 });

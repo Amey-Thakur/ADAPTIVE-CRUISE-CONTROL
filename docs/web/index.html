@@ -107,13 +107,25 @@
         <div class="road-edge bottom"></div>
 
         <!-- Lead Vehicle -->
-        <div id="lead-car" class="car" title="Lead vehicle. Click to horn! 🔊">
+        <div id="lead-car" class="car" title="Lead Vehicle">
           <div class="car-body lead">
-            <svg class="car-svg" viewBox="0 0 100 40">
-              <path class="body-main" d="M10,35 L90,35 L95,25 L85,10 L30,10 L15,25 Z" fill="var(--car-lead)" />
-              <path class="glass" d="M32,12 L83,12 L88,25 L32,25 Z" fill="rgba(255,255,255,0.2)" />
-              <circle class="wheel" cx="25" cy="35" r="5" fill="#222" />
-              <circle class="wheel" cx="75" cy="35" r="5" fill="#222" />
+            <svg class="car-svg" viewBox="0 0 120 45">
+              <defs>
+                <linearGradient id="grad-lead" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color:#9ca3af" />
+                  <stop offset="100%" style="stop-color:#4b5563" />
+                </linearGradient>
+              </defs>
+              <!-- Chassis -->
+              <path d="M5,35 Q5,32 8,32 L112,32 Q115,32 115,35 L115,38 Q115,40 112,40 L8,40 Q5,40 5,38 Z" fill="#222" />
+              <!-- Body -->
+              <path d="M10,32 L15,18 Q18,10 28,10 L85,10 Q95,10 100,20 L112,32 Z" fill="url(#grad-lead)" />
+              <!-- Windows -->
+              <path d="M30,12 L58,12 L58,24 L22,24 Q24,14 30,12 Z" fill="rgba(100,200,255,0.3)" />
+              <path d="M62,12 L85,12 Q92,12 95,20 L102,24 L62,24 Z" fill="rgba(100,200,255,0.2)" />
+              <!-- Wheels -->
+              <circle cx="25" cy="35" r="7" fill="#111" stroke="#333" stroke-width="1.5" />
+              <circle cx="90" cy="35" r="7" fill="#111" stroke="#333" stroke-width="1.5" />
             </svg>
             <div class="tail-light l"></div>
             <div class="tail-light r"></div>
@@ -122,13 +134,27 @@
         </div>
 
         <!-- ACC Vehicle -->
-        <div id="ego-car" class="car" title="Your ACC vehicle. Click to horn! 🔊">
+        <div id="ego-car" class="car" title="ACC Vehicle · Click to Horn 🔊">
           <div class="car-body ego">
-            <svg class="car-svg" viewBox="0 0 100 40">
-              <path class="body-main" d="M10,35 L90,35 L95,25 L85,10 L30,10 L15,25 Z" fill="var(--car-ego)" />
-              <path class="glass" d="M32,12 L83,12 L88,25 L32,25 Z" fill="rgba(255,255,255,0.2)" />
-              <circle class="wheel" cx="25" cy="35" r="5" fill="#222" />
-              <circle class="wheel" cx="75" cy="35" r="5" fill="#222" />
+            <svg class="car-svg" viewBox="0 0 120 45">
+              <defs>
+                <linearGradient id="grad-ego" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color:#60a5fa" />
+                  <stop offset="100%" style="stop-color:#1d4ed8" />
+                </linearGradient>
+              </defs>
+              <!-- Chassis -->
+              <path d="M5,35 Q5,32 8,32 L112,32 Q115,32 115,35 L115,38 Q115,40 112,40 L8,40 Q5,40 5,38 Z" fill="#111" />
+              <!-- Body -->
+              <path d="M8,32 L12,16 Q15,8 30,8 L80,8 Q95,8 105,22 L114,32 Z" fill="url(#grad-ego)" />
+              <!-- Windows -->
+              <path d="M32,10 L56,10 L56,22 L18,22 Q22,12 32,10 Z" fill="rgba(100,220,255,0.4)" />
+              <path d="M60,10 L82,10 Q90,10 95,18 L104,22 L60,22 Z" fill="rgba(100,220,255,0.3)" />
+              <!-- Details -->
+              <path d="M102,25 L110,30" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+              <!-- Wheels -->
+              <circle cx="25" cy="35" r="7" fill="#000" stroke="#333" stroke-width="1.5" />
+              <circle cx="90" cy="35" r="7" fill="#000" stroke="#333" stroke-width="1.5" />
             </svg>
             <div class="headlight l"></div>
             <div class="headlight r"></div>
