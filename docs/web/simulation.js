@@ -616,19 +616,14 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshSensor();
     refreshRoad();
 
-    // Horn interaction (ACC vehicle only) - Moved to car body
-    // D.egoCar.addEventListener('click', playHorn);
-
-    boot();
-});
-
-// Helper for horn interaction
-document.addEventListener('DOMContentLoaded', () => {
-    const body = D.egoCar.querySelector('.car-body');
-    if (body) {
-        body.addEventListener('click', () => {
+    // Horn interaction (ACC vehicle only)
+    const egoBody = D.egoCar.querySelector('.car-body');
+    if (egoBody) {
+        egoBody.addEventListener('click', () => {
             console.log('📡 ACC Horn Activated');
             playHorn();
         });
     }
+
+    boot();
 });
