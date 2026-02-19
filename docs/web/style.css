@@ -301,7 +301,7 @@ body {
 #road {
   position: relative;
   width: 100%;
-  height: 130px;
+  height: 160px;
   background: var(--road-bg);
   overflow: hidden;
 }
@@ -387,18 +387,18 @@ body {
 
 .car-body {
   position: relative;
-  width: 80px;
-  height: 32px
+  width: 105px;
+  height: 42px
 }
 
 .car-body::before {
   content: '';
   position: absolute;
-  bottom: 4px;
-  left: 4px;
-  right: 4px;
-  height: 16px;
-  border-radius: 4px 4px 3px 3px;
+  bottom: 5px;
+  left: 5px;
+  right: 5px;
+  height: 22px;
+  border-radius: 5px 5px 4px 4px;
   z-index: 1;
 }
 
@@ -415,11 +415,11 @@ body {
 
 .car-top {
   position: absolute;
-  bottom: 16px;
+  bottom: 22px;
   left: 22%;
   width: 56%;
-  height: 14px;
-  border-radius: 9px 9px 0 0;
+  height: 18px;
+  border-radius: 12px 12px 0 0;
   z-index: 2
 }
 
@@ -437,12 +437,12 @@ body {
 
 .car-window {
   position: absolute;
-  bottom: 18px;
+  bottom: 24px;
   left: 26%;
   width: 22%;
-  height: 9px;
+  height: 12px;
   background: rgba(148, 200, 255, .2);
-  border-radius: 5px 3px 0 0;
+  border-radius: 6px 4px 0 0;
   z-index: 3;
   border: 1px solid rgba(148, 200, 255, .1);
   border-bottom: none
@@ -451,12 +451,12 @@ body {
 .car-body::after {
   content: '';
   position: absolute;
-  bottom: 18px;
+  bottom: 24px;
   left: 52%;
   width: 20%;
-  height: 9px;
+  height: 12px;
   background: rgba(148, 200, 255, .15);
-  border-radius: 3px 5px 0 0;
+  border-radius: 4px 6px 0 0;
   z-index: 3;
   border: 1px solid rgba(148, 200, 255, .08);
   border-bottom: none
@@ -465,13 +465,13 @@ body {
 .car-wheel {
   position: absolute;
   bottom: 0;
-  width: 11px;
-  height: 11px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: radial-gradient(circle at 40% 40%, #3a3a4a, #111);
   border: 2px solid #2a2a3a;
   z-index: 4;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .4);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .4);
 }
 
 .car-wheel::after {
@@ -496,9 +496,9 @@ body {
 
 .tail-light {
   position: absolute;
-  bottom: 9px;
-  width: 5px;
-  height: 8px;
+  bottom: 12px;
+  width: 6px;
+  height: 10px;
   border-radius: 2px;
   background: #4a2020;
   z-index: 4;
@@ -506,11 +506,11 @@ body {
 }
 
 .tail-light.l {
-  left: 5px
+  left: 6px
 }
 
 .tail-light.r {
-  right: 5px
+  right: 6px
 }
 
 .tail-light.on {
@@ -520,8 +520,8 @@ body {
 
 .headlight {
   position: absolute;
-  width: 5px;
-  height: 6px;
+  width: 6px;
+  height: 8px;
   border-radius: 2px;
   background: rgba(255, 253, 220, .15);
   z-index: 4;
@@ -529,13 +529,13 @@ body {
 }
 
 .headlight.l {
-  right: 4px;
-  bottom: 12px
+  right: 5px;
+  bottom: 16px
 }
 
 .headlight.r {
-  right: 4px;
-  bottom: 6px
+  right: 5px;
+  bottom: 8px
 }
 
 .headlight.on {
@@ -555,14 +555,14 @@ body {
 
 .sensor-cone {
   position: absolute;
-  right: -5px;
+  right: -8px;
   top: 50%;
   transform: translateY(-50%);
   width: 0;
   height: 0;
-  border-top: 14px solid transparent;
-  border-bottom: 14px solid transparent;
-  border-left: 70px solid rgba(6, 182, 212, .06);
+  border-top: 18px solid transparent;
+  border-bottom: 18px solid transparent;
+  border-left: 90px solid rgba(6, 182, 212, .06);
   opacity: 0;
   z-index: 0;
   transition: opacity .3s;
