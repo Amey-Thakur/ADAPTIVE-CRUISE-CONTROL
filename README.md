@@ -145,30 +145,33 @@ ADAPTIVE-CRUISE-CONTROL/
 
   ### Main Controller & Display Interface
   
-  **Arduino Uno R3: Technical Pinout & Architecture**  <br>
+  **Arduino Uno R3: Technical Pinout & Architecture**  <br><br>
   <img src="Source Code/figures/Hardware Components/02 - Arduino Uno.png" width="650" alt="Arduino Uno Technical Diagram">
 
-  **LCD Display (16x2): Pin Configuration & Interface**  <br>
+  **LCD Display (16x2): Pin Configuration & Interface**  <br><br>
   <img src="Source Code/figures/Hardware Components/01 - LCD Display.png" width="350" alt="LCD Display Technical Diagram">
 
   ### Sensory & Connectivity
   
-  | Ultrasonic Sensor | Jumper Wires |
-  | :---: | :---: |
-  | <img src="Source Code/figures/Hardware Components/05 - Ultrasonic Sensor.png" width="300"> | <img src="Source Code/figures/Hardware Components/07 - Jumper Wires.jpg" width="300"> |
+  **Ultrasonic Sensor (HC-SR04): Wave Propagation & Pinout**  <br><br>
+  <img src="Source Code/figures/Hardware Components/05 - Ultrasonic Sensor.png" width="600" alt="Ultrasonic Sensor Diagram">
+
+  **Jumper Wires: Connectivity Standards**  <br><br>
+  <img src="Source Code/figures/Hardware Components/07 - Jumper Wires.jpg" width="400" alt="Jumper Wires">
 
   ### User Interface & Input Controls
-  
+  <br>
+
   | Potentiometer | Push Button | Digital Input |
   | :---: | :---: | :---: |
   | <img src="Source Code/figures/Hardware Components/09 - Potentiometer.png" width="200"> | <img src="Source Code/figures/Hardware Components/03 - Push Button.jpg" width="200"> | <img src="Source Code/figures/Hardware Components/04 - Digital Input.jpg" width="200"> |
 
   ### Technical Reference Standards
   
-  **Resistor Color Code Diagram**  <br>
+  **Resistor Color Code Diagram**  <br><br>
   <img src="Source Code/figures/Hardware Components/06 - Resistor.png" width="600" alt="Resistor Diagram">
 
-  **Breadboard Technical Layout**  <br>
+  **Breadboard Technical Layout**  <br><br>
   <img src="Source Code/figures/Hardware Components/08 - Breadboard.png" width="600" alt="Breadboard Layout">
 
 </div>
