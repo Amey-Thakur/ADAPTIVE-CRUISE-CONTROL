@@ -364,7 +364,7 @@ Special thanks to the **mentors** and **peers** whose encouragement, discussions
 
   <br>
 
-  🔬 **[MATLAB Repository](https://github.com/Amey-Thakur/COMPUTATIONAL-METHODS-AND-MODELING-FOR-ENGINEERING-APPLICATIONS)** &nbsp;·&nbsp; 🏎️ **[Adaptive Cruise Control](#adaptive-cruise-control)**
+  🔬 **[MATLAB Repository](https://github.com/Amey-Thakur/COMPUTATIONAL-METHODS-AND-MODELING-FOR-ENGINEERING-APPLICATIONS)** &nbsp;·&nbsp; 🚘 **[Adaptive Cruise Control](#adaptive-cruise-control)**
 
   ---
 
