@@ -56,8 +56,11 @@ The **Adaptive Cruise Control (ACC)** system is a sophisticated embedded control
 | 1 | [Technical Specification](docs/SPECIFICATION.md) | Technical architecture and control logic specification |
 | 2 | [ACC Algorithm](Source%20Code/Adaptive%20Cruise%20Control%20Algorithm.txt) | Step-by-step logic for speed and proximity regulation |
 | 3 | [Source Code](Source%20Code/Adaptive%20Cruise%20Control.m) | Primary MATLAB implementation script |
-| 4 | [MATLAB Repository](https://github.com/Amey-Thakur/COMPUTATIONAL-METHODS-AND-MODELING-FOR-ENGINEERING-APPLICATIONS) | Academic repository for Computational Methods and Modeling |
-| 5 | [Engineering Repository](https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING) | Master repository for MEng Computer Engineering |
+| 4 | [Working Model Gallery](Source%20Code/figures/Arduino%20Working%20Model/) | Physical hardware implementation and operational states |
+| 5 | [Hardware Gallery](Source%20Code/figures/Hardware%20Components/) | Visual documentation of standalone project components |
+| 6 | [Simulation Gallery](Source%20Code/figures/Tinkercad%20Simulation/) | Virtual prototyping results and circuit logic views |
+| 7 | [MATLAB Repository](https://github.com/Amey-Thakur/COMPUTATIONAL-METHODS-AND-MODELING-FOR-ENGINEERING-APPLICATIONS) | Academic repository for Computational Methods and Modeling |
+| 8 | [Engineering Repository](https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING) | Master repository for MEng Computer Engineering |
 
 ---
 
