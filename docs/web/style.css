@@ -1207,6 +1207,7 @@ input[type="range"]::-moz-range-thumb {
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
+  height: 100%;
   min-height: 0;
   transition: background .3s, border-color .3s;
 }
