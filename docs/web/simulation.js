@@ -144,13 +144,19 @@ function refreshHW() {
         (sensor ? ' on' : '') +
         (sensor && danger ? ' danger' : '');
 
-    // Headlights
-    const hl = D.egoCar.querySelectorAll('.headlight');
-    hl.forEach(h => h.classList.toggle('on', S.D13));
+    // Headlights (ACC follows D13, Lead is constant)
+    const egoHL = D.egoCar.querySelectorAll('.headlight');
+    egoHL.forEach(h => h.classList.toggle('on', S.D13));
 
-    // Tail lights on lead (only when danger)
-    const tl = D.leadCar.querySelectorAll('.tail-light');
-    tl.forEach(t => t.classList.toggle('on', danger && sensor));
+    const leadHL = D.leadCar.querySelectorAll('.headlight');
+    leadHL.forEach(h => h.classList.add('on'));
+
+    // Tail lights (ACC follows D12, Lead follows proximity sensor)
+    const egoTL = D.egoCar.querySelectorAll('.tail-light');
+    egoTL.forEach(t => t.classList.toggle('on', S.D12));
+
+    const leadTL = D.leadCar.querySelectorAll('.tail-light');
+    leadTL.forEach(t => t.classList.toggle('on', danger));
 
     // Distance label
     D.distLabel.className = sensor ? 'show' : '';

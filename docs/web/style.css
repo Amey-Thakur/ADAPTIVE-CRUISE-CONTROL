@@ -387,19 +387,19 @@ body {
 
 .car-body {
   position: relative;
-  width: 105px;
-  height: 42px;
+  width: 125px;
+  height: 50px;
   cursor: pointer;
 }
 
 .car-body::before {
   content: '';
   position: absolute;
-  bottom: 5px;
-  left: 5px;
-  right: 5px;
-  height: 22px;
-  border-radius: 5px 5px 4px 4px;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  height: 26px;
+  border-radius: 7px 7px 6px 6px;
   z-index: 1;
 }
 
@@ -416,63 +416,63 @@ body {
 
 .car-top {
   position: absolute;
-  bottom: 22px;
+  bottom: 26px;
   left: 22%;
   width: 56%;
-  height: 18px;
-  border-radius: 12px 12px 0 0;
+  height: 22px;
+  border-radius: 16px 16px 0 0;
   z-index: 2
 }
 
 .lead .car-top {
   background: linear-gradient(180deg, #7d8694, var(--car-lead));
-  border: 1px solid rgba(255, 255, 255, .05);
+  border: 1px solid rgba(255, 255, 255, .1);
   border-bottom: none
 }
 
 .ego .car-top {
   background: linear-gradient(180deg, #93c5fd, var(--car-ego));
-  border: 1px solid rgba(255, 255, 255, .12);
+  border: 1px solid rgba(255, 255, 255, .18);
   border-bottom: none
 }
 
 .car-window {
   position: absolute;
-  bottom: 24px;
+  bottom: 30px;
   left: 26%;
   width: 22%;
-  height: 12px;
-  background: rgba(148, 200, 255, .2);
-  border-radius: 6px 4px 0 0;
+  height: 15px;
+  background: rgba(148, 200, 255, .28);
+  border-radius: 8px 6px 0 0;
   z-index: 3;
-  border: 1px solid rgba(148, 200, 255, .1);
+  border: 1px solid rgba(148, 200, 255, .2);
   border-bottom: none
 }
 
 .car-body::after {
   content: '';
   position: absolute;
-  bottom: 24px;
+  bottom: 30px;
   left: 52%;
   width: 20%;
-  height: 12px;
-  background: rgba(148, 200, 255, .15);
-  border-radius: 4px 6px 0 0;
+  height: 15px;
+  background: rgba(148, 200, 255, .22);
+  border-radius: 6px 8px 0 0;
   z-index: 3;
-  border: 1px solid rgba(148, 200, 255, .08);
+  border: 1px solid rgba(148, 200, 255, .15);
   border-bottom: none
 }
 
 .car-wheel {
   position: absolute;
   bottom: 0;
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: radial-gradient(circle at 40% 40%, #3a3a4a, #111);
   border: 2px solid #2a2a3a;
   z-index: 4;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, .4);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .6);
 }
 
 .car-wheel::after {
@@ -481,10 +481,10 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 3px;
-  height: 3px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: #555
+  background: #777
 }
 
 
@@ -500,51 +500,50 @@ body {
 
 .tail-light {
   position: absolute;
-  bottom: 12px;
   width: 6px;
   height: 10px;
   border-radius: 2px;
-  background: #4a2020;
+  background: #3a1010;
   z-index: 4;
-  transition: all .2s
+  transition: all .24s;
+  left: 2px;
 }
 
 .tail-light.l {
-  left: 6px
+  bottom: 20px;
 }
 
 .tail-light.r {
-  right: 6px
+  bottom: 10px;
 }
 
 .tail-light.on {
-  background: var(--red);
-  box-shadow: 0 0 8px var(--red), 0 0 18px rgba(239, 68, 68, .35)
+  background: #ff3c3c;
+  box-shadow: 0 0 10px #ff3c3c, 0 0 22px rgba(255, 60, 60, .4)
 }
 
 .headlight {
   position: absolute;
-  width: 6px;
-  height: 8px;
+  width: 8px;
+  height: 10px;
   border-radius: 2px;
-  background: rgba(255, 253, 220, .15);
+  background: rgba(255, 253, 220, .08);
   z-index: 4;
-  transition: all .2s
+  transition: all .24s;
+  right: 2px;
 }
 
 .headlight.l {
-  right: 5px;
-  bottom: 16px
+  bottom: 21px;
 }
 
 .headlight.r {
-  right: 5px;
-  bottom: 8px
+  bottom: 12px;
 }
 
 .headlight.on {
-  background: #fffde0;
-  box-shadow: 0 0 6px #fffde0, 0 0 14px rgba(255, 253, 224, .3)
+  background: #fffef0;
+  box-shadow: 0 0 8px #fffef0, 0 0 18px rgba(255, 254, 240, .4)
 }
 
 .car-tag {
