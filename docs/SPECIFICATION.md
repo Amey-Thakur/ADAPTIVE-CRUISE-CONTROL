@@ -51,5 +51,17 @@ The program employs a hybrid input model interfacing physical hardware with real
 - **State Variables**: Scalar doubles representing `speed`, `distance`, and `mode` ensuring precision in telemetry.
 - **Input Buffers**: Volatile memory structures for voltage readings ensure the system remains responsive to rapid driver intervention.
 
+## 6. Web Simulation Architecture (PWA)
+The system includes a high-fidelity web-based simulation engine designed to replicate the MATLAB/Arduino control logic within a hardware-agnostic, browser-based environment.
+
+### Core Web Technologies:
+- **Engine Logic (`simulation.js`)**: A deterministic JavaScript port of the original MATLAB script. It manages simulated I/O states, PWM-to-Velocity mappings, and HC-SR04 distance calculations.
+- **Design System (`style.css`)**: Implementation of a high-contrast engineering dashboard utilizing CSS Grid/Flexbox for cross-platform responsiveness and dynamic theme management (Dark/Light).
+- **Service Worker (`sw.js`)**: Implements a **Cache-First** strategy for offline operational capability, ensuring 100% availability of the simulation engine without persistent network dependency.
+- **Web App Manifest (`manifest.json`)**: Configures the PWA's metadata, providing a "standalone" application experience with custom branding and orientation locking.
+
+### Mathematical Fidelity:
+The web port maintains a 1.0 parity with the MATLAB implementation's logic, specifically the **0.3m safety threshold** and simulated kinetic drag coefficients. This allows for rigorous logic validation without access to physical hardware components.
+
 ---
-*Technical Specification | MEng Computer Engineering Project | Version 1.0*
+*Technical Specification | MEng Computer Engineering Project | Version 1.1*
