@@ -89,7 +89,7 @@ The **Adaptive Cruise Control (ACC)** system is a sophisticated embedded control
 - **Numerical Computing**: MATLAB (R2023a+) & Control System Toolbox
 - **Embedded Controller**: Arduino Uno R3 (ATmega328P Architecture)
 - **Hardware Abstraction**: MATLAB Support Package for Arduino Hardware
-- **Peripheral Peripherals**: HC-SR04 Ultrasonic Sensor, 16x2 I2C/Parallel LCD Display
+- **Hardware Peripherals**: HC-SR04 Ultrasonic Sensor, 16x2 I2C/Parallel LCD Display
 - **Simulation Web Engine**: Vanilla JavaScript (ES6+), CSS3 Flexbox/Grid, and Web Audio API
 - **Deployment & Architecture**: Progressive Web App (PWA) with Service Worker offline caching
 - **Prototyping Environment**: Tinkercad for electrical schematic validation and transient logic modeling
