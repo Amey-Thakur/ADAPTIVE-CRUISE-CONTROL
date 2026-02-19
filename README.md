@@ -155,7 +155,8 @@ ADAPTIVE-CRUISE-CONTROL/
   <img src="Source Code/figures/Hardware Components/01 - LCD Display.png" width="400" alt="LCD Display Technical Diagram">
 
   ### Sensory & Connectivity
-  <br>
+  *Environmental perception via ultrasonic telemetry and modular circuit interconnects.*
+  <br><br>
 
   | Ultrasonic Sensor (HC-SR04) | Jumper Wires: Connectivity |
   | :---: | :---: |
@@ -164,7 +165,8 @@ ADAPTIVE-CRUISE-CONTROL/
   | <img src="Source Code/figures/Hardware Components/06 - Resistor.png" width="400" alt="Resistor"> | <img src="Source Code/figures/Hardware Components/08 - Breadboard.png" width="400" alt="Breadboard"> |
 
   ### User Interface & Input Controls
-  <br>
+  *Tactile actuators and variable resistance inputs for manual system overrides.*
+  <br><br>
 
   | Potentiometer Control | Push Button | Digital Input |
   | :---: | :---: | :---: |
