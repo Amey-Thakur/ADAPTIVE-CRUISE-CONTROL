@@ -20,7 +20,7 @@
 
 <div align="center">
 
-  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [Hardware Components](#hardware-components) &nbsp;·&nbsp; [Tinkercad Simulation](#tinkercad-simulation) &nbsp;·&nbsp; [Working Model](#arduino-working-model) &nbsp;·&nbsp; [Usage Guidelines](#usage-guidelines) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
+  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [Hardware Components](#hardware-components) &nbsp;·&nbsp; [Tinkercad Simulation](#tinkercad-simulation) &nbsp;·&nbsp; [Working Model](#arduino-working-model) &nbsp;·&nbsp; [Development Roadmap](#development-roadmap) &nbsp;·&nbsp; [Usage Guidelines](#usage-guidelines) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
 
 </div>
 
@@ -126,10 +126,12 @@ ADAPTIVE-CRUISE-CONTROL/
 
 <!-- HARDWARE GALLERY -->
 ## Hardware Components
+*Comprehensive inventory of the physical and electronic assets utilized in the ACC architecture.*
 
 <div align="center">
 
   ### Bill of Materials: Component Table
+  *Quantified technical breakdown of active and passive components.*
   
   | Name | Quantity | Component |
   | :--- | :---: | :--- |
@@ -144,6 +146,7 @@ ADAPTIVE-CRUISE-CONTROL/
   | **R6, R7** | 2 | 10 kΩ Resistor |
 
   ### Main Controller & Display Interface
+  *Core processing unit and the primary visual monitoring dashboard.*
   
   **Arduino Uno R3: Technical Pinout & Architecture**  <br><br>
   <img src="Source Code/figures/Hardware Components/02 - Arduino Uno.png" width="650" alt="Arduino Uno Technical Diagram">
@@ -227,16 +230,19 @@ ADAPTIVE-CRUISE-CONTROL/
 ---
 
 <!-- LOGISTICS -->
-## Project Logistics
+## Development Roadmap
+*Strategic timeline and logic execution architecture from project inception to final realization.*
 
 <div align="center">
 
   ### Project Flowchart
-  <br>
+  *Algorithmic sequence for sensory feedback, speed regulation, and adaptive braking.*
+  <br><br>
   <img src="Source Code/figures/Adaptive Cruise Control Flowchart.png" width="90%" alt="ACC Flowchart">
 
-  ### Gantt Chart
-  <br>
+  ### Project Gantt Chart
+  *Phased development lifecycle including hardware selection, circuit design, and code optimization.*
+  <br><br>
   <img src="Source Code/figures/Project Gantt Chart.jpg" width="90%" alt="Gantt Chart">
 
 </div>
@@ -301,7 +307,7 @@ Special thanks to the engineering project partners and peers for their continuou
 
   [↑ Back to Top](#adaptive-cruise-control)
 
-  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [Hardware Components](#hardware-components) &nbsp;·&nbsp; [Tinkercad Simulation](#tinkercad-simulation) &nbsp;·&nbsp; [Working Model](#arduino-working-model) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
+  [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [Hardware Components](#hardware-components) &nbsp;·&nbsp; [Tinkercad Simulation](#tinkercad-simulation) &nbsp;·&nbsp; [Working Model](#arduino-working-model) &nbsp;·&nbsp; [Roadmap](#development-roadmap) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
 
   <br>
 
