@@ -1,8 +1,8 @@
 /* =========================================================================================
-   ADAPTIVE CRUISE CONTROL — SIMULATION ENGINE v3
+   ADAPTIVE CRUISE CONTROL — SIMULATION ENGINE v4
 
    Faithful JS port of the MATLAB ACC algorithm (Adaptive Cruise Control.m)
-   2-Lane road with lane changing + overtaking
+   2-Lane road · Lane changing · Overtaking · Moving traffic
 
    MODES: 0 → Normal | 1 → Cruise Control | 2 → Adaptive Cruise
    PINS:  A0 Accel | A1 Brake | A2 Cancel | A3 Cruise | A4 ACC
@@ -23,6 +23,8 @@ const S = {
     D12: false,        // Red LED
     running: false,
     lane: 0,           // 0 = main (bottom), 1 = overtake (top)
+    trafficPos: 55,    // Traffic car position % (moves independently)
+    trafficSpeed: 15,  // Traffic car's own speed (km/h) for relative motion
     pins: { A0: 0, A1: 0, A2: 0, A3: 0, A4: 0 },
 };
 
@@ -123,12 +125,12 @@ function refreshHW() {
     const hl = D.egoCar.querySelectorAll('.headlight');
     hl.forEach(h => h.classList.toggle('on', S.D13));
 
-    // Tail lights on lead car (only when in same lane and danger)
+    // Tail lights on lead (only when same lane + danger)
     const tl = D.leadCar.querySelectorAll('.tail-light');
-    const sameLane = S.lane === 0; // lead is always in lane 0
+    const sameLane = S.lane === 0;
     tl.forEach(t => t.classList.toggle('on', danger && sensor && sameLane));
 
-    // Distance label visibility
+    // Distance label
     D.distLabel.className = sensor ? 'show' : '';
 }
 
@@ -161,9 +163,8 @@ function refreshGauge() {
 
 
 // ─── DISTANCE LOGIC ──────────────────────────────────────────────────────────
-// When ACC car is in a DIFFERENT lane from lead, distance is "clear" (1.00m)
 function getEffectiveDistance() {
-    if (S.lane === 0) return S.distance;  // same lane as lead: real distance
+    if (S.lane === 0) return S.distance;  // same lane as lead
     return 1.00;                           // different lane: path clear
 }
 
@@ -181,12 +182,15 @@ function refreshSensor() {
 
 // ─── ROAD ────────────────────────────────────────────────────────────────────
 function refreshRoad() {
-    // Lead car position based on distance (lead is always in bottom lane)
+    // Lead car position based on distance (always bottom lane)
     const pos = 42 + (S.distance * 38);
     D.leadCar.style.left = pos + '%';
 
     // Ego car lane
     D.egoCar.className = 'car ' + (S.lane === 1 ? 'lane-top' : 'lane-bottom');
+
+    // Traffic car position
+    D.trafficCar.style.left = S.trafficPos + '%';
 
     // Road animation speed
     const dashes = document.querySelectorAll('.dash');
@@ -198,6 +202,33 @@ function refreshRoad() {
             d.style.animationPlayState = 'paused';
         }
     });
+}
+
+
+// ─── TRAFFIC CAR MOVEMENT ────────────────────────────────────────────────────
+// Traffic car moves relative to ego speed. When ego is faster, traffic
+// appears to move backward (left). Wraps around when off-screen.
+function tickTraffic() {
+    if (!S.running) return;
+    if (S.speed === 0) return; // no relative motion when stationary
+
+    // Relative speed: negative = traffic recedes (ego faster), positive = approaches
+    const relativeSpeed = S.trafficSpeed - S.speed;
+    // Convert to position delta: scale so movement is visible
+    const delta = relativeSpeed * 0.03;
+
+    S.trafficPos += delta;
+
+    // Wrap around: goes off left → reappear from right
+    if (S.trafficPos < -15) {
+        S.trafficPos = 105;
+    }
+    // Wrap around: goes off right → reappear from left
+    if (S.trafficPos > 105) {
+        S.trafficPos = -15;
+    }
+
+    D.trafficCar.style.left = S.trafficPos + '%';
 }
 
 
@@ -248,11 +279,9 @@ function refreshTelemetry() {
     D.infoCode.textContent = S.mode;
     D.infoTarget.textContent = S.mode === 2 ? S.constant : '—';
 
-    // Mode badge
     D.modeBadge.textContent = MODE_NAMES[S.mode] + ' Mode';
     D.modeBadge.className = 'mode-badge ' + MODE_CLASSES[S.mode];
 
-    // Mode buttons
     [D.btnM0, D.btnM1, D.btnM2].forEach((b, i) => {
         b.className = 'btn btn-mode' + (S.mode === i ? ' active ' + MODE_BTN_CLASSES[i] : '');
     });
@@ -310,7 +339,7 @@ function tick() {
         setPin('D13', 1); setPin('D12', 0);
 
         if (S.lane === 1) {
-            // In overtake lane — path is always clear
+            // Overtake lane — path always clear
             log(`OVERTAKE LANE: Path clear`, 'success');
             S.speed += 1;
             setStatus('adaptive_overtake');
@@ -484,11 +513,11 @@ document.addEventListener('keydown', e => {
             break;
         case 'q':
             e.preventDefault();
-            changeLane(1); // overtake lane
+            changeLane(1);
             break;
         case 'e':
             e.preventDefault();
-            changeLane(0); // main lane
+            changeLane(0);
             break;
         case '1': D.btnM0.click(); break;
         case '2': D.btnM1.click(); break;
@@ -533,6 +562,15 @@ setInterval(() => {
 }, 500);
 
 
+// ─── TRAFFIC CAR ANIMATION (60fps loop) ──────────────────────────────────────
+// The traffic car moves continuously based on relative speed difference.
+// When the ego car is faster, traffic appears to scroll left (overtake effect).
+// When the ego car is slower, traffic appears to scroll right (being passed).
+setInterval(() => {
+    tickTraffic();
+}, 50);
+
+
 // ─── THEME TOGGLE ────────────────────────────────────────────────────────────
 D.themeToggle.addEventListener('click', toggleTheme);
 
@@ -564,7 +602,8 @@ function boot() {
         S.mode = 0;
         lcd('Vehicle Speed:', '0');
         log('System ready. Entering control loop.', 'success');
-        log('Keys: ↑/W Accel · ↓/S Brake · ←/A Closer · →/D Farther · Q/E Lane · 1/2/3 Mode', 'info');
+        log('Keys: ↑/W Accel · ↓/S Brake · ←/A Closer · →/D Farther', 'info');
+        log('Keys: Q Overtake Lane · E Main Lane · 1/2/3 Mode', 'info');
         setStatus('normal_idle');
         refreshAll();
     }, 5500);

@@ -1,7 +1,7 @@
 /* =========================================================================================
-   ADAPTIVE CRUISE CONTROL — v5
+   ADAPTIVE CRUISE CONTROL — v6
    2 Lanes · 3 Cars · Lane Changing · Overtaking
-   Left panels fill height · Right scrollable serial
+   Readable panels · Meaningful tooltips · Moving traffic
    ========================================================================================= */
 
 /* ── DARK THEME ── */
@@ -237,7 +237,7 @@ body {
   padding: .35rem 1.5rem;
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
-  font-size: .65rem;
+  font-size: .68rem;
   color: var(--text2);
   flex-shrink: 0;
   transition: background .3s, border-color .3s;
@@ -306,7 +306,7 @@ body {
 #road {
   position: relative;
   width: 100%;
-  height: 160px;
+  height: 155px;
   background: var(--road-bg);
   overflow: hidden;
 }
@@ -320,7 +320,6 @@ body {
   z-index: 1;
 }
 
-/* Road edges */
 .road-edge {
   position: absolute;
   left: 0;
@@ -341,7 +340,6 @@ body {
   box-shadow: 0 0 8px rgba(217, 119, 6, .3)
 }
 
-/* Center lane divider */
 .lane-markers.center-lane {
   position: absolute;
   top: 50%;
@@ -374,11 +372,10 @@ body {
   }
 }
 
-/* Lane labels */
 .lane-label {
   position: absolute;
   left: 6px;
-  font-size: .36rem;
+  font-size: .38rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
@@ -395,7 +392,7 @@ body {
   bottom: 16px
 }
 
-/* ── Cars ── */
+/* Cars */
 .car {
   position: absolute;
   z-index: 5;
@@ -408,7 +405,7 @@ body {
 }
 
 .car.lane-bottom {
-  top: 60%
+  top: 58%
 }
 
 #lead-car {
@@ -425,8 +422,8 @@ body {
 
 .car-body {
   position: relative;
-  width: 90px;
-  height: 36px
+  width: 88px;
+  height: 35px
 }
 
 .car-body::before {
@@ -435,7 +432,7 @@ body {
   bottom: 4px;
   left: 4px;
   right: 4px;
-  height: 18px;
+  height: 17px;
   border-radius: 4px 4px 3px 3px;
   z-index: 1;
 }
@@ -458,10 +455,10 @@ body {
 
 .car-top {
   position: absolute;
-  bottom: 18px;
+  bottom: 17px;
   left: 22%;
   width: 56%;
-  height: 16px;
+  height: 15px;
   border-radius: 9px 9px 0 0;
   z-index: 2
 }
@@ -486,10 +483,10 @@ body {
 
 .car-window {
   position: absolute;
-  bottom: 20px;
+  bottom: 19px;
   left: 26%;
   width: 22%;
-  height: 11px;
+  height: 10px;
   background: rgba(148, 200, 255, .2);
   border-radius: 5px 3px 0 0;
   z-index: 3;
@@ -500,10 +497,10 @@ body {
 .car-body::after {
   content: '';
   position: absolute;
-  bottom: 20px;
+  bottom: 19px;
   left: 52%;
   width: 20%;
-  height: 11px;
+  height: 10px;
   background: rgba(148, 200, 255, .15);
   border-radius: 3px 5px 0 0;
   z-index: 3;
@@ -514,8 +511,8 @@ body {
 .car-wheel {
   position: absolute;
   bottom: 0;
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: radial-gradient(circle at 40% 40%, #3a3a4a, #111);
   border: 2px solid #2a2a3a;
@@ -595,7 +592,7 @@ body {
 .car-tag {
   display: block;
   margin-top: 1px;
-  font-size: .42rem;
+  font-size: .44rem;
   color: var(--road-dash);
   text-transform: uppercase;
   letter-spacing: .1em;
@@ -638,7 +635,6 @@ body {
   border-left-color: rgba(239, 68, 68, .1)
 }
 
-/* Distance label */
 #dist-label {
   position: absolute;
   top: 8px;
@@ -672,7 +668,7 @@ body {
   background: rgba(6, 182, 212, .12);
   color: var(--cyan);
   font-family: 'JetBrains Mono', monospace;
-  font-size: .52rem;
+  font-size: .55rem;
   font-weight: 600;
   padding: 1px 7px;
   border-radius: 3px;
@@ -692,7 +688,7 @@ body {
   overflow: hidden;
 }
 
-/* Left Column — fills height, no blank space */
+/* Left Column — fills height */
 #left-col {
   display: flex;
   flex-direction: column;
@@ -721,7 +717,7 @@ body {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: .45rem .55rem;
+  padding: .5rem .65rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
@@ -734,12 +730,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: .25rem;
+  margin-bottom: .3rem;
   flex-shrink: 0
 }
 
 .panel-title {
-  font-size: .48rem;
+  font-size: .55rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .1em;
@@ -748,7 +744,7 @@ body {
 
 .panel-pin {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .42rem;
+  font-size: .48rem;
   color: var(--text4)
 }
 
@@ -757,33 +753,33 @@ body {
   font-weight: 600
 }
 
-/* LCD */
+/* ── LCD — READABLE ── */
 #lcd {
   background: var(--lcd-bg);
-  border-radius: 4px;
-  padding: 5px 8px;
+  border-radius: 5px;
+  padding: 8px 12px;
   box-shadow: inset 0 0 20px rgba(57, 255, 20, .05);
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 0
+  min-height: 0;
 }
 
 .lcd-line {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .72rem;
+  font-size: .92rem;
   font-weight: 700;
   color: var(--lcd-text);
   text-shadow: 0 0 6px var(--lcd-glow), 0 0 14px var(--lcd-glow);
   letter-spacing: .1em;
   white-space: nowrap;
   overflow: hidden;
-  min-height: 1.1em;
-  line-height: 1.2;
+  min-height: 1.3em;
+  line-height: 1.35;
 }
 
-/* Gauge */
+/* ── Gauge ── */
 #gauge {
   display: flex;
   justify-content: center;
@@ -794,56 +790,56 @@ body {
 
 #gauge-svg {
   width: 100%;
-  max-width: 100px
+  max-width: 110px
 }
 
 .gauge-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
   fill: var(--text)
 }
 
 .gauge-unit {
   font-family: 'Inter', sans-serif;
-  font-size: 8px;
+  font-size: 9px;
   fill: var(--text3);
   font-weight: 500
 }
 
-/* Info Grid */
+/* ── Telemetry — READABLE ── */
 #info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: .2rem;
+  gap: .25rem;
   flex: 1;
   min-height: 0
 }
 
 .info-cell {
   background: var(--bg3);
-  border-radius: 4px;
-  padding: .2rem .35rem;
+  border-radius: 5px;
+  padding: .3rem .4rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 0
+  min-height: 0;
 }
 
 .info-label {
   display: block;
-  font-size: .38rem;
+  font-size: .48rem;
   color: var(--text4);
   text-transform: uppercase;
   letter-spacing: .08em;
   font-weight: 600;
-  margin-bottom: 1px
+  margin-bottom: 2px;
 }
 
 .info-val {
   display: block;
-  font-size: .68rem;
+  font-size: .82rem;
   font-weight: 700;
   color: var(--text)
 }
@@ -852,12 +848,12 @@ body {
   font-family: 'JetBrains Mono', monospace
 }
 
-/* HW Panel */
+/* ── Arduino HW — READABLE ── */
 #hw-grid {
   display: flex;
-  gap: .3rem;
+  gap: .4rem;
   justify-content: center;
-  margin-bottom: .25rem;
+  margin-bottom: .35rem;
   flex-wrap: wrap
 }
 
@@ -865,24 +861,25 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  min-width: 30px
+  gap: 3px;
+  min-width: 40px
 }
 
 .led-pair span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .34rem;
+  font-size: .4rem;
   color: var(--text4);
-  text-transform: uppercase
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .hw-led {
-  width: 11px;
-  height: 11px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: var(--bg3);
   border: 1px solid var(--border);
-  transition: all .2s
+  transition: all .2s;
 }
 
 .hw-led.green.on {
@@ -905,7 +902,7 @@ body {
 
 #pin-bars {
   display: flex;
-  gap: 3px
+  gap: 4px
 }
 
 .pbar {
@@ -913,19 +910,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px
+  gap: 3px
 }
 
 .pbar span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .34rem;
+  font-size: .42rem;
   color: var(--text4);
   font-weight: 600
 }
 
 .pbar-fill {
   width: 100%;
-  height: 3px;
+  height: 4px;
   background: var(--bg3);
   border-radius: 2px;
   position: relative;
@@ -968,17 +965,17 @@ body {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: .35rem;
+  padding: .4rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .2rem;
+  gap: .25rem;
   transition: background .3s, border-color .3s;
 }
 
 .arrow-title {
-  font-size: .46rem;
+  font-size: .5rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .1em;
@@ -987,30 +984,30 @@ body {
 
 .arrow-pair {
   display: flex;
-  gap: .3rem
+  gap: .35rem
 }
 
 .btn-arrow-key {
-  width: 44px;
-  height: 36px;
+  width: 46px;
+  height: 38px;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 7px;
   background: var(--btn-bg);
   color: var(--text);
-  font-size: .85rem;
+  font-size: .9rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0px;
+  gap: 0;
   user-select: none;
   transition: all .12s;
 }
 
 .btn-arrow-key kbd {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .36rem;
+  font-size: .38rem;
   color: var(--kbd-text);
   font-weight: 400
 }
@@ -1087,24 +1084,24 @@ body {
 
 #mode-row {
   display: flex;
-  gap: .3rem
+  gap: .35rem
 }
 
 .btn {
   flex: 1;
-  padding: .35rem .4rem;
+  padding: .38rem .5rem;
   border: 1px solid var(--border);
-  border-radius: 6px;
+  border-radius: 7px;
   background: var(--btn-bg);
   color: var(--text);
   font-family: 'Inter', sans-serif;
-  font-size: .55rem;
+  font-size: .6rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .2rem;
+  gap: .25rem;
   user-select: none;
   white-space: nowrap;
   transition: all .12s;
@@ -1121,7 +1118,7 @@ body {
 
 .btn kbd {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .38rem;
+  font-size: .4rem;
   padding: 1px 3px;
   border-radius: 2px;
   background: var(--kbd-bg);
@@ -1131,10 +1128,10 @@ body {
 
 .mode-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .44rem;
+  font-size: .48rem;
   font-weight: 700;
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   border-radius: 3px;
   display: inline-flex;
   align-items: center;
@@ -1182,7 +1179,7 @@ body {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: .35rem .55rem;
+  padding: .38rem .6rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
@@ -1193,7 +1190,7 @@ body {
 .slider-head {
   display: flex;
   justify-content: space-between;
-  font-size: .5rem;
+  font-size: .55rem;
   color: var(--text2);
   font-weight: 500
 }
@@ -1217,8 +1214,8 @@ input[type="range"] {
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: white;
   border: 2px solid var(--cyan);
@@ -1227,8 +1224,8 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="range"]::-moz-range-thumb {
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: white;
   border: 2px solid var(--cyan);
@@ -1239,7 +1236,7 @@ input[type="range"]::-moz-range-thumb {
   display: flex;
   justify-content: space-between;
   font-family: 'JetBrains Mono', monospace;
-  font-size: .38rem;
+  font-size: .42rem;
   color: var(--text4)
 }
 
@@ -1272,10 +1269,10 @@ input[type="range"]::-moz-range-thumb {
 .serial-head {
   display: flex;
   justify-content: space-between;
-  padding: .3rem .55rem;
+  padding: .35rem .6rem;
   background: var(--bg3);
   border-bottom: 1px solid var(--border);
-  font-size: .48rem;
+  font-size: .52rem;
   font-weight: 600;
   color: var(--text3);
   text-transform: uppercase;
@@ -1290,12 +1287,12 @@ input[type="range"]::-moz-range-thumb {
 
 #serial {
   background: var(--serial-bg);
-  padding: .3rem .55rem;
+  padding: .35rem .6rem;
   flex: 1;
   overflow-y: auto;
   min-height: 0;
   font-family: 'JetBrains Mono', monospace;
-  font-size: .52rem;
+  font-size: .56rem;
   line-height: 1.5;
   color: #94a3b8;
 }
@@ -1338,7 +1335,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 #footer p {
-  font-size: .55rem;
+  font-size: .58rem;
   color: var(--text3);
   line-height: 1.5
 }

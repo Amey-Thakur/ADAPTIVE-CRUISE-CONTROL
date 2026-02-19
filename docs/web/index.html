@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="h-center">
-      <div class="mode-badge" id="mode-badge">Normal Mode</div>
+      <div class="mode-badge" id="mode-badge" title="Current operating mode of the ACC system">Normal Mode</div>
     </div>
     <div class="h-right">
       <button id="theme-toggle" class="icon-btn" title="Toggle Light/Dark Mode" aria-label="Toggle theme">
@@ -50,7 +50,7 @@
         </svg>
       </button>
       <a href="https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL" class="icon-btn" target="_blank" rel="noopener"
-        title="View on GitHub">
+        title="View source code on GitHub">
         <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor">
           <path
             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
@@ -60,7 +60,7 @@
   </header>
 
   <!-- ═══ STATUS BAR ═══ -->
-  <div id="status-bar">
+  <div id="status-bar" title="Real-time system status messages from the ACC controller">
     <span class="status-dot" id="status-dot"></span>
     <span id="status-text">Initializing system — Arduino Uno connecting on COM5...</span>
   </div>
@@ -69,11 +69,10 @@
   <main id="main">
 
     <!-- ── ROAD (2 lanes, 3 cars) ── -->
-    <section id="road-section">
+    <section id="road-section"
+      title="Simulated 2-lane road. The ACC vehicle uses ultrasonic distance sensing to track the lead vehicle ahead. Press Q to overtake, E to return.">
       <div id="road">
         <div class="road-edge top"></div>
-
-        <!-- Top lane dashes (lane divider) -->
         <div class="lane-markers center-lane">
           <div class="dash"></div>
           <div class="dash"></div>
@@ -106,15 +105,13 @@
           <div class="dash"></div>
           <div class="dash"></div>
         </div>
-
         <div class="road-edge bottom"></div>
-
-        <!-- Lane labels -->
         <div class="lane-label top-label">Overtake Lane</div>
         <div class="lane-label bottom-label">Main Lane</div>
 
-        <!-- Traffic Vehicle (top lane) -->
-        <div id="traffic-car" class="car lane-top">
+        <!-- Traffic Vehicle (moves independently in top lane) -->
+        <div id="traffic-car" class="car lane-top"
+          title="Independent traffic vehicle driving in the overtake lane at its own speed">
           <div class="car-body traffic">
             <div class="car-top"></div>
             <div class="car-window"></div>
@@ -125,7 +122,8 @@
         </div>
 
         <!-- Lead Vehicle (bottom lane) -->
-        <div id="lead-car" class="car lane-bottom">
+        <div id="lead-car" class="car lane-bottom"
+          title="Lead vehicle in the main lane. Distance is measured from ACC vehicle to this car using HC-SR04 ultrasonic sensor.">
           <div class="car-body lead">
             <div class="car-top"></div>
             <div class="car-window"></div>
@@ -137,8 +135,9 @@
           <span class="car-tag">Lead Vehicle</span>
         </div>
 
-        <!-- ACC Vehicle (starts in bottom lane) -->
-        <div id="ego-car" class="car lane-bottom">
+        <!-- ACC Vehicle -->
+        <div id="ego-car" class="car lane-bottom"
+          title="Your ACC-equipped vehicle. Uses closed-loop feedback control with ultrasonic sensing for adaptive speed regulation.">
           <div class="car-body ego">
             <div class="car-top"></div>
             <div class="car-window"></div>
@@ -151,30 +150,37 @@
           <span class="car-tag">ACC Vehicle</span>
         </div>
 
-        <!-- Distance Label -->
         <div id="dist-label">
           <span id="dist-label-val">0.50 m</span>
         </div>
       </div>
     </section>
 
-    <!-- ── CONTENT: Left panels + Right serial ── -->
+    <!-- ── CONTENT ROW ── -->
     <div id="content-row">
 
       <!-- Left Column -->
       <div id="left-col">
         <div id="instruments-top">
-          <div class="panel" id="lcd-panel">
+          <!-- LCD Panel -->
+          <div class="panel" id="lcd-panel"
+            title="Simulated 16×2 character LCD display (pins D2-D7). Shows current mode and speed, replicating the physical LCD output from the Arduino.">
             <div class="panel-head">
               <span class="panel-title">LCD 16×2</span>
-              <span class="panel-pin">D7 D6 D5 D4 D3 D2</span>
+              <span class="panel-pin" title="Digital pins D7-D2 used for 4-bit parallel LCD communication">D7 D6 D5 D4
+                D3 D2</span>
             </div>
             <div id="lcd">
-              <div class="lcd-line" id="lcd-1">WELCOME TO</div>
-              <div class="lcd-line" id="lcd-2">ACC PROJECT</div>
+              <div class="lcd-line" id="lcd-1" title="LCD Row 1: Displays the current operating mode label">WELCOME TO
+              </div>
+              <div class="lcd-line" id="lcd-2" title="LCD Row 2: Displays the current vehicle speed value">ACC PROJECT
+              </div>
             </div>
           </div>
-          <div class="panel" id="gauge-panel">
+
+          <!-- Speedometer -->
+          <div class="panel" id="gauge-panel"
+            title="Visual speedometer showing current vehicle velocity in km/h. Color changes: green (0-20), blue (20-50), amber (50+).">
             <div class="panel-head">
               <span class="panel-title">Speedometer</span>
             </div>
@@ -192,101 +198,142 @@
         </div>
 
         <div id="instruments-bottom">
-          <div class="panel" id="info-panel">
+          <!-- Telemetry -->
+          <div class="panel" id="info-panel"
+            title="Real-time telemetry dashboard showing active mode, numeric mode code, cruise target speed, and measured distance from HC-SR04 sensor.">
             <div class="panel-head">
               <span class="panel-title">Telemetry</span>
             </div>
             <div id="info-grid">
-              <div class="info-cell"><span class="info-label">Mode</span><span class="info-val"
-                  id="info-mode">Normal</span></div>
-              <div class="info-cell"><span class="info-label">Code</span><span class="info-val mono"
-                  id="info-code">0</span></div>
-              <div class="info-cell"><span class="info-label">Target</span><span class="info-val mono"
-                  id="info-target">—</span></div>
-              <div class="info-cell"><span class="info-label">Distance</span><span class="info-val mono"
-                  id="info-dist">0.50m</span></div>
+              <div class="info-cell"
+                title="Current ACC operating mode: Normal (manual), Cruise (speed hold), or Adaptive (proximity-aware)">
+                <span class="info-label">Mode</span><span class="info-val" id="info-mode">Normal</span>
+              </div>
+              <div class="info-cell" title="Numeric mode code sent to the Arduino: 0=Normal, 1=Cruise, 2=Adaptive">
+                <span class="info-label">Code</span><span class="info-val mono" id="info-code">0</span>
+              </div>
+              <div class="info-cell"
+                title="Cruise target speed (km/h). Set when entering Adaptive mode. The ACC system will not exceed this speed.">
+                <span class="info-label">Target</span><span class="info-val mono" id="info-target">—</span>
+              </div>
+              <div class="info-cell"
+                title="Effective distance to lead vehicle measured by the HC-SR04 ultrasonic sensor. Safety threshold: 0.30m">
+                <span class="info-label">Distance</span><span class="info-val mono" id="info-dist">0.50m</span>
+              </div>
             </div>
           </div>
-          <div class="panel" id="hw-panel">
+
+          <!-- Arduino Uno -->
+          <div class="panel" id="hw-panel"
+            title="Arduino Uno R3 hardware status. Shows LED indicators and analog pin voltage levels. Connected via USB on COM5 at 9600 baud.">
             <div class="panel-head">
               <span class="panel-title">Arduino Uno</span>
-              <span class="panel-pin com-on">● COM5</span>
+              <span class="panel-pin com-on" title="Serial connection active on COM5">● COM5</span>
             </div>
             <div id="hw-grid">
-              <div class="led-pair">
-                <div class="hw-led green" id="hw-led-g"></div><span>D13</span>
+              <div class="led-pair" title="Digital Pin 13: Green LED. Lights up during acceleration (D13 HIGH).">
+                <div class="hw-led green" id="hw-led-g"></div><span>D13 Accel</span>
               </div>
-              <div class="led-pair">
-                <div class="hw-led red" id="hw-led-r"></div><span>D12</span>
+              <div class="led-pair"
+                title="Digital Pin 12: Red LED. Lights up during braking or when speed reaches zero (D12 HIGH).">
+                <div class="hw-led red" id="hw-led-r"></div><span>D12 Brake</span>
               </div>
-              <div class="led-pair">
-                <div class="hw-led cyan" id="hw-led-t"></div><span>D10</span>
+              <div class="led-pair"
+                title="Digital Pin 10: HC-SR04 Trigger pin. Sends 10μs ultrasonic pulse to initiate distance measurement.">
+                <div class="hw-led cyan" id="hw-led-t"></div><span>D10 Trig</span>
               </div>
-              <div class="led-pair">
-                <div class="hw-led cyan" id="hw-led-e"></div><span>D8</span>
+              <div class="led-pair"
+                title="Digital Pin 8: HC-SR04 Echo pin. Receives reflected ultrasonic signal. Pulse duration determines distance.">
+                <div class="hw-led cyan" id="hw-led-e"></div><span>D8 Echo</span>
               </div>
             </div>
             <div id="pin-bars">
-              <div class="pbar"><span>A0</span>
+              <div class="pbar"
+                title="Analog Pin A0: Accelerator potentiometer. Reads 0-5V. Values ≥4V trigger acceleration.">
+                <span>A0</span>
                 <div class="pbar-fill" id="pf-a0"></div>
               </div>
-              <div class="pbar"><span>A1</span>
+              <div class="pbar"
+                title="Analog Pin A1: Brake potentiometer. Reads 0-5V. Values ≥4V trigger deceleration.">
+                <span>A1</span>
                 <div class="pbar-fill" id="pf-a1"></div>
               </div>
-              <div class="pbar"><span>A2</span>
+              <div class="pbar" title="Analog Pin A2: Cancel button. Resets to Normal Mode (Mode 0) when activated.">
+                <span>A2</span>
                 <div class="pbar-fill" id="pf-a2"></div>
               </div>
-              <div class="pbar"><span>A3</span>
+              <div class="pbar"
+                title="Analog Pin A3: Cruise Control button. Activates Mode 1 and locks current speed as target.">
+                <span>A3</span>
                 <div class="pbar-fill" id="pf-a3"></div>
               </div>
-              <div class="pbar"><span>A4</span>
+              <div class="pbar"
+                title="Analog Pin A4: Adaptive Cruise button. Activates Mode 2 with proximity-based speed regulation.">
+                <span>A4</span>
                 <div class="pbar-fill" id="pf-a4"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Controls: Speed | Distance | Lane -->
+        <!-- Controls -->
         <div id="controls-area">
           <div id="arrow-grid">
-            <div class="arrow-group">
+            <div class="arrow-group"
+              title="Speed control: Simulates the accelerator (A0) and brake (A1) potentiometers on the Arduino.">
               <span class="arrow-title">Speed</span>
               <div class="arrow-pair">
-                <button id="btn-up" class="btn-arrow-key accel" title="Accelerate (↑ or W)">▲<kbd>W</kbd></button>
-                <button id="btn-down" class="btn-arrow-key brake" title="Brake (↓ or S)">▼<kbd>S</kbd></button>
+                <button id="btn-up" class="btn-arrow-key accel"
+                  title="Accelerate: Sets analog pin A0 to 5V. Speed +1 km/h per tick. Hold to repeat. (↑ or W)">▲<kbd>W</kbd></button>
+                <button id="btn-down" class="btn-arrow-key brake"
+                  title="Brake: Sets analog pin A1 to 5V. Speed -1 km/h per tick. Hold to repeat. (↓ or S)">▼<kbd>S</kbd></button>
               </div>
             </div>
-            <div class="arrow-group">
+            <div class="arrow-group"
+              title="Distance control: Adjusts the HC-SR04 ultrasonic sensor reading (0.00m to 1.00m). Safety threshold is 0.30m.">
               <span class="arrow-title">Distance</span>
               <div class="arrow-pair">
-                <button id="btn-closer" class="btn-arrow-key dist-close" title="Closer (← or A)">◀<kbd>A</kbd></button>
-                <button id="btn-farther" class="btn-arrow-key dist-far" title="Farther (→ or D)">▶<kbd>D</kbd></button>
+                <button id="btn-closer" class="btn-arrow-key dist-close"
+                  title="Move lead vehicle closer. Decreases HC-SR04 distance reading. Below 0.30m triggers emergency braking in Adaptive mode. (← or A)">◀<kbd>A</kbd></button>
+                <button id="btn-farther" class="btn-arrow-key dist-far"
+                  title="Move lead vehicle farther. Increases HC-SR04 distance reading. Above 0.30m allows ACC to accelerate to target. (→ or D)">▶<kbd>D</kbd></button>
               </div>
             </div>
-            <div class="arrow-group">
+            <div class="arrow-group"
+              title="Lane change: Switch between main lane and overtake lane. In Adaptive mode, changing lanes clears the path for overtaking.">
               <span class="arrow-title">Lane</span>
               <div class="arrow-pair">
-                <button id="btn-lane-up" class="btn-arrow-key lane-up" title="Overtake Lane (Q)">▲<kbd>Q</kbd></button>
-                <button id="btn-lane-down" class="btn-arrow-key lane-dn" title="Main Lane (E)">▼<kbd>E</kbd></button>
+                <button id="btn-lane-up" class="btn-arrow-key lane-up"
+                  title="Switch to overtake lane. In Adaptive mode, sensor path clears and ACC accelerates to cruise target for overtaking. (Q)">▲<kbd>Q</kbd></button>
+                <button id="btn-lane-down" class="btn-arrow-key lane-dn"
+                  title="Return to main lane. Resumes normal distance tracking with the lead vehicle ahead. (E)">▼<kbd>E</kbd></button>
               </div>
             </div>
           </div>
 
           <div id="mode-row">
-            <button id="btn-m0" class="btn btn-mode active" title="Normal Mode (Key: 1)"><span class="mode-num">0</span>
-              Normal <kbd>1</kbd></button>
-            <button id="btn-m1" class="btn btn-mode" title="Cruise Control (Key: 2)"><span class="mode-num">1</span>
-              Cruise <kbd>2</kbd></button>
-            <button id="btn-m2" class="btn btn-mode" title="Adaptive Cruise (Key: 3)"><span class="mode-num">2</span>
-              Adaptive <kbd>3</kbd></button>
+            <button id="btn-m0" class="btn btn-mode active"
+              title="Normal Mode (Code 0): Manual speed control only. No cruise target. Natural kinetic drag reduces speed when idle. Press 1 to activate.">
+              <span class="mode-num">0</span> Normal <kbd>1</kbd>
+            </button>
+            <button id="btn-m1" class="btn btn-mode"
+              title="Cruise Control (Code 1): Maintains current speed automatically. No natural drag. Manual override available. Press 2 to activate.">
+              <span class="mode-num">1</span> Cruise <kbd>2</kbd>
+            </button>
+            <button id="btn-m2" class="btn btn-mode"
+              title="Adaptive Cruise (Code 2): Proximity-aware cruise control. Auto-decelerates when distance < 0.30m. Locks current speed as target ceiling. Press 3 to activate.">
+              <span class="mode-num">2</span> Adaptive <kbd>3</kbd>
+            </button>
           </div>
 
-          <div id="slider-box">
+          <div id="slider-box"
+            title="HC-SR04 ultrasonic distance sensor simulator. Drag to set the distance between the ACC vehicle and the lead vehicle (0.00m to 1.00m). Safety threshold at 0.30m.">
             <div class="slider-head">
               <span>HC-SR04 Distance</span>
               <span class="slider-val" id="slider-val">0.50m</span>
             </div>
-            <input type="range" id="dist-slider" min="0" max="100" value="50" step="1">
+            <input type="range" id="dist-slider" min="0" max="100" value="50" step="1"
+              title="Drag to simulate ultrasonic sensor distance reading">
             <div class="slider-labels">
               <span class="lbl-danger">0.00</span>
               <span class="lbl-warn">0.30</span>
@@ -296,8 +343,9 @@
         </div>
       </div>
 
-      <!-- Right Column: Serial Monitor -->
-      <div id="serial-col">
+      <!-- Serial Monitor -->
+      <div id="serial-col"
+        title="Simulated Arduino Serial Monitor (9600 baud). Displays real-time system events, sensor readings, mode changes, and proximity warnings — exactly as they would appear on the physical serial output.">
         <div class="serial-head">
           <span>Serial Monitor</span>
           <span class="serial-baud">COM5 · 9600 baud</span>
