@@ -254,13 +254,13 @@ ADAPTIVE-CRUISE-CONTROL/
 <!-- USAGE SECTION -->
 ## Usage Guidelines
 
-This repository is shared to support scholarly exchange and advance ideas in modern automotive control systems.
+This repository is openly shared to support learning and knowledge exchange across the academic community.
 
 **For Students**  
-Utilize this project as a reference for MATLAB-Arduino interfacing, sensor fusion, and closed-loop control logic. The source code and simulation screenshots provide a comprehensive roadmap for hardware-level programming.
+Use this project as reference material for understanding **MATLAB-Arduino Interfacing**, **Sensor Fusion**, and **Closed-Loop Control Logic**. The source code and simulation documentation are available for study to facilitate self-paced learning and exploration of **cyber-physical systems and automated control architecture**.
 
 **For Educators**  
-This repository serves as a practical implementation of real-time control systems. Attribution is appreciated when utilizing the architectural flow or technical visuals for instructional purposes.
+This repository serves as a practical implementation of real-time embedded systems. Attribution is appreciated when utilizing content.
 
 **For Researchers**  
 The technical specification and modular code structure provide insights into the behavioral modeling of adaptive cruise systems in a controlled academic environment.
