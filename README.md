@@ -98,9 +98,17 @@ The **Adaptive Cruise Control (ACC)** system is a sophisticated embedded control
 ```python
 ADAPTIVE-CRUISE-CONTROL/
 │
+├── .github/
+│   └── workflows/
+│       └── deploy-pages.yml                 # GitHub Pages Deployment Workflow
+│
 ├── docs/                                    # Formal Documentation
 │   ├── Matlab Logo.png                      # MATLAB Branding Asset
-│   └── SPECIFICATION.md                     # Technical Architecture & Specification
+│   ├── SPECIFICATION.md                     # Technical Architecture & Specification
+│   └── web/                                 # Interactive ACC Simulation (GitHub Pages)
+│       ├── index.html                       # Simulation Entry Point
+│       ├── style.css                        # Design System & Styles
+│       └── simulation.js                    # ACC Engine (JS Port of MATLAB Logic)
 │
 ├── Matlab Project/                          # Academic Deliverables
 │   ├── Final Report/                        # Final Project Report & MATLAB Source
