@@ -612,6 +612,21 @@ function boot() {
 
 // ─── INIT ────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+    // Security: Anti-right-click & Anti-select
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+
+    // Easter Egg
+    console.log(
+        "%c🚘 ACC Simulation v4.0.0",
+        "color: #3b82f6; font-size: 20px; font-weight: bold; font-family: 'Inter', sans-serif;"
+    );
+    console.log(
+        "%cDesigned & Developed by Amey Thakur\n%c\"Precision is the soul of engineering.\"",
+        "color: #94a3b8; font-size: 14px; font-style: italic;",
+        "color: #22c55e; font-size: 12px; font-weight: bold;"
+    );
+
     initTheme();
     refreshSensor();
     refreshRoad();
