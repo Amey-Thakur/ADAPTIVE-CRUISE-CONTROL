@@ -22,6 +22,7 @@ const S = {
     running: false,
     lastLog: '',       // Suppression of duplicate logs
     pins: { A0: 0, A1: 0, A2: 0, A3: 0, A4: 0 },
+    hornBlinking: false, // Flag to prevent blink overlap
 };
 
 // ─── DOM ─────────────────────────────────────────────────────────────────────
@@ -121,6 +122,19 @@ function playHorn() {
         playTone(340, 'triangle', now, 0.4, 0.15);
         playTone(420, 'triangle', now, 0.4, 0.15);
         log('ACC Vehicle Horn: HOOOOONK! 🔊', 'sys');
+
+        // Fail-proof blinking logic (Flash twice)
+        if (!S.hornBlinking) {
+            S.hornBlinking = true;
+            const hl = D.egoCar.querySelectorAll('.headlight');
+            const setFlash = (active) => hl.forEach(h => h.classList.toggle('flash', active));
+
+            setFlash(true);
+            setTimeout(() => setFlash(false), 150);
+            setTimeout(() => setFlash(true), 300);
+            setTimeout(() => setFlash(false), 450);
+            setTimeout(() => { S.hornBlinking = false; }, 500);
+        }
     } catch (e) {
         console.warn('Audio blocked or not supported');
     }
@@ -602,8 +616,19 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshSensor();
     refreshRoad();
 
-    // Horn interaction (ACC vehicle only)
-    D.egoCar.addEventListener('click', playHorn);
+    // Horn interaction (ACC vehicle only) - Moved to car body
+    // D.egoCar.addEventListener('click', playHorn);
 
     boot();
+});
+
+// Helper for horn interaction
+document.addEventListener('DOMContentLoaded', () => {
+    const body = D.egoCar.querySelector('.car-body');
+    if (body) {
+        body.addEventListener('click', () => {
+            console.log('📡 ACC Horn Activated');
+            playHorn();
+        });
+    }
 });
