@@ -1042,16 +1042,16 @@ body {
   background: var(--btn-bg);
   color: var(--text);
   font-family: 'Play', sans-serif;
-  font-size: .85rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 800;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .35rem;
+  gap: .5rem;
   user-select: none;
   white-space: nowrap;
-  transition: all .12s;
+  transition: all .15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn:hover {
@@ -1065,21 +1065,22 @@ body {
 
 .btn kbd {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .4rem;
-  padding: 1px 3px;
-  border-radius: 2px;
+  font-size: .58rem;
+  padding: 2px 4px;
+  border-radius: 3px;
   background: var(--kbd-bg);
   color: var(--kbd-text);
-  font-weight: 400
+  font-weight: 600;
+  opacity: 0.8;
 }
 
 .mode-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .48rem;
-  font-weight: 700;
-  width: 14px;
-  height: 14px;
-  border-radius: 3px;
+  font-size: .7rem;
+  font-weight: 800;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
