@@ -109,16 +109,12 @@
         <!-- Lead Vehicle -->
         <div id="lead-car" class="car" title="Lead Vehicle">
           <div class="car-body lead">
-            <svg class="car-svg" viewBox="0 0 100 35">
-              <path d="M5,25 L95,25 L95,28 Q95,32 90,32 L10,32 Q5,32 5,28 Z" fill="#222" />
-              <path d="M10,25 L15,12 Q18,5 28,5 L78,5 Q88,5 92,15 L98,25 Z" fill="var(--car-lead)" />
-              <path d="M30,7 L55,7 L55,18 L20,18 Q24,9 30,7 Z" fill="rgba(100,200,255,0.3)" />
-              <path d="M59,7 L80,7 Q86,7 89,15 L93,18 L59,18 Z" fill="rgba(100,200,255,0.2)" />
-              <circle cx="25" cy="28" r="6" fill="#111" stroke="#333" stroke-width="1" />
-              <circle cx="80" cy="28" r="6" fill="#111" stroke="#333" stroke-width="1" />
-            </svg>
+            <div class="car-top"></div>
+            <div class="car-window"></div>
             <div class="tail-light l"></div>
             <div class="tail-light r"></div>
+            <div class="car-wheel front"></div>
+            <div class="car-wheel rear"></div>
           </div>
           <span class="car-tag">Lead Vehicle</span>
         </div>
@@ -126,16 +122,12 @@
         <!-- ACC Vehicle -->
         <div id="ego-car" class="car" title="ACC Vehicle · Click to Horn 🔊">
           <div class="car-body ego">
-            <svg class="car-svg" viewBox="0 0 100 35">
-              <path d="M5,25 L95,25 L95,28 Q95,32 90,32 L10,32 Q5,32 5,28 Z" fill="#111" />
-              <path d="M10,25 L15,12 Q18,5 30,5 L75,5 Q85,5 92,15 L98,25 Z" fill="var(--car-ego)" />
-              <path d="M32,7 L55,7 L55,18 L22,18 Q26,9 32,7 Z" fill="rgba(100,220,255,0.4)" />
-              <path d="M59,7 L82,7 Q88,7 91,15 L94,18 L59,18 Z" fill="rgba(100,220,255,0.3)" />
-              <circle cx="25" cy="28" r="6" fill="#000" stroke="#333" stroke-width="1" />
-              <circle cx="80" cy="28" r="6" fill="#000" stroke="#333" stroke-width="1" />
-            </svg>
+            <div class="car-top"></div>
+            <div class="car-window"></div>
             <div class="headlight l"></div>
             <div class="headlight r"></div>
+            <div class="car-wheel front"></div>
+            <div class="car-wheel rear"></div>
             <div class="sensor-cone" id="sensor-cone"></div>
           </div>
           <span class="car-tag">ACC Vehicle</span>
