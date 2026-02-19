@@ -378,7 +378,7 @@ This project showcases the **Adaptive Cruise Control (ACC)** system, a real-time
 
 ### Acknowledgments
 
-Grateful acknowledgment to my **Major Project** teammates, **Nandeshwar Royal Uppalapati** and **Brano Bruno Barshmen**, for their collaborative excellence and shared commitment throughout the semester. Our collective efforts in synthesizing technical information and developing comprehensive engineering reports were fundamental to achieving our academic goals and major projects.
+Grateful acknowledgment to my **Major Project** teammates, **Nandeshwar Royal Uppalapati** and **Brano Bruno Barshmen**, for their collaborative excellence and shared commitment throughout the semester. Our collective efforts in synthesizing complex datasets, developing rigorous technical architectures, and authoring comprehensive engineering reports were fundamental to the successful realization of our objectives. This partnership not only strengthened the analytical depth of our shared deliverables but also provided invaluable insights into the dynamics of high-performance engineering teamwork.
 
 Grateful acknowledgment to **Jason Horn**, **[Writing Support Desk](https://github.com/Amey-Thakur/WRITING-SUPPORT)**, **University of Windsor**, for his distinguished mentorship and scholarly guidance. His analytical feedback and methodological rigor were instrumental in refining the intellectual depth and professional caliber of my academic work. His dedication stands as a testament to the pursuit of academic excellence and professional integrity.
 
