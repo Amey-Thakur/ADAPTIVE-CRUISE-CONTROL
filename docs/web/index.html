@@ -272,23 +272,51 @@
         </div>
       </div>
 
-      <!-- Serial Monitor -->
-      <div id="serial-col" title="Simulated Arduino Serial Monitor (9600 baud).">
-        <div class="serial-head">
-          <span>Serial Monitor</span>
-          <span class="serial-baud">COM5 · 9600 baud</span>
+      <!-- Right Column: Diagnostics & Design -->
+      <div id="right-col">
+        <!-- Serial Monitor -->
+        <div id="serial-panel" class="panel" title="Simulated Arduino Serial Monitor (9600 baud).">
+          <div class="panel-head">
+            <span><i class="icon">📟</i> Serial Monitor</span>
+            <span class="serial-baud">COM5 · 9600 baud</span>
+          </div>
+          <div id="serial" role="log" aria-live="polite"></div>
         </div>
-        <div id="serial" role="log" aria-live="polite"></div>
+
+        <!-- Engineering & Design Guide -->
+        <div id="design-panel" class="panel" title="Project Engineering Specifications">
+          <div class="panel-head">
+            <span><i class="icon">⚙️</i> Engineering Design</span>
+          </div>
+          <div class="design-content">
+            <div class="design-item">
+              <span class="tag">MATLAB/Simulink</span>
+              <p>Design control logic using <strong>PID controllers</strong> and <strong>Stateflow</strong>. Use the
+                "Simulink Support Package for Arduino" for seamless HIL (Hardware-in-the-Loop) deployment.</p>
+            </div>
+            <div class="design-item">
+              <span class="tag">Hardware Integration</span>
+              <p>Interface <strong>HC-SR04</strong> for distance and <strong>PWM</strong> for throttle control. Ensure a
+                minimum 50Hz control loop frequency for stable real-time response.</p>
+            </div>
+            <div class="design-item">
+              <span class="tag">Pro-Tip</span>
+              <p>Always implement a <strong>Velocity Cap</strong> and <strong>Distance Hysteresis</strong> in Simulink
+                to prevent actuator jitter during transition zones.</p>
+            </div>
+          </div>
+        </div>
       </div>
-
     </div>
-
   </main>
 
   <!-- ═══ FOOTER ═══ -->
   <footer id="footer">
-    <p>2023 &copy; All Rights Reserved &nbsp;|&nbsp; Designed &amp; Developed by <a
-        href="https://github.com/Amey-Thakur" target="_blank" rel="noopener"><strong>Amey Thakur</strong></a></p>
+    <p>2023 &copy; All Rights Reserved &nbsp;|&nbsp;
+      Designed &amp; Developed by
+      <a href="https://github.com/Amey-Thakur" target="_blank" rel="noopener"><strong>Amey Thakur</strong></a> &amp;
+      <a href="https://github.com/msatmod" target="_blank" rel="noopener"><strong>Mega Satish</strong></a>
+    </p>
   </footer>
 
   <script src="simulation.js"></script>
