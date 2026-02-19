@@ -6,7 +6,7 @@
   ![Status](https://img.shields.io/badge/Status-Completed-success)
   ![MATLAB | Simulink](https://img.shields.io/badge/Stack-MATLAB%20%7C%20Simulink-orange?style=flat&logo=mathworks&logoColor=white)
   ![Arduino](https://img.shields.io/badge/Arduino-Uno-00979D?style=flat)
-  [![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-blue?style=flat&logo=github)](https://amey-thakur.github.io/ADAPTIVE-CRUISE-CONTROL/)
+  [![Live Demo](https://img.shields.io/badge/Live%20Demo-ACC-dc143c?style=flat)](https://amey-thakur.github.io/ADAPTIVE-CRUISE-CONTROL/)
   [![Developed by Amey Thakur](https://img.shields.io/badge/Developed%20by-Amey%20Thakur-blue.svg)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL)
 
   An Adaptive Cruise Control (ACC) system developed as a **2nd-Semester Project** for the **MEng Computer Engineering** program. This implementation utilizes MATLAB and Arduino to demonstrate real-time sensory feedback, automated speed regulation, and proximity-aware safety logic.
@@ -198,9 +198,9 @@ run("Source Code/Adaptive Cruise Control.m")
 >
 > 👉🏻 **[View Tinkercad Simulation](#tinkercad-simulation)**
 >
-> You can also explore the **interactive browser-based simulation** — no hardware or MATLAB required:
+> You can also explore the **interactive browser-based simulation**, no hardware or MATLAB required:
 >
-> 🎮 **[Launch Live Demo](https://amey-thakur.github.io/ADAPTIVE-CRUISE-CONTROL/)**
+> 🚘 **[Launch Live Demo](https://amey-thakur.github.io/ADAPTIVE-CRUISE-CONTROL/)**
 
 ---
 
