@@ -177,15 +177,18 @@ ADAPTIVE-CRUISE-CONTROL/
 <div align="center">
 
   ### Circuit View
-  <br>
+  *High-fidelity virtual breadboard layout demonstrating sensor-to-controller mapping.*
+  <br><br>
   <img src="Source Code/figures/Tinkercad Simulation/01 - Circuit View.jpg" width="80%" alt="Circuit View">
 
   ### Schematic View
-  <br>
+  *Electrical representation of the ACC logic, highlighting terminal interconnectivity.*
+  <br><br>
   <img src="Source Code/figures/Tinkercad Simulation/02 - Schematic View.jpg" width="80%" alt="Schematic View">
 
   ### Simulation Logic
-  
+  *Visualizing discrete state transitions between manual cruise and autonomous adaptive speed control.*
+  <br><br>
   | Welcome Message | Group Details | Initial Resting State |
   | :---: | :---: | :---: |
   | <img src="Source Code/figures/Tinkercad Simulation/03 - Welcome Message.jpg" width="250"> | <img src="Source Code/figures/Tinkercad Simulation/04 - Group Number & Names.jpg" width="250"> | <img src="Source Code/figures/Tinkercad Simulation/05 - Circuit at Initial (Zero Speed).jpg" width="250"> |
@@ -204,11 +207,13 @@ ADAPTIVE-CRUISE-CONTROL/
 <div align="center">
 
   ### Physical Circuit Connections
-  <br>
+  *Macro-perspective of the finalized Arduino assembly within the hardware enclosure.*
+  <br><br>
   <img src="Source Code/figures/Arduino Working Model/01 - Circuit Connections.jpg" width="80%" alt="Hardware Connections">
 
   ### Hardware States
-  
+  *Real-time performance of the physical system across various cruise and safety scenarios.*
+  <br><br>
   | Activation Screen | Member Display | System Resting |
   | :---: | :---: | :---: |
   | <img src="Source Code/figures/Arduino Working Model/02 - Welcome Message.jpg" width="250"> | <img src="Source Code/figures/Arduino Working Model/03 - Group Number & Names.jpg" width="250"> | <img src="Source Code/figures/Arduino Working Model/04 - Circuit at Initial (Zero Speed).jpg" width="250"> |
