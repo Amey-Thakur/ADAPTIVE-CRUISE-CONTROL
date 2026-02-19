@@ -4,7 +4,7 @@
 
   [![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
   ![Status](https://img.shields.io/badge/Status-Completed-success)
-  ![MATLAB | Simulink](https://img.shields.io/badge/MATLAB%20%7C%20Simulink-R2023a-orange?style=flat&logo=mathworks&logoColor=white)
+  ![MATLAB | Simulink](https://img.shields.io/badge/Stack-MATLAB%20%7C%20Simulink-orange?style=flat&logo=mathworks&logoColor=white)
   ![Arduino](https://img.shields.io/badge/Arduino-Uno-00979D?style=flat)
   [![Developed by Amey Thakur](https://img.shields.io/badge/Developed%20by-Amey%20Thakur-blue.svg)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL)
 
@@ -245,6 +245,8 @@ This project showcases the **Adaptive Cruise Control (ACC)** system, a real-time
 ### Acknowledgments
 
 Grateful acknowledgment to [**Mega Satish**](https://github.com/msatmod) for her meaningful contributions, guidance, and support that helped shape this work. Her collaboration and technical insights were instrumental in achieving the project's functional objectives.
+
+Grateful acknowledgment to project partners **Brano Bruno Barshmen** and **Nandeshwar Royal Uppalapati** for their collaborative spirit and technical contributions during the development of this adaptive cruise control system.
 
 Grateful acknowledgment to the faculty members of the Department of Electrical and Computer Engineering at the University of Windsor for their guidance and instruction. Their expertise in computational modeling and embedded systems was vital to the successful realization of this project.
 
