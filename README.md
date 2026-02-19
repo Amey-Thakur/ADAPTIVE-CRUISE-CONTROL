@@ -323,7 +323,7 @@ The technical specification and modular code structure provide insights into the
 <!-- LICENSE -->
 ## License
 
-This repository and its technical assets are made available under the **MIT License**. See the [LICENSE](LICENSE) file for complete terms.
+This repository and all linked academic content are made available under the **MIT License**. See the [LICENSE](LICENSE) file for complete terms.
 
 > [!NOTE]
 > **Summary**: You are free to share and adapt this content for any purpose, even commercially, as long as you provide appropriate attribution to the original author.
