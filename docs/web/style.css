@@ -340,30 +340,37 @@ body {
   top: 50%;
   left: 0;
   right: 0;
-  transform: translateY(-50%);
   height: 2px;
-  display: flex;
-  gap: 22px;
+  transform: translateY(-50%);
   overflow: hidden;
+  pointer-events: none;
 }
 
-.lane-markers .dash {
-  width: 35px;
-  height: 2px;
-  background: var(--road-dash);
-  border-radius: 1px;
-  flex-shrink: 0;
-  animation: scrollDash 1.5s linear infinite;
+.lane-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% + 57px);
+  height: 100%;
+  background-image: linear-gradient(90deg,
+      var(--road-dash) 0px,
+      var(--road-dash) 35px,
+      transparent 35px,
+      transparent 57px);
+  background-size: 57px 100%;
+  background-repeat: repeat-x;
+  animation: scrollDash var(--road-speed, 1s) linear infinite;
   animation-play-state: paused;
+  will-change: transform;
 }
 
 @keyframes scrollDash {
-  0% {
-    transform: translateX(0)
+  from {
+    transform: translateX(0);
   }
 
-  100% {
-    transform: translateX(-57px)
+  to {
+    transform: translateX(-57px);
   }
 }
 
