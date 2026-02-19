@@ -23,8 +23,6 @@ const S = {
     D12: false,        // Red LED
     running: false,
     lane: 0,           // 0 = main (bottom), 1 = overtake (top)
-    trafficPos: 55,    // Traffic car position % (moves independently)
-    trafficSpeed: 15,  // Traffic car's own speed (km/h) for relative motion
     pins: { A0: 0, A1: 0, A2: 0, A3: 0, A4: 0 },
 };
 
@@ -43,7 +41,7 @@ const D = {
     serial: $('serial'),
     distSlider: $('dist-slider'), sliderVal: $('slider-val'),
     distLabel: $('dist-label'), distLabelVal: $('dist-label-val'),
-    leadCar: $('lead-car'), egoCar: $('ego-car'), trafficCar: $('traffic-car'),
+    leadCar: $('lead-car'), egoCar: $('ego-car'),
     sensorCone: $('sensor-cone'),
     btnUp: $('btn-up'), btnDown: $('btn-down'),
     btnCloser: $('btn-closer'), btnFarther: $('btn-farther'),
@@ -189,9 +187,6 @@ function refreshRoad() {
     // Ego car lane
     D.egoCar.className = 'car ' + (S.lane === 1 ? 'lane-top' : 'lane-bottom');
 
-    // Traffic car position
-    D.trafficCar.style.left = S.trafficPos + '%';
-
     // Road animation speed
     const dashes = document.querySelectorAll('.dash');
     dashes.forEach(d => {
@@ -205,31 +200,7 @@ function refreshRoad() {
 }
 
 
-// ─── TRAFFIC CAR MOVEMENT ────────────────────────────────────────────────────
-// Traffic car moves relative to ego speed. When ego is faster, traffic
-// appears to move backward (left). Wraps around when off-screen.
-function tickTraffic() {
-    if (!S.running) return;
-    if (S.speed === 0) return; // no relative motion when stationary
 
-    // Relative speed: negative = traffic recedes (ego faster), positive = approaches
-    const relativeSpeed = S.trafficSpeed - S.speed;
-    // Convert to position delta: scale so movement is visible
-    const delta = relativeSpeed * 0.03;
-
-    S.trafficPos += delta;
-
-    // Wrap around: goes off left → reappear from right
-    if (S.trafficPos < -15) {
-        S.trafficPos = 105;
-    }
-    // Wrap around: goes off right → reappear from left
-    if (S.trafficPos > 105) {
-        S.trafficPos = -15;
-    }
-
-    D.trafficCar.style.left = S.trafficPos + '%';
-}
 
 
 // ─── LANE CHANGE ─────────────────────────────────────────────────────────────
@@ -562,13 +533,7 @@ setInterval(() => {
 }, 500);
 
 
-// ─── TRAFFIC CAR ANIMATION (60fps loop) ──────────────────────────────────────
-// The traffic car moves continuously based on relative speed difference.
-// When the ego car is faster, traffic appears to scroll left (overtake effect).
-// When the ego car is slower, traffic appears to scroll right (being passed).
-setInterval(() => {
-    tickTraffic();
-}, 50);
+
 
 
 // ─── THEME TOGGLE ────────────────────────────────────────────────────────────
