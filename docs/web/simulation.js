@@ -1,13 +1,13 @@
 /* =========================================================================================
-   ADAPTIVE CRUISE CONTROL — SIMULATION ENGINE v2
-   
+   ADAPTIVE CRUISE CONTROL — SIMULATION ENGINE v3
+
    Faithful JS port of the MATLAB ACC algorithm (Adaptive Cruise Control.m)
-   Compact dashboard version with dark/light theme support
-   
+   2-Lane road with lane changing + overtaking
+
    MODES: 0 → Normal | 1 → Cruise Control | 2 → Adaptive Cruise
    PINS:  A0 Accel | A1 Brake | A2 Cancel | A3 Cruise | A4 ACC
           D13 Green LED | D12 Red LED | D10 Trig | D8 Echo
-   
+
    Author: Amey Thakur
    ========================================================================================= */
 
@@ -22,6 +22,7 @@ const S = {
     D13: false,        // Green LED
     D12: false,        // Red LED
     running: false,
+    lane: 0,           // 0 = main (bottom), 1 = overtake (top)
     pins: { A0: 0, A1: 0, A2: 0, A3: 0, A4: 0 },
 };
 
@@ -40,10 +41,11 @@ const D = {
     serial: $('serial'),
     distSlider: $('dist-slider'), sliderVal: $('slider-val'),
     distLabel: $('dist-label'), distLabelVal: $('dist-label-val'),
-    leadCar: $('lead-car'), egoCar: $('ego-car'),
+    leadCar: $('lead-car'), egoCar: $('ego-car'), trafficCar: $('traffic-car'),
     sensorCone: $('sensor-cone'),
     btnUp: $('btn-up'), btnDown: $('btn-down'),
     btnCloser: $('btn-closer'), btnFarther: $('btn-farther'),
+    btnLaneUp: $('btn-lane-up'), btnLaneDown: $('btn-lane-down'),
     btnM0: $('btn-m0'), btnM1: $('btn-m1'), btnM2: $('btn-m2'),
     themeToggle: $('theme-toggle'),
     iconSun: $('icon-sun'), iconMoon: $('icon-moon'),
@@ -111,7 +113,8 @@ function refreshHW() {
     D.ledE.className = 'hw-led cyan' + (sensor ? ' on' : '');
 
     // Sensor cone
-    const danger = S.distance < 0.3;
+    const effectiveDist = getEffectiveDistance();
+    const danger = effectiveDist < 0.3;
     D.sensorCone.className = 'sensor-cone' +
         (sensor ? ' on' : '') +
         (sensor && danger ? ' danger' : '');
@@ -120,9 +123,10 @@ function refreshHW() {
     const hl = D.egoCar.querySelectorAll('.headlight');
     hl.forEach(h => h.classList.toggle('on', S.D13));
 
-    // Tail lights
+    // Tail lights on lead car (only when in same lane and danger)
     const tl = D.leadCar.querySelectorAll('.tail-light');
-    tl.forEach(t => t.classList.toggle('on', danger && sensor));
+    const sameLane = S.lane === 0; // lead is always in lane 0
+    tl.forEach(t => t.classList.toggle('on', danger && sensor && sameLane));
 
     // Distance label visibility
     D.distLabel.className = sensor ? 'show' : '';
@@ -136,16 +140,14 @@ function refreshPinBars(active) {
 
 
 // ─── GAUGE ───────────────────────────────────────────────────────────────────
-const ARC_LEN = 157; // Total arc path length
+const ARC_LEN = 157;
 
 function refreshGauge() {
-    const pct = Math.min(S.speed / 80, 1); // Max visual at 80
+    const pct = Math.min(S.speed / 80, 1);
     const offset = ARC_LEN - (ARC_LEN * pct);
     D.gaugeArc.setAttribute('stroke-dashoffset', offset);
     D.gaugeNum.textContent = S.speed;
 
-    // Color based on speed
-    const root = document.documentElement;
     if (S.speed === 0) {
         D.gaugeArc.setAttribute('stroke', 'var(--text4)');
     } else if (S.speed < 20) {
@@ -158,22 +160,33 @@ function refreshGauge() {
 }
 
 
-// ─── SENSOR ──────────────────────────────────────────────────────────────────
+// ─── DISTANCE LOGIC ──────────────────────────────────────────────────────────
+// When ACC car is in a DIFFERENT lane from lead, distance is "clear" (1.00m)
+function getEffectiveDistance() {
+    if (S.lane === 0) return S.distance;  // same lane as lead: real distance
+    return 1.00;                           // different lane: path clear
+}
+
 function refreshSensor() {
     const v = parseInt(D.distSlider.value);
     S.distance = v / 100;
-    const str = S.distance.toFixed(2) + 'm';
-    D.sliderVal.textContent = str;
+
+    const eff = getEffectiveDistance();
+    const str = eff.toFixed(2) + 'm';
+    D.sliderVal.textContent = S.distance.toFixed(2) + 'm';
     D.infoDist.textContent = str;
-    D.distLabelVal.textContent = S.distance.toFixed(2) + ' m';
+    D.distLabelVal.textContent = eff.toFixed(2) + ' m';
 }
 
 
 // ─── ROAD ────────────────────────────────────────────────────────────────────
 function refreshRoad() {
-    // Lead car position based on distance
+    // Lead car position based on distance (lead is always in bottom lane)
     const pos = 42 + (S.distance * 38);
     D.leadCar.style.left = pos + '%';
+
+    // Ego car lane
+    D.egoCar.className = 'car ' + (S.lane === 1 ? 'lane-top' : 'lane-bottom');
 
     // Road animation speed
     const dashes = document.querySelectorAll('.dash');
@@ -185,6 +198,29 @@ function refreshRoad() {
             d.style.animationPlayState = 'paused';
         }
     });
+}
+
+
+// ─── LANE CHANGE ─────────────────────────────────────────────────────────────
+function changeLane(targetLane) {
+    if (!S.running) return;
+    if (S.lane === targetLane) return;
+
+    S.lane = targetLane;
+    const name = targetLane === 1 ? 'OVERTAKE' : 'MAIN';
+    log(`LANE CHANGE → ${name} lane`, 'sys');
+
+    if (S.mode === 2) {
+        if (targetLane === 1) {
+            log('Path clear in overtake lane. ACC accelerating to target.', 'success');
+        } else {
+            log('Merged back to main lane. Resuming distance tracking.', 'info');
+        }
+    }
+
+    refreshRoad();
+    refreshSensor();
+    refreshHW();
 }
 
 
@@ -204,6 +240,7 @@ const STATUS_MSGS = {
     adaptive_safe: 'Adaptive Cruise — Path clear. Restoring speed to cruise target: ',
     adaptive_danger: 'Adaptive Cruise — ⚠ Proximity < 0.3m! Auto-decelerating for safety.',
     adaptive_cap: 'Adaptive Cruise — Speed at target ceiling. Maintaining velocity.',
+    adaptive_overtake: 'Adaptive Cruise — Overtake lane. Path clear, accelerating to target.',
 };
 
 function refreshTelemetry() {
@@ -224,7 +261,6 @@ function refreshTelemetry() {
 function setStatus(key, extra = '') {
     D.statusText.textContent = (STATUS_MSGS[key] || key) + extra;
 
-    // Dot color
     const isDanger = key.includes('danger');
     const isWarn = key.includes('drag') || key.includes('brake');
     D.statusDot.className = 'status-dot' +
@@ -235,6 +271,8 @@ function setStatus(key, extra = '') {
 // ─── CORE ACC ENGINE ─────────────────────────────────────────────────────────
 function tick() {
     if (!S.running) return;
+
+    const effectiveDist = getEffectiveDistance();
 
     // MODE 0: NORMAL
     if (S.mode === 0) {
@@ -264,19 +302,24 @@ function tick() {
             setStatus('cruise_hold');
         }
         if (S.speed < 0) { setPin('D13', 0); setPin('D12', 1); S.speed = 0; }
-        lcd('Cruise mode:', String(S.speed));
+        lcd('Cruise Mode:', String(S.speed));
     }
 
     // MODE 2: ADAPTIVE CRUISE
     else if (S.mode === 2) {
         setPin('D13', 1); setPin('D12', 0);
 
-        if (S.distance < 0.3) {
-            log(`PROXIMITY WARNING: ${S.distance.toFixed(2)}m — Auto-decelerating`, 'danger');
+        if (S.lane === 1) {
+            // In overtake lane — path is always clear
+            log(`OVERTAKE LANE: Path clear`, 'success');
+            S.speed += 1;
+            setStatus('adaptive_overtake');
+        } else if (effectiveDist < 0.3) {
+            log(`PROXIMITY WARNING: ${effectiveDist.toFixed(2)}m — Auto-decelerating`, 'danger');
             S.speed -= 1;
             setStatus('adaptive_danger');
         } else {
-            log(`PATH CLEAR: ${S.distance.toFixed(2)}m`, 'success');
+            log(`PATH CLEAR: ${effectiveDist.toFixed(2)}m`, 'success');
             S.speed += 1;
             setStatus('adaptive_safe', S.constant + ' km/h');
         }
@@ -286,7 +329,7 @@ function tick() {
             setStatus('adaptive_cap');
         }
         if (S.speed < 0) { setPin('D13', 0); setPin('D12', 1); S.speed = 0; }
-        lcd('Adap_Cruise_mode', String(S.speed));
+        lcd('Adaptive Cruise:', String(S.speed));
     }
 
     refreshAll();
@@ -389,19 +432,33 @@ function stopDist(btn) {
     clearInterval(distInt); distInt = null;
 }
 
-// Closer (decrease distance)
+// Closer
 D.btnCloser.addEventListener('mousedown', e => { e.preventDefault(); startDist(-2, D.btnCloser); });
 D.btnCloser.addEventListener('mouseup', () => stopDist(D.btnCloser));
 D.btnCloser.addEventListener('mouseleave', () => stopDist(D.btnCloser));
 D.btnCloser.addEventListener('touchstart', e => { e.preventDefault(); startDist(-2, D.btnCloser); });
 D.btnCloser.addEventListener('touchend', () => stopDist(D.btnCloser));
 
-// Farther (increase distance)
+// Farther
 D.btnFarther.addEventListener('mousedown', e => { e.preventDefault(); startDist(2, D.btnFarther); });
 D.btnFarther.addEventListener('mouseup', () => stopDist(D.btnFarther));
 D.btnFarther.addEventListener('mouseleave', () => stopDist(D.btnFarther));
 D.btnFarther.addEventListener('touchstart', e => { e.preventDefault(); startDist(2, D.btnFarther); });
 D.btnFarther.addEventListener('touchend', () => stopDist(D.btnFarther));
+
+
+// ─── LANE BUTTONS ────────────────────────────────────────────────────────────
+D.btnLaneUp.addEventListener('click', () => {
+    D.btnLaneUp.classList.add('pressed');
+    changeLane(1);
+    setTimeout(() => D.btnLaneUp.classList.remove('pressed'), 200);
+});
+
+D.btnLaneDown.addEventListener('click', () => {
+    D.btnLaneDown.classList.add('pressed');
+    changeLane(0);
+    setTimeout(() => D.btnLaneDown.classList.remove('pressed'), 200);
+});
 
 
 // ─── KEYBOARD ────────────────────────────────────────────────────────────────
@@ -424,6 +481,14 @@ document.addEventListener('keydown', e => {
         case 'arrowright': case 'd':
             e.preventDefault();
             if (!distInt) startDist(2, D.btnFarther);
+            break;
+        case 'q':
+            e.preventDefault();
+            changeLane(1); // overtake lane
+            break;
+        case 'e':
+            e.preventDefault();
+            changeLane(0); // main lane
             break;
         case '1': D.btnM0.click(); break;
         case '2': D.btnM1.click(); break;
@@ -499,7 +564,7 @@ function boot() {
         S.mode = 0;
         lcd('Vehicle Speed:', '0');
         log('System ready. Entering control loop.', 'success');
-        log('Keys: ↑/W Accel · ↓/S Brake · ←/A Closer · →/D Farther · 1/2/3 Mode', 'info');
+        log('Keys: ↑/W Accel · ↓/S Brake · ←/A Closer · →/D Farther · Q/E Lane · 1/2/3 Mode', 'info');
         setStatus('normal_idle');
         refreshAll();
     }, 5500);
