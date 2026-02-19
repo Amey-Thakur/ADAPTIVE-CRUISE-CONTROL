@@ -1,0 +1,18 @@
+{
+    "name": "Adaptive Cruise Control",
+    "short_name": "ACC Simulation",
+    "description": "An Adaptive Cruise Control (ACC) system developed as a 2nd-Semester Project for the MEng Computer Engineering program. This implementation utilizes MATLAB and Arduino to demonstrate real-time sensory feedback, automated speed regulation, and proximity-aware safety logic.",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#080d1a",
+    "theme_color": "#080d1a",
+    "icons": [
+        {
+            "src": "icon.svg",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "orientation": "landscape"
+}
