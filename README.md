@@ -236,6 +236,7 @@ Copyright © 2023 Amey Thakur
 
 **Created & Maintained by**: [Amey Thakur](https://github.com/Amey-Thakur)  
 **Academic Journey**: Master of Engineering in Computer Engineering (2023-2024)  
+**Course**: [Computational Methods and Modeling](https://github.com/Amey-Thakur/COMPUTATIONAL-METHODS-AND-MODELING-FOR-ENGINEERING-APPLICATIONS)  
 **Institution**: [University of Windsor](https://www.uwindsor.ca/), Windsor, Ontario  
 **Faculty**: [Faculty of Engineering](https://www.uwindsor.ca/engineering/)
 
