@@ -654,6 +654,7 @@ function boot() {
     log('═══════════════════════════════════════', 'info');
     log('Adaptive Cruise Control · Simulation', 'info');
     log('Arduino Uno R3 · COM5 · 9600 baud', 'info');
+    log('Author: Amey Thakur', 'info');
     log('═══════════════════════════════════════', 'info');
     log('Initializing: Ultrasonic, ExampleLCD/LCDAddOn', 'sys');
 
