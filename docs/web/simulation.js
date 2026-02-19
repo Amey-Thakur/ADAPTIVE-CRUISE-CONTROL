@@ -1,31 +1,48 @@
-/* =========================================================================================
-   ADAPTIVE CRUISE CONTROL — SIMULATION ENGINE
-
-   Faithful JS port of the MATLAB ACC algorithm (Adaptive Cruise Control.m)
-   MODES: 0 → Normal | 1 → Cruise Control | 2 → Adaptive Cruise
-   PINS:  A0 Accel | A1 Brake | A2 Cancel | A3 Cruise | A4 ACC
-          D13 Green LED | D12 Red LED | D10 Trig | D8 Echo
-
-   Author: Amey Thakur
-   ========================================================================================= */
+/* ┌──────────────────────────────────────────────────────────────────────────────┐
+ * │  File:         simulation.js                                               │
+ * │  Author:       Amey Thakur                                                 │
+ * │  Profile:      https://github.com/Amey-Thakur                              │
+ * │  Repository:   https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL      │
+ * │                                                                             │
+ * │  Description:  Core simulation engine for the Adaptive Cruise Control       │
+ * │                (ACC) web application. This module is a faithful JavaScript   │
+ * │                port of the original MATLAB ACC algorithm. It manages        │
+ * │                three operating modes (Normal, Cruise, Adaptive), handles    │
+ * │                simulated Arduino I/O (LEDs, pins, LCD, HC-SR04 sensor),     │
+ * │                and drives all real-time dashboard updates including the     │
+ * │                speedometer, telemetry, road visualization, and serial       │
+ * │                monitor output.                                              │
+ * │                                                                             │
+ * │  Modes:        0 → Normal | 1 → Cruise Control | 2 → Adaptive Cruise       │
+ * │  Pin Map:      A0 Accel | A1 Brake | A2 Cancel | A3 Cruise | A4 ACC        │
+ * │                D13 Green LED | D12 Red LED | D10 Trig | D8 Echo             │
+ * │                                                                             │
+ * │  Technology:   Vanilla JavaScript (ES6+), Web Audio API                     │
+ * │  Released:     September 08, 2023                                           │
+ * │  License:      MIT                                                          │
+ * └──────────────────────────────────────────────────────────────────────────────┘ */
 
 'use strict';
 
-// ─── STATE ───────────────────────────────────────────────────────────────────
+// ─── SIMULATION STATE ────────────────────────────────────────────────────────
+// Central state object holding all runtime values for the ACC simulation.
+// Mode codes: 0 = Normal (manual), 1 = Cruise Control, 2 = Adaptive Cruise.
 const S = {
     speed: 0,
-    mode: 0,           // 0: Normal, 1: Cruise, 2: Adaptive
-    distance: 0.50,
-    constant: 0,       // Cruise target (cached on ACC activation)
-    D13: false,        // Green LED
-    D12: false,        // Red LED
-    running: false,
-    lastLog: '',       // Suppression of duplicate logs
-    pins: { A0: 0, A1: 0, A2: 0, A3: 0, A4: 0 },
-    hornBlinking: false, // Flag to prevent blink overlap
+    mode: 0,           // Active operating mode (0: Normal, 1: Cruise, 2: Adaptive)
+    distance: 0.50,    // HC-SR04 ultrasonic sensor reading in meters
+    constant: 0,       // Cruise target speed, captured at the moment of ACC activation
+    D13: false,        // Green LED (D13) — illuminates during acceleration
+    D12: false,        // Red LED (D12) — illuminates during braking or vehicle stop
+    running: false,    // Whether the simulation control loop is active
+    lastLog: '',       // Tracks the most recent log message to suppress duplicates
+    pins: { A0: 0, A1: 0, A2: 0, A3: 0, A4: 0 },  // Simulated analog pin voltage levels (0–5V)
+    hornBlinking: false, // Prevents overlapping headlight flash sequences during horn
 };
 
-// ─── DOM ─────────────────────────────────────────────────────────────────────
+// ─── DOM ELEMENT REFERENCES ─────────────────────────────────────────────────
+// Cached references to all interactive DOM elements. Using a single lookup
+// on initialization avoids repeated querySelector calls during the control loop.
 const $ = id => document.getElementById(id);
 
 const D = {
@@ -50,13 +67,15 @@ const D = {
     laneStrip: $('lane-strip'),
 };
 
-// Pin bar refs
+// Analog pin bar fill elements (A0–A4), used to visualize active pin states.
 const PF = {
     A0: $('pf-a0'), A1: $('pf-a1'), A2: $('pf-a2'), A3: $('pf-a3'), A4: $('pf-a4'),
 };
 
 
-// ─── THEME ───────────────────────────────────────────────────────────────────
+// ─── THEME MANAGEMENT ───────────────────────────────────────────────────────
+// Handles dark/light theme persistence using localStorage and updates the
+// toggle icon accordingly. Preference is stored under the key 'acc-theme'.
 function initTheme() {
     const saved = localStorage.getItem('acc-theme');
     if (saved) document.documentElement.setAttribute('data-theme', saved);
@@ -78,9 +97,14 @@ function updateThemeIcon() {
 }
 
 
-// ─── SERIAL LOGGER ───────────────────────────────────────────────────────────
+// ─── SERIAL MONITOR LOGGER ──────────────────────────────────────────────────
+// Appends a timestamped log entry to the serial monitor panel. Each entry
+// includes a high-resolution timestamp (HH:MM:SS.mmm) and a CSS class
+// for color-coding: 'info', 'success', 'warn', 'danger', or 'sys'.
+// Duplicate consecutive messages are suppressed to reduce visual noise.
+// The buffer is capped at 100 entries to maintain rendering performance.
 function log(msg, cls = 'info') {
-    // Suppress duplicate rapid-fire logs from the engine loop
+    // Skip if this message is identical to the previous entry
     if (msg === S.lastLog) return;
     S.lastLog = msg;
 
@@ -95,7 +119,10 @@ function log(msg, cls = 'info') {
 }
 
 
-// ─── HORN SOUND (Web Audio API) ─────────────────────────────────────────────
+// ─── HORN SOUND ─────────────────────────────────────────────────────────────
+// Generates a dual-tone car horn using the Web Audio API (F + A notes).
+// Simultaneously triggers a double-flash on the ACC vehicle's headlights.
+// Audio is fail-safe — gracefully catches blocked or unsupported contexts.
 function playHorn() {
     try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -118,12 +145,12 @@ function playHorn() {
         };
 
         const now = ctx.currentTime;
-        // Dual-tone car horn (Standard F & A notes)
+        // Standard automotive dual-tone horn: F (340 Hz) and A (420 Hz)
         playTone(340, 'triangle', now, 0.4, 0.15);
         playTone(420, 'triangle', now, 0.4, 0.15);
         log('ACC Vehicle Horn: HOOOOONK! 🔊', 'sys');
 
-        // Fail-proof blinking logic (Flash twice)
+        // Double-flash headlight sequence (150ms on, 150ms off, 150ms on)
         if (!S.hornBlinking) {
             S.hornBlinking = true;
             const hl = D.egoCar.querySelectorAll('.headlight');
@@ -140,7 +167,10 @@ function playHorn() {
     }
 }
 
-// ─── CINEMATIC FX (Thakur Engineering Protocol) ──────────────────────────────
+// ─── CINEMATIC SEQUENCE ─────────────────────────────────────────────────────
+// Hidden Easter egg sequence activated by typing 'amey'. Plays a power-up
+// sound effect, overlays a holographic blueprint view of the ACC algorithm,
+// and streams the algorithm pseudocode into the serial monitor.
 function playPowerUpSound() {
     try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -217,7 +247,7 @@ function startCinematic() {
 
     playPowerUpSound();
 
-    // Stream algorithm into Serial Monitor only
+    // Stream algorithm lines into the serial monitor at 150ms intervals
     let line = 0;
     const streamInterval = setInterval(() => {
         if (line < algorithm.length) {
@@ -239,14 +269,18 @@ function startCinematic() {
 }
 
 
-// ─── LCD ─────────────────────────────────────────────────────────────────────
+// ─── LCD DISPLAY ────────────────────────────────────────────────────────────
+// Updates the simulated 16×2 character LCD. Row 1 typically shows the mode
+// label; Row 2 shows the current speed or status value.
 function lcd(r1, r2) {
     D.lcd1.textContent = r1;
     D.lcd2.textContent = r2;
 }
 
 
-// ─── PIN WRITES ──────────────────────────────────────────────────────────────
+// ─── DIGITAL PIN CONTROL ────────────────────────────────────────────────────
+// Sets simulated digital pin states (D12, D13) and refreshes the hardware
+// panel to reflect LED, sensor cone, headlight, and tail light states.
 function setPin(pin, val) {
     S[pin] = !!val;
 }
@@ -259,27 +293,27 @@ function refreshHW() {
     D.ledT.className = 'hw-led cyan' + (sensor ? ' on' : '');
     D.ledE.className = 'hw-led cyan' + (sensor ? ' on' : '');
 
-    // Sensor cone
+    // HC-SR04 sensor cone visibility and danger state
     const danger = S.distance < 0.3;
     D.sensorCone.className = 'sensor-cone' +
         (sensor ? ' on' : '') +
         (sensor && danger ? ' danger' : '');
 
-    // Headlights (ACC follows D13, Lead is constant)
+    // Headlights: ACC vehicle follows D13 state; lead vehicle stays on
     const egoHL = D.egoCar.querySelectorAll('.headlight');
     egoHL.forEach(h => h.classList.toggle('on', S.D13));
 
     const leadHL = D.leadCar.querySelectorAll('.headlight');
     leadHL.forEach(h => h.classList.add('on'));
 
-    // Tail lights (ACC follows D12, Lead follows proximity sensor)
+    // Tail lights: ACC vehicle follows D12 (brake); lead follows proximity
     const egoTL = D.egoCar.querySelectorAll('.tail-light');
     egoTL.forEach(t => t.classList.toggle('on', S.D12));
 
     const leadTL = D.leadCar.querySelectorAll('.tail-light');
     leadTL.forEach(t => t.classList.toggle('on', danger));
 
-    // Distance label
+    // Distance label overlay (visible only in Adaptive Mode)
     D.distLabel.className = sensor ? 'show' : '';
 }
 
@@ -290,7 +324,9 @@ function refreshPinBars(active) {
 }
 
 
-// ─── GAUGE ───────────────────────────────────────────────────────────────────
+// ─── SPEEDOMETER GAUGE ──────────────────────────────────────────────────────
+// Updates the SVG arc gauge. The arc length is proportional to the current
+// speed (0–80 km/h range). Stroke color shifts at 20 and 50 km/h thresholds.
 const ARC_LEN = 157;
 
 function refreshGauge() {
@@ -311,7 +347,9 @@ function refreshGauge() {
 }
 
 
-// ─── DISTANCE LOGIC ──────────────────────────────────────────────────────────
+// ─── HC-SR04 DISTANCE SENSOR ────────────────────────────────────────────────
+// Reads the slider value (0–100), converts it to meters (0.00–1.00m),
+// and updates all distance displays across the dashboard.
 function refreshSensor() {
     const v = parseInt(D.distSlider.value);
     S.distance = v / 100;
@@ -323,14 +361,16 @@ function refreshSensor() {
 }
 
 
-// ─── ROAD ────────────────────────────────────────────────────────────────────
+// ─── ROAD VISUALIZATION ────────────────────────────────────────────────────
+// Positions the lead vehicle on the road based on the distance reading.
+// Adjusts the lane marker animation speed proportional to vehicle velocity.
 function refreshRoad() {
     const pos = 42 + (S.distance * 38);
     D.leadCar.style.left = pos + '%';
 
     if (S.speed > 0) {
-        // GPU-accelerated speed mapping: duration = distance / speed
-        // This curve is optimized for a butter-smooth high-fidelity feel
+        // Lane marker scroll rate: inversely proportional to speed.
+        // Lower duration values produce faster visual scrolling.
         const dur = Math.max(0.1, 2.0 - (S.speed / 45));
         D.laneStrip.style.setProperty('--road-speed', dur + 's');
         D.laneStrip.style.animationPlayState = 'running';
@@ -340,7 +380,10 @@ function refreshRoad() {
 }
 
 
-// ─── TELEMETRY & STATUS ──────────────────────────────────────────────────────
+// ─── TELEMETRY AND STATUS BAR ───────────────────────────────────────────────
+// Refreshes the telemetry panel (mode, code, target, distance) and updates
+// the status bar text and indicator dot color. Status keys map to predefined
+// descriptive messages for each operational state.
 const MODE_NAMES = ['Normal', 'Cruise', 'Adaptive'];
 const MODE_CLASSES = ['', 'cruise', 'adaptive'];
 const MODE_BTN_CLASSES = ['m0-active', 'm1-active', 'm2-active'];
@@ -381,11 +424,14 @@ function setStatus(key, extra = '') {
 }
 
 
-// ─── CORE ACC ENGINE ─────────────────────────────────────────────────────────
+// ─── CORE ACC ENGINE ────────────────────────────────────────────────────────
+// Main control loop tick function. Executes one iteration of the ACC
+// algorithm based on the current mode and pin input states. This is a
+// direct port of the MATLAB control logic (Adaptive Cruise Control.m).
 function tick() {
     if (!S.running) return;
 
-    // MODE 0: NORMAL
+    // Mode 0 — Normal: Manual acceleration and braking via analog pins A0/A1.
     if (S.mode === 0) {
         if (S.pins.A0 >= 4) {
             setPin('D13', 1); setPin('D12', 0);
@@ -409,7 +455,7 @@ function tick() {
         lcd('Vehicle Speed:', String(S.speed));
     }
 
-    // MODE 1: CRUISE CONTROL
+    // Mode 1 — Cruise Control: Speed is held constant. Manual override is allowed.
     else if (S.mode === 1) {
         if (S.pins.A0 >= 4) {
             setPin('D13', 1); setPin('D12', 0);
@@ -432,7 +478,9 @@ function tick() {
         lcd('Cruise Mode:', String(S.speed));
     }
 
-    // MODE 2: ADAPTIVE CRUISE
+    // Mode 2 — Adaptive Cruise: Speed auto-adjusts based on HC-SR04 distance.
+    // If distance < 0.30m (danger zone), the vehicle decelerates.
+    // Otherwise, speed ramps back toward the stored cruise target.
     else if (S.mode === 2) {
         setPin('D13', 1); setPin('D12', 0);
 
@@ -472,7 +520,9 @@ function refreshAll() {
 }
 
 
-// ─── SPEED CONTROLS (hold-to-repeat) ─────────────────────────────────────────
+// ─── SPEED CONTROLS ─────────────────────────────────────────────────────────
+// Hold-to-repeat acceleration and braking. Pressing and holding the speed
+// buttons triggers tick() at 130ms intervals for continuous speed change.
 let spdInt = null;
 
 function startSpeed(pin) {
@@ -489,7 +539,7 @@ function stopSpeed(pin) {
     spdInt = null;
 }
 
-// Mouse
+// Mouse event bindings for speed buttons
 D.btnUp.addEventListener('mousedown', e => { e.preventDefault(); D.btnUp.classList.add('pressed'); startSpeed('A0'); });
 D.btnUp.addEventListener('mouseup', () => { D.btnUp.classList.remove('pressed'); stopSpeed('A0'); });
 D.btnUp.addEventListener('mouseleave', () => { D.btnUp.classList.remove('pressed'); stopSpeed('A0'); });
@@ -498,14 +548,17 @@ D.btnDown.addEventListener('mousedown', e => { e.preventDefault(); D.btnDown.cla
 D.btnDown.addEventListener('mouseup', () => { D.btnDown.classList.remove('pressed'); stopSpeed('A1'); });
 D.btnDown.addEventListener('mouseleave', () => { D.btnDown.classList.remove('pressed'); stopSpeed('A1'); });
 
-// Touch
+// Touch event bindings for speed buttons (mobile support)
 D.btnUp.addEventListener('touchstart', e => { e.preventDefault(); D.btnUp.classList.add('pressed'); startSpeed('A0'); });
 D.btnUp.addEventListener('touchend', () => { D.btnUp.classList.remove('pressed'); stopSpeed('A0'); });
 D.btnDown.addEventListener('touchstart', e => { e.preventDefault(); D.btnDown.classList.add('pressed'); startSpeed('A1'); });
 D.btnDown.addEventListener('touchend', () => { D.btnDown.classList.remove('pressed'); stopSpeed('A1'); });
 
 
-// ─── MODE BUTTONS ────────────────────────────────────────────────────────────
+// ─── MODE SELECTION BUTTONS ─────────────────────────────────────────────────
+// Each mode button writes 5V to its corresponding analog pin, switches
+// the operating mode, logs the transition, and triggers a single tick.
+// The pin flash lasts 250ms to provide visual feedback.
 D.btnM0.addEventListener('click', () => {
     S.pins.A2 = 5; refreshPinBars('A2');
     S.mode = 0;
@@ -536,11 +589,14 @@ D.btnM2.addEventListener('click', () => {
 });
 
 
-// ─── DISTANCE SLIDER ─────────────────────────────────────────────────────────
+// ─── DISTANCE SLIDER ────────────────────────────────────────────────────────
+// Direct slider input handler for the HC-SR04 distance sensor simulation.
 D.distSlider.addEventListener('input', () => { refreshSensor(); refreshHW(); });
 
 
-// ─── DISTANCE BUTTONS (← Closer / → Farther) ────────────────────────────────
+// ─── DISTANCE STEP BUTTONS ──────────────────────────────────────────────────
+// Hold-to-repeat distance adjustment. Each step changes the slider by ±2
+// units (0.02m). Holding the button repeats at 100ms intervals.
 let distInt = null;
 
 function stepDistance(delta) {
@@ -560,14 +616,14 @@ function stopDist(btn) {
     clearInterval(distInt); distInt = null;
 }
 
-// Closer
+// Closer button bindings (mouse + touch)
 D.btnCloser.addEventListener('mousedown', e => { e.preventDefault(); startDist(-2, D.btnCloser); });
 D.btnCloser.addEventListener('mouseup', () => stopDist(D.btnCloser));
 D.btnCloser.addEventListener('mouseleave', () => stopDist(D.btnCloser));
 D.btnCloser.addEventListener('touchstart', e => { e.preventDefault(); startDist(-2, D.btnCloser); });
 D.btnCloser.addEventListener('touchend', () => stopDist(D.btnCloser));
 
-// Farther
+// Farther button bindings (mouse + touch)
 D.btnFarther.addEventListener('mousedown', e => { e.preventDefault(); startDist(2, D.btnFarther); });
 D.btnFarther.addEventListener('mouseup', () => stopDist(D.btnFarther));
 D.btnFarther.addEventListener('mouseleave', () => stopDist(D.btnFarther));
@@ -575,7 +631,9 @@ D.btnFarther.addEventListener('touchstart', e => { e.preventDefault(); startDist
 D.btnFarther.addEventListener('touchend', () => stopDist(D.btnFarther));
 
 
-// ─── KEYBOARD ────────────────────────────────────────────────────────────────
+// ─── KEYBOARD INPUT HANDLING ────────────────────────────────────────────────
+// Maps keyboard keys to simulation controls. Arrow keys and WASD control
+// speed and distance; number keys 1/2/3 switch operating modes.
 document.addEventListener('keydown', e => {
     if (!S.running) return;
     if (e.repeat) return;
@@ -616,7 +674,10 @@ document.addEventListener('keyup', e => {
 });
 
 
-// ─── NATURAL DRAG ───────────────────────────────────────────────────────────
+// ─── KINETIC DRAG (Normal Mode Only) ────────────────────────────────────────
+// In Normal Mode, speed gradually decreases by 1 km/h every 1.5 seconds
+// when no acceleration or braking input is active. This simulates natural
+// deceleration due to rolling resistance and aerodynamic drag.
 setInterval(() => {
     if (!S.running || S.mode !== 0) return;
     if (S.pins.A0 >= 4 || S.pins.A1 >= 4) return;
@@ -637,7 +698,10 @@ setInterval(() => {
 }, 1500);
 
 
-// ─── ADAPTIVE AUTO-CYCLE ────────────────────────────────────────────────────
+// ─── ADAPTIVE MODE AUTO-CYCLE ───────────────────────────────────────────────
+// In Adaptive Cruise Mode, the control loop runs automatically every 500ms.
+// This interval re-reads the distance sensor and adjusts speed accordingly,
+// independent of any manual input.
 setInterval(() => {
     if (!S.running || S.mode !== 2) return;
     refreshSensor();
@@ -645,11 +709,14 @@ setInterval(() => {
 }, 500);
 
 
-// ─── THEME TOGGLE ────────────────────────────────────────────────────────────
+// ─── THEME TOGGLE BINDING ───────────────────────────────────────────────────
 D.themeToggle.addEventListener('click', toggleTheme);
 
 
-// ─── STARTUP SEQUENCE ────────────────────────────────────────────────────────
+// ─── BOOT SEQUENCE ──────────────────────────────────────────────────────────
+// Initializes the serial monitor with system identification, displays
+// the LCD welcome screen, shows team information, and activates the
+// control loop after a staged 5.5-second startup delay.
 function boot() {
     log('═══════════════════════════════════════', 'info');
     log('Adaptive Cruise Control · Simulation', 'info');
@@ -684,9 +751,12 @@ function boot() {
 }
 
 
-// ─── INIT ────────────────────────────────────────────────────────────────────
+// ─── APPLICATION INITIALIZATION ─────────────────────────────────────────────
+// Entry point. Runs the loading screen animation, initializes theme and
+// sensor state, binds the cinematic Easter egg, and sets up the horn
+// interaction. The boot() sequence is triggered once the loader completes.
 document.addEventListener('DOMContentLoaded', () => {
-    // ── Loading Screen ──
+    // Loading screen progress bar animation (synced with 3-second CSS car drive)
     const loaderScreen = document.getElementById('loader-screen');
     const loaderBar = document.getElementById('loader-bar');
     const loadDuration = 3000; // 3 seconds — synced with car animation
@@ -700,24 +770,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (progress < 100) {
             requestAnimationFrame(animateLoader);
         } else {
-            // Loading complete — fade out
+            // Progress complete — fade out overlay and start simulation
             setTimeout(() => {
                 loaderScreen.classList.add('fade');
                 loaderScreen.addEventListener('transitionend', () => {
                     loaderScreen.remove();
                 }, { once: true });
-                // Start simulation
+                // Begin the ACC boot sequence after loader exits
                 boot();
             }, 300);
         }
     }
     requestAnimationFrame(animateLoader);
 
-    // Security: Anti-right-click & Anti-select
+    // Disable right-click context menu and text selection for kiosk-style UX
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('selectstart', e => e.preventDefault());
 
-    // Easter Egg
+    // Developer console branding
     console.log(
         "%c🚘 Adaptive Cruise Control",
         "color: #3b82f6; font-size: 24px; font-weight: 800; font-family: 'Inter', sans-serif;"
@@ -742,7 +812,7 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshSensor();
     refreshRoad();
 
-    // Cinematic Easter Egg — type "amey" to trigger
+    // Cinematic Easter egg: typing 'amey' triggers the holographic sequence
     let eggBuffer = '';
     let eggTimer = null;
     document.addEventListener('keydown', (e) => {
@@ -755,7 +825,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Horn interaction (ACC vehicle only)
+    // Horn interaction: clicking the ACC vehicle body triggers a dual-tone horn
     const egoBody = D.egoCar.querySelector('.car-body');
     if (egoBody) {
         egoBody.addEventListener('click', () => {
