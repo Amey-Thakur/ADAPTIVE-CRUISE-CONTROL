@@ -1,7 +1,6 @@
 /* =========================================================================================
-   ADAPTIVE CRUISE CONTROL — v6
-   2 Lanes · 2 Cars · Lane Changing · Overtaking
-   Readable panels · Meaningful tooltips
+   ADAPTIVE CRUISE CONTROL — v7
+   Single Lane · Original Layout · Premium Aesthetics
    ========================================================================================= */
 
 /* ── DARK THEME ── */
@@ -287,7 +286,7 @@ body {
 
 
 /* =========================================================================================
-   ROAD — 2 Lanes
+   ROAD (Single Lane)
    ========================================================================================= */
 #road-section {
   background: var(--bg2);
@@ -302,7 +301,7 @@ body {
 #road {
   position: relative;
   width: 100%;
-  height: 155px;
+  height: 130px;
   background: var(--road-bg);
   overflow: hidden;
 }
@@ -336,7 +335,7 @@ body {
   box-shadow: 0 0 8px rgba(217, 119, 6, .3)
 }
 
-.lane-markers.center-lane {
+.lane-markers {
   position: absolute;
   top: 50%;
   left: 0;
@@ -368,40 +367,14 @@ body {
   }
 }
 
-.lane-label {
-  position: absolute;
-  left: 6px;
-  font-size: .38rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  color: rgba(255, 255, 255, .12);
-  z-index: 2;
-  user-select: none;
-}
-
-.lane-label.top-label {
-  top: 16px
-}
-
-.lane-label.bottom-label {
-  bottom: 16px
-}
-
 /* Cars */
 .car {
   position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
   z-index: 5;
   text-align: center;
-  transition: top .4s cubic-bezier(.4, 0, .2, 1), left .3s ease
-}
-
-.car.lane-top {
-  top: 18%
-}
-
-.car.lane-bottom {
-  top: 58%
+  transition: left .3s ease;
 }
 
 #lead-car {
@@ -412,12 +385,10 @@ body {
   left: 18%
 }
 
-
-
 .car-body {
   position: relative;
-  width: 88px;
-  height: 35px
+  width: 80px;
+  height: 32px
 }
 
 .car-body::before {
@@ -426,7 +397,7 @@ body {
   bottom: 4px;
   left: 4px;
   right: 4px;
-  height: 17px;
+  height: 16px;
   border-radius: 4px 4px 3px 3px;
   z-index: 1;
 }
@@ -442,14 +413,12 @@ body {
   box-shadow: 0 0 14px var(--car-ego-glow)
 }
 
-
-
 .car-top {
   position: absolute;
-  bottom: 17px;
+  bottom: 16px;
   left: 22%;
   width: 56%;
-  height: 15px;
+  height: 14px;
   border-radius: 9px 9px 0 0;
   z-index: 2
 }
@@ -466,14 +435,12 @@ body {
   border-bottom: none
 }
 
-
-
 .car-window {
   position: absolute;
-  bottom: 19px;
+  bottom: 18px;
   left: 26%;
   width: 22%;
-  height: 10px;
+  height: 9px;
   background: rgba(148, 200, 255, .2);
   border-radius: 5px 3px 0 0;
   z-index: 3;
@@ -484,10 +451,10 @@ body {
 .car-body::after {
   content: '';
   position: absolute;
-  bottom: 19px;
+  bottom: 18px;
   left: 52%;
   width: 20%;
-  height: 10px;
+  height: 9px;
   background: rgba(148, 200, 255, .15);
   border-radius: 3px 5px 0 0;
   z-index: 3;
@@ -498,8 +465,8 @@ body {
 .car-wheel {
   position: absolute;
   bottom: 0;
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   background: radial-gradient(circle at 40% 40%, #3a3a4a, #111);
   border: 2px solid #2a2a3a;
@@ -513,8 +480,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 4px;
-  height: 4px;
+  width: 3px;
+  height: 3px;
   border-radius: 50%;
   background: #555
 }
@@ -563,7 +530,7 @@ body {
 
 .headlight.l {
   right: 4px;
-  bottom: 13px
+  bottom: 12px
 }
 
 .headlight.r {
@@ -580,7 +547,7 @@ body {
   display: block;
   margin-top: 1px;
   font-size: .44rem;
-  color: var(--road-dash);
+  color: var(--text4);
   text-transform: uppercase;
   letter-spacing: .1em;
   font-weight: 600
@@ -675,7 +642,6 @@ body {
   overflow: hidden;
 }
 
-/* Left Column — fills height */
 #left-col {
   display: flex;
   flex-direction: column;
@@ -740,7 +706,6 @@ body {
   font-weight: 600
 }
 
-/* ── LCD — READABLE ── */
 #lcd {
   background: var(--lcd-bg);
   border-radius: 5px;
@@ -755,7 +720,7 @@ body {
 
 .lcd-line {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .92rem;
+  font-size: .9rem;
   font-weight: 700;
   color: var(--lcd-text);
   text-shadow: 0 0 6px var(--lcd-glow), 0 0 14px var(--lcd-glow);
@@ -766,7 +731,6 @@ body {
   line-height: 1.35;
 }
 
-/* ── Gauge ── */
 #gauge {
   display: flex;
   justify-content: center;
@@ -794,7 +758,6 @@ body {
   font-weight: 500
 }
 
-/* ── Telemetry — READABLE ── */
 #info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -826,7 +789,7 @@ body {
 
 .info-val {
   display: block;
-  font-size: .82rem;
+  font-size: .8rem;
   font-weight: 700;
   color: var(--text)
 }
@@ -835,7 +798,6 @@ body {
   font-family: 'JetBrains Mono', monospace
 }
 
-/* ── Arduino HW — READABLE ── */
 #hw-grid {
   display: flex;
   gap: .4rem;
@@ -857,12 +819,12 @@ body {
   font-size: .4rem;
   color: var(--text4);
   text-transform: uppercase;
-  white-space: nowrap;
+  white-space: nowrap
 }
 
 .hw-led {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--bg3);
   border: 1px solid var(--border);
@@ -933,13 +895,11 @@ body {
   background: var(--green)
 }
 
-
-/* ── Controls ── */
 #controls-area {
   display: flex;
   flex-direction: column;
   gap: .3rem;
-  flex-shrink: 0;
+  flex-shrink: 0
 }
 
 #arrow-grid {
@@ -1047,26 +1007,6 @@ body {
 .btn-arrow-key.dist-far.pressed {
   border-color: var(--cyan);
   box-shadow: 0 0 10px rgba(6, 182, 212, .1)
-}
-
-.btn-arrow-key.lane-up {
-  color: var(--purple)
-}
-
-.btn-arrow-key.lane-up:hover,
-.btn-arrow-key.lane-up.pressed {
-  border-color: var(--purple);
-  box-shadow: 0 0 10px rgba(168, 85, 247, .1)
-}
-
-.btn-arrow-key.lane-dn {
-  color: var(--purple)
-}
-
-.btn-arrow-key.lane-dn:hover,
-.btn-arrow-key.lane-dn.pressed {
-  border-color: var(--purple);
-  box-shadow: 0 0 10px rgba(168, 85, 247, .1)
 }
 
 #mode-row {
@@ -1239,8 +1179,6 @@ input[type="range"]::-moz-range-thumb {
   color: var(--green)
 }
 
-
-/* ── Serial Monitor ── */
 #serial-col {
   background: var(--bg2);
   border: 1px solid var(--border);
@@ -1308,10 +1246,6 @@ input[type="range"]::-moz-range-thumb {
   color: var(--purple)
 }
 
-
-/* =========================================================================================
-   FOOTER
-   ========================================================================================= */
 #footer {
   padding: .4rem 1.25rem;
   text-align: center;
@@ -1336,10 +1270,6 @@ input[type="range"]::-moz-range-thumb {
   text-decoration: underline
 }
 
-
-/* =========================================================================================
-   RESPONSIVE
-   ========================================================================================= */
 @media(max-width:1024px) {
   body {
     height: auto;
@@ -1407,11 +1337,11 @@ input[type="range"]::-moz-range-thumb {
   }
 
   #road {
-    height: 130px
+    height: 110px
   }
 
   .car-body {
-    width: 65px;
+    width: 70px;
     height: 28px
   }
 
