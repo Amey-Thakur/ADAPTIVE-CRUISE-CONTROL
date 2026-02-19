@@ -553,6 +553,12 @@ body {
   box-shadow: 0 0 8px #fffef0, 0 0 18px rgba(255, 254, 240, .4)
 }
 
+.headlight.flash {
+  background: #fff !important;
+  box-shadow: 0 0 20px #fff, 0 0 40px rgba(255, 255, 255, 1) !important;
+  transition: none !important;
+}
+
 .car-tag {
   display: block;
   margin-top: 1px;
