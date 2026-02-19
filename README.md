@@ -10,7 +10,7 @@
 
   An Adaptive Cruise Control (ACC) system developed as a **2nd-Semester Project** for the **MEng Computer Engineering** program. This implementation utilizes MATLAB and Arduino to demonstrate real-time sensory feedback, automated speed regulation, and proximity-aware safety logic.
 
-  **[Source Code](Source%20Code/)** &nbsp;·&nbsp; **[Technical Specification](docs/SPECIFICATION.md)** &nbsp;·&nbsp; **[ACC Algorithm](Source%20Code/Adaptive%20Cruise%20Control%20Algorithm.txt)** &nbsp;·&nbsp; **[Final Report](Matlab%20Project/Final%20Report/Adaptive%20Cruise%20Control%20Final%20Report.pdf)**
+  **[Source Code](Source%20Code/)** &nbsp;·&nbsp; **[Technical Specification](docs/SPECIFICATION.md)** &nbsp;·&nbsp; **[ACC Algorithm](Source%20Code/Adaptive%20Cruise%20Control%20Algorithm.txt)** &nbsp;·&nbsp; **[Project Report](Matlab%20Project/Final%20Report/Adaptive%20Cruise%20Control%20Final%20Report.pdf)**
 
   <img src="Source Code/figures/Adaptive Cruise Control Overview.jpg" width="80%" alt="ACC Overview">
 
@@ -56,7 +56,7 @@ The **Adaptive Cruise Control (ACC)** system is a sophisticated embedded control
 
 | # | Resource | Description |
 |---|---|---|
-| 1 | [Final Project Report](Matlab%20Project/Final%20Report/Adaptive%20Cruise%20Control%20Final%20Report.pdf) | Comprehensive academic report on system design and results |
+| 1 | [Project Report](Matlab%20Project/Final%20Report/Adaptive%20Cruise%20Control%20Final%20Report.pdf) | Comprehensive academic report on system design and results |
 | 2 | [Technical Specification](docs/SPECIFICATION.md) | Technical architecture and control logic specification |
 | 3 | [ACC Algorithm](Source%20Code/Adaptive%20Cruise%20Control%20Algorithm.txt) | Step-by-step logic for speed and proximity regulation |
 | 4 | [Source Code](Source%20Code/Adaptive%20Cruise%20Control.m) | Primary MATLAB implementation script |
