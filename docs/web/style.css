@@ -640,8 +640,8 @@ body {
   flex: 1;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
-  gap: .75rem;
-  padding: .75rem 1.25rem;
+  gap: .5rem;
+  padding: .5rem 1rem;
   min-height: 0;
   overflow: hidden;
 }
@@ -657,13 +657,13 @@ body {
 #instruments-top {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: .75rem;
+  gap: .5rem;
 }
 
 #instruments-bottom {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: .75rem;
+  gap: .5rem;
 }
 
 .panel {
@@ -914,12 +914,12 @@ body {
 #controls-area {
   display: flex;
   flex-direction: column;
-  gap: .75rem;
+  gap: .5rem;
 }
 
 #arrow-grid {
   display: flex;
-  gap: .75rem;
+  gap: .5rem;
 }
 
 .arrow-group {
