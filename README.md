@@ -4,7 +4,7 @@
 
   [![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
   ![Status](https://img.shields.io/badge/Status-Completed-success)
-  ![MATLAB](https://img.shields.io/badge/MATLAB-R2023a-blue?style=flat&logo=mathworks&logoColor=white)
+  ![MATLAB](https://img.shields.io/badge/MATLAB-R2023a-%23ED1C24?style=flat&logo=mathworks&logoColor=white)
   [![Developed by Amey Thakur](https://img.shields.io/badge/Developed%20by-Amey%20Thakur-blue.svg)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL)
 
   A high-fidelity Adaptive Cruise Control (ACC) system developed as a **2nd-Semester Project** for the **MEng Computer Engineering** program. This implementation utilizes MATLAB and Arduino to demonstrate real-time sensory feedback, automated speed regulation, and proximity-aware safety logic.
