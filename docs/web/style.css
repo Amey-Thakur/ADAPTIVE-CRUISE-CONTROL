@@ -1429,6 +1429,10 @@ input[type="range"]::-moz-range-thumb {
 }
 
 @media(max-width:1024px) {
+  html {
+    font-size: 16px;
+  }
+
   body {
     height: auto;
     overflow-x: hidden;
@@ -1507,6 +1511,10 @@ input[type="range"]::-moz-range-thumb {
 }
 
 @media(max-width:640px) {
+  html {
+    font-size: 15px;
+  }
+
   #header {
     padding: .4rem .75rem;
     flex-direction: column;
@@ -1550,13 +1558,13 @@ input[type="range"]::-moz-range-thumb {
   }
 
   #mode-row {
-    flex-direction: column;
+    flex-direction: row;
     gap: .4rem;
   }
 
   .btn {
-    padding: .8rem;
-    font-size: .95rem;
+    padding: .5rem .6rem;
+    font-size: .9rem;
   }
 
   #arrow-grid {
@@ -1565,7 +1573,7 @@ input[type="range"]::-moz-range-thumb {
   }
 
   .arrow-group {
-    height: 90px;
+    height: 80px;
     padding: .4rem;
   }
 
@@ -1574,9 +1582,9 @@ input[type="range"]::-moz-range-thumb {
   }
 
   .btn-arrow-key {
-    width: 60px;
-    height: 52px;
-    font-size: 1.3rem;
+    width: 55px;
+    height: 45px;
+    font-size: 1.2rem;
   }
 
   .btn-arrow-key kbd {
