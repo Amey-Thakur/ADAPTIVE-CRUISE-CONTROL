@@ -75,7 +75,7 @@ The **Adaptive Cruise Control (ACC)** system is a sophisticated embedded control
 | **Normal Mode** | Manual velocity regulation via potentiometers with simulated kinetic drag. |
 | **Cruise Control** | Automated maintenance of a user-defined target velocity. |
 | **Adaptive Logic** | Proximity-aware deceleration when safety buffers are breached (< 0.3m). |
-| **Real-time Feedback** | High-fidelity LCD telemetry showing vehicle speed and operational mode. |
+| **Real-time Feedback** | Standard LCD telemetry showing vehicle speed and operational mode. |
 | **Safety Indicators** | Dual-LED system for real-time acceleration (Green) and braking (Red) status. |
 | **Hardware Integration** | Direct interface with Arduino Uno and HC-SR04 Ultrasonic sensors. |
 
@@ -177,14 +177,14 @@ ADAPTIVE-CRUISE-CONTROL/
 <div align="center">
 
   ### Circuit View
-  *High-fidelity virtual breadboard layout demonstrating sensor-to-controller mapping.*
+  *Detailed virtual breadboard layout demonstrating sensor-to-controller mapping.*
   <br><br>
-  <img src="Source Code/figures/Tinkercad Simulation/01 - Circuit View.jpg" width="80%" alt="Circuit View">
+  <img src="Source Code/figures/Tinkercad Simulation/01 - Circuit View.jpg" width="90%" alt="Circuit View">
 
   ### Schematic View
   *Electrical representation of the ACC logic, highlighting terminal interconnectivity.*
   <br><br>
-  <img src="Source Code/figures/Tinkercad Simulation/02 - Schematic View.jpg" width="80%" alt="Schematic View">
+  <img src="Source Code/figures/Tinkercad Simulation/02 - Schematic View.jpg" width="90%" alt="Schematic View">
 
   ### Simulation Logic
   *Visualizing discrete state transitions between manual cruise and autonomous adaptive speed control.*
@@ -209,7 +209,7 @@ ADAPTIVE-CRUISE-CONTROL/
   ### Physical Circuit Connections
   *Macro-perspective of the finalized Arduino assembly within the hardware enclosure.*
   <br><br>
-  <img src="Source Code/figures/Arduino Working Model/01 - Circuit Connections.jpg" width="80%" alt="Hardware Connections">
+  <img src="Source Code/figures/Arduino Working Model/01 - Circuit Connections.jpg" width="90%" alt="Hardware Connections">
 
   ### Hardware States
   *Real-time performance of the physical system across various cruise and safety scenarios.*
@@ -233,11 +233,11 @@ ADAPTIVE-CRUISE-CONTROL/
 
   ### Project Flowchart
   <br>
-  <img src="Source Code/figures/Adaptive Cruise Control Flowchart.png" width="80%" alt="ACC Flowchart">
+  <img src="Source Code/figures/Adaptive Cruise Control Flowchart.png" width="90%" alt="ACC Flowchart">
 
   ### Gantt Chart
   <br>
-  <img src="Source Code/figures/Project Gantt Chart.jpg" width="80%" alt="Gantt Chart">
+  <img src="Source Code/figures/Project Gantt Chart.jpg" width="90%" alt="Gantt Chart">
 
 </div>
 
