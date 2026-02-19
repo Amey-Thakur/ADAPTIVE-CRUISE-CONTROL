@@ -96,7 +96,7 @@
 }
 
 html {
-  font-size: 15px;
+  font-size: 18px;
   height: 100%
 }
 
@@ -395,7 +395,7 @@ body.cinematic-active #main {
   flex-direction: column;
   gap: .3rem;
   min-height: 0;
-  overflow: hidden;
+  overflow: auto;
 }
 
 
@@ -770,7 +770,7 @@ body.cinematic-active #main {
   gap: .4rem;
   padding: .2rem .75rem;
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 #left-col {
@@ -1054,14 +1054,14 @@ body.cinematic-active #main {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: .6rem;
+  padding: .4rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .4rem;
+  gap: .25rem;
   transition: background .3s, border-color .3s;
-  height: 100px;
+  height: 75px;
   justify-content: center;
 }
 
@@ -1080,13 +1080,13 @@ body.cinematic-active #main {
 }
 
 .btn-arrow-key {
-  width: 80px;
-  height: 64px;
+  width: 65px;
+  height: 48px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--btn-bg);
   color: var(--text);
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -1407,8 +1407,8 @@ input[type="range"]::-moz-range-thumb {
 #footer {
   padding: .25rem 1.25rem;
   text-align: center;
-  border-top: 1px solid var(--border);
-  background: var(--bg2);
+  border-top: none;
+  background: var(--bg);
   flex-shrink: 0;
   transition: background .3s, border-color .3s;
 }
