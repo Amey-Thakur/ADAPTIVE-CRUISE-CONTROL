@@ -1,6 +1,6 @@
 <div align="center">
 
-  # <a href="https://amey-thakur.github.io/ADAPTIVE-CRUISE-CONTROL/"><img src="docs/Matlab Logo.png" width="42" height="42" valign="middle"></a> Adaptive Cruise Control
+  # <a href="https://amey-thakur.github.io/ADAPTIVE-CRUISE-CONTROL/"><img src="docs/Matlab Logo.png" width="60" height="60" valign="middle"></a> Adaptive Cruise Control
 
   [![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
   ![Status](https://img.shields.io/badge/Status-Completed-success)
