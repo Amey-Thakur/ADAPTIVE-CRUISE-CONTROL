@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Off Track | Adaptive Cruise Control</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+
+    <!-- Modern Typography & Iconography -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #080d1a;
+            --bg2: #0f1628;
+            --surface: #1a2340;
+            --text: #f1f5f9;
+            --text2: #94a3b8;
+            --accent: #3b82f6;
+            --red: #ef4444;
+            --amber: #f59e0b;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg: #eef2f7;
+            --bg2: #ffffff;
+            --surface: #ffffff;
+            --text: #0f172a;
+            --text2: #475569;
+            --accent: #2563eb;
+            --red: #dc2626;
+            --amber: #d97706;
+            --border: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Play', sans-serif;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .error-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Road Animation Background */
+        .road-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, var(--bg2) 40.5%, var(--bg2) 60%, transparent 60.5%);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .lane-strip {
+            width: 200%;
+            height: 2px;
+            background-image: linear-gradient(90deg, var(--text2) 0px, var(--text2) 40px, transparent 40px, transparent 80px);
+            background-size: 80px 100%;
+            animation: scroll 1s linear infinite;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-80px);
+            }
+        }
+
+        .error-code {
+            font-size: 10rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin: 0;
+            line-height: 1;
+            position: relative;
+            text-shadow: 4px 4px 0 var(--bg), 8px 8px 0 rgba(59, 130, 246, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .car-icon {
+            font-size: 4rem;
+            color: var(--red);
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.4));
+            transform: rotate(-5deg);
+        }
+
+        .error-message {
+            font-size: 1.5rem;
+            color: var(--text2);
+            margin-top: 10px;
+            margin-bottom: 40px;
+            max-width: 500px;
+            line-height: 1.4;
+        }
+
+        .btn-home {
+            background: var(--accent);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-home:hover {
+            background: transparent;
+            color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+        }
+
+        footer {
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            background: var(--bg2);
+            font-size: 0.9rem;
+            color: var(--text2);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .warning-tape {
+            position: absolute;
+            top: 20px;
+            left: -50px;
+            background: var(--amber);
+            color: #000;
+            padding: 8px 60px;
+            transform: rotate(-30deg);
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 20;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="warning-tape">Out of Range</div>
+
+    <div class="road-bg">
+        <div class="lane-strip"></div>
+    </div>
+
+    <div class="error-container">
+        <div class="car-icon">
+            <i class="fas fa-car-crash"></i>
+        </div>
+        <h1 class="error-code">404</h1>
+        <p class="error-message">
+            Proximity Alert! The page you're looking for is outside the sensory range of our ACC system.
+        </p>
+
+        <a href="index.html" class="btn-home">
+            <i class="fas fa-route"></i> Recalculate Route
+        </a>
+    </div>
+
+    <footer>
+        <p>
+            Designed & Developed by <a href="https://github.com/Amey-Thakur" target="_blank">Amey Thakur</a>
+        </p>
+        <p style="margin-top: 10px; opacity: 0.6; font-size: 0.8rem;">
+            © 2023 Adaptive Cruise Control Project
+        </p>
+    </footer>
+
+    <script>
+        // Sync theme with main app if possible
+        const saved = localStorage.getItem('acc-theme');
+        if (saved) document.documentElement.setAttribute('data-theme', saved);
+    </script>
+</body>
+
+</html>
