@@ -3,11 +3,11 @@
   # <a href="https://amey-thakur.github.io/ADAPTIVE-CRUISE-CONTROL/"><img src="docs/Matlab Logo.png" width="60" height="60" valign="middle"></a> Adaptive Cruise Control
 
   [![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
-  ![Status](https://img.shields.io/badge/Status-Completed-success)
-  ![MATLAB | Simulink](https://img.shields.io/badge/Stack-MATLAB%20%7C%20Simulink-orange?style=flat&logo=mathworks&logoColor=white)
+  ![Status](https://img.shields.io/badge/Status-Completed-2EA043)
+  ![MATLAB | Simulink](https://img.shields.io/badge/Stack-MATLAB%20%7C%20Simulink-8250DF?style=flat&logo=mathworks&logoColor=white)
   ![Arduino](https://img.shields.io/badge/Arduino-Uno-00979D?style=flat)
-  [![Live Demo](https://img.shields.io/badge/Live%20Demo-ACC-dc143c?style=flat)](https://amey-thakur.github.io/ADAPTIVE-CRUISE-CONTROL/)
-  [![Developed by Amey Thakur](https://img.shields.io/badge/Developed%20by-Amey%20Thakur-blue.svg)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL)
+  [![Live Demo](https://img.shields.io/badge/Live%20Demo-ACC-00B8D9?style=flat)](https://amey-thakur.github.io/ADAPTIVE-CRUISE-CONTROL/)
+  [![Developed by Amey Thakur](https://img.shields.io/badge/Developed%20by-Amey%20Thakur-0969DA.svg)](https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL)
 
   An Adaptive Cruise Control (ACC) system developed as a **2nd-Semester Project** for the **MEng Computer Engineering** program. This implementation utilizes MATLAB and Arduino to demonstrate real-time sensory feedback, automated speed regulation, and proximity-aware safety logic.
 
@@ -34,7 +34,7 @@
 
   **University of Windsor | MEng Computer Engineering | Batch of 2024**
 
-| <a href="https://github.com/Amey-Thakur"><img src="https://github.com/Amey-Thakur.png" width="150" height="150" alt="Amey Thakur"></a><br>[**Amey Thakur**](https://github.com/Amey-Thakur)<br><br>[![ORCID](https://img.shields.io/badge/ORCID-0000--0001--5644--1575-green.svg)](https://orcid.org/0000-0001-5644-1575) |
+| <a href="https://github.com/Amey-Thakur"><img src="https://github.com/Amey-Thakur.png" width="150" height="150" alt="Amey Thakur"></a><br>[**Amey Thakur**](https://github.com/Amey-Thakur)<br><br>[![ORCID](https://img.shields.io/badge/ORCID-0000--0001--5644--1575-A6CE39.svg)](https://orcid.org/0000-0001-5644-1575) |
 | :---: |
 
 </div>
@@ -389,7 +389,7 @@ Special thanks to the **mentors** and **peers** whose encouragement, discussions
 <!-- FOOTER SECTION -->
 <div align="center">
 
-  [↑ Back to Top](#adaptive-cruise-control)
+  [↑ Back to Top](#-adaptive-cruise-control)
 
   [Authors](#authors) &nbsp;·&nbsp; [Overview](#overview) &nbsp;·&nbsp; [Features](#features) &nbsp;·&nbsp; [Structure](#project-structure) &nbsp;·&nbsp; [Quick Start](#quick-start) &nbsp;·&nbsp; [Hardware Components](#hardware-components) &nbsp;·&nbsp; [Tinkercad Simulation](#tinkercad-simulation) &nbsp;·&nbsp; [Working Model](#arduino-working-model) &nbsp;·&nbsp; [Development Roadmap](#development-roadmap) &nbsp;·&nbsp; [Usage Guidelines](#usage-guidelines) &nbsp;·&nbsp; [License](#license) &nbsp;·&nbsp; [About](#about-this-repository) &nbsp;·&nbsp; [Acknowledgments](#acknowledgments)
 
@@ -410,3 +410,4 @@ Special thanks to the **mentors** and **peers** whose encouragement, discussions
   *Semester-wise curriculum, laboratories, projects, and academic notes.*
 
 </div>
+
