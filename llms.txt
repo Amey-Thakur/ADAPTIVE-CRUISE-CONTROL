@@ -1,0 +1,32 @@
+# <a href="https://amey-thakur.github.io/ADAPTIVE-CRUISE-CONTROL/"><img src="docs/Matlab Logo.png" width="60" height="60" valign="middle"></a> Adaptive Cruise Control
+
+> Adaptive Cruise Control (ACC) with Arduino, MATLAB, and Simulink |
+> Real-time speed regulation and proximity-based safety system
+
+Author: Amey Thakur, ORCID 0000-0001-5644-1575
+Institution: University of Windsor
+Programme: M.Eng Computer Engineering, Semester II
+Licence: CC BY 4.0, attribution required
+Repository created: 9 August 2023
+Work dated: 8 September 2023
+
+## What is in this repository
+
+- Matlab Project, 16 files
+- Source Code, 32 files
+- docs, 9 files
+
+## Subject terms
+
+adaptive-cruise-control, arduino, arduino-project, arduino-uno,
+automotive-engineering, cruise-control, embedded-systems, matlab,
+matlab-code, meng-ece, simulink, simulink-model, tinkercad,
+ultrasonic-sensor, university-of-windsor, uwindsor
+
+## Where this sits
+
+- This repository: https://github.com/Amey-Thakur/ADAPTIVE-CRUISE-CONTROL
+- Degree index, every subject and project: https://github.com/Amey-Thakur/MENG-COMPUTER-ENGINEERING
+- Project page: https://amey-thakur.github.io/ADAPTIVE-CRUISE-CONTROL/
+- Author: https://github.com/Amey-Thakur
+- Research notes and reflections: https://amey-thakur.github.io/
